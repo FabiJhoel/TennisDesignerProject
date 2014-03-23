@@ -12,26 +12,14 @@
                         <GradientStop Color="White" Offset="1"/>
                     </LinearGradientBrush>
                 </TabItem.Background>
-
                 <!--Work Space-->
                 <Canvas x:Name="canvasEdit" Margin="7,11,9,11" Background="#FFF5EFEF" AllowDrop="True">
-
-                    <!--<Ellipse Name="punto" Height="50" Width="50" Fill="Green"                   
-                     Canvas.Left="195" 
-                     Canvas.Top="143"  MouseMove="MouseMoveEllipse"/>
-
-                    <Ellipse Name="punto2" Height="50" Width="50" Fill="AliceBlue"                   
-                     Canvas.Left="325" 
-                     Canvas.Top="150"  MouseMove="MouseMoveEllipse"/>-->
-
-
                     <Ellipse MouseMove="MouseMoveEllipse" Fill="#FF1E87AE" HorizontalAlignment="Left" Height="20" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="20" RenderTransformOrigin="3,3.333" Canvas.Left="320" Canvas.Top="185"/>
                     <Ellipse MouseMove="MouseMoveEllipse" Fill="#FF1E87AE" HorizontalAlignment="Left" Height="20" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="20" RenderTransformOrigin="3,3.333" Canvas.Left="425" Canvas.Top="310"/>
                     <Ellipse MouseMove="MouseMoveEllipse" Fill="#FF1E87AE" HorizontalAlignment="Left" Height="20" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="20" RenderTransformOrigin="3,3.333" Canvas.Left="395" Canvas.Top="230"/>
                     <Ellipse MouseMove="MouseMoveEllipse" Fill="#FF1E87AE" HorizontalAlignment="Left" Height="20" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="20" RenderTransformOrigin="3,3.333" Canvas.Left="155" Canvas.Top="185"/>
                     <Ellipse MouseMove="MouseMoveEllipse" Fill="#FF1E87AE" HorizontalAlignment="Left" Height="20" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="20" RenderTransformOrigin="3,3.333" Canvas.Left="155" Canvas.Top="300"/>
                     <Path Stroke="Black" StrokeThickness="1" Canvas.Left="45" Canvas.Top="15" Data="M10,50 C100,0 200,200 300,100 L400,100 A50,50,45,1,1,200,100" Height="140" Stretch="Fill" Width="270" />
-
                 </Canvas>
             </TabItem>
 
@@ -51,14 +39,12 @@
                         <GradientStop Color="White" Offset="1"/>
                     </LinearGradientBrush>
                 </TabItem.Background>
-
             </TabItem>
 
         </TabControl>
+        <!--Designs Panel-->
         <GroupBox Header="Designs" HorizontalAlignment="Left" Height="325" Margin="10,30,0,0" VerticalAlignment="Top" Width="215" FontWeight="Bold" Foreground="#FF595353"/>
         <ListBox x:Name="ListBoxDesigns" HorizontalAlignment="Left" Height="250" Margin="25,60,0,0" VerticalAlignment="Top" Width="185" Foreground="#FF595353"/>
-        <GroupBox Header="Properties" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Height="220" Width="215" Foreground="#FF595353" FontWeight="Bold"/>
-        <ListBox x:Name="ListBoxProperties" HorizontalAlignment="Left" Height="176" Margin="25,404,0,0" VerticalAlignment="Top" Width="185" Foreground="#FF595353"/>
         <Button Content="Add" HorizontalAlignment="Left" Margin="165,325,0,0" VerticalAlignment="Top" Width="45" Foreground="#FF595353">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -67,7 +53,9 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-
-
+        <!--Properties Panel-->
+        <GroupBox Header="Properties" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Height="220" Width="215" Foreground="#FF595353" FontWeight="Bold"/>
+        <ListBox x:Name="ListBoxProperties" HorizontalAlignment="Left" Height="176" Margin="25,404,0,0" VerticalAlignment="Top" Width="185" Foreground="#FF595353"/>
+        
     </Grid>
 </Window>
