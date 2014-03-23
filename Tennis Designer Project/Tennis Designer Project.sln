@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{1382D3E7-0267-41FE-A8AA-D65431CB2A99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisDesignerGUI", "TennisDesignerGUI\TennisDesignerGUI.csproj", "{A2DACCF7-35A2-4DE4-8DE0-6DFD91BA35FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisLogic", "TennisLogic\TennisLogic.csproj", "{D0284563-15E6-4CB7-A6DB-764AA1239B99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1382D3E7-0267-41FE-A8AA-D65431CB2A99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1382D3E7-0267-41FE-A8AA-D65431CB2A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1382D3E7-0267-41FE-A8AA-D65431CB2A99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1382D3E7-0267-41FE-A8AA-D65431CB2A99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2DACCF7-35A2-4DE4-8DE0-6DFD91BA35FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2DACCF7-35A2-4DE4-8DE0-6DFD91BA35FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2DACCF7-35A2-4DE4-8DE0-6DFD91BA35FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2DACCF7-35A2-4DE4-8DE0-6DFD91BA35FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0284563-15E6-4CB7-A6DB-764AA1239B99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0284563-15E6-4CB7-A6DB-764AA1239B99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0284563-15E6-4CB7-A6DB-764AA1239B99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0284563-15E6-4CB7-A6DB-764AA1239B99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
