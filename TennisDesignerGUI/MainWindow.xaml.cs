@@ -25,6 +25,42 @@ namespace TennisDesignerGUI
             ListBoxDesigns.Items.Add("examp1");
             ListBoxDesigns.Items.Add("examp1");
             ListBoxDesigns.Items.Add("examp1");    
+
+            //path examp
+            // Create a figure.
+            PathFigure myPathFigure = new PathFigure();
+            myPathFigure.StartPoint = new Point(10, 50);
+            myPathFigure.Segments.Add(
+                new BezierSegment(
+                    new Point(100, 0),
+                    new Point(200, 200),
+                    new Point(300, 100),
+                    true /* IsStroked */  ));
+            myPathFigure.Segments.Add(
+                new LineSegment(
+                    new Point(400, 100),
+                    true /* IsStroked */ ));
+            myPathFigure.Segments.Add(
+                new ArcSegment(
+                    new Point(200, 100),
+                    new Size(50, 50),
+                    45,
+                    true, /* IsLargeArc */
+                    SweepDirection.Clockwise,
+                    true /* IsStroked */ ));
+
+            /// Create a PathGeometry to contain the figure.
+            PathGeometry myPathGeometry = new PathGeometry();
+            myPathGeometry.Figures.Add(myPathFigure);
+
+            // Display the PathGeometry. 
+            Path myPath = new Path();
+            myPath.Stroke = Brushes.Black;
+            myPath.StrokeThickness = 1;
+            myPath.Data = myPathGeometry;
+            Canvas.SetLeft(myPath,12);
+            Canvas.SetRight(myPath, 112);
+            canvasEdit.Children.Add(myPath);
         }
 
         /*Move points around 
