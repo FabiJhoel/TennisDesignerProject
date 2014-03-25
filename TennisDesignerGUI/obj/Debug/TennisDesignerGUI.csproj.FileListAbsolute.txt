@@ -11,3 +11,6 @@ C:\Users\Fabiola\Documents\Visual Studio 2013\Projects\Tennis Designer Project\T
 C:\Users\Fabiola\Documents\Visual Studio 2013\Projects\Tennis Designer Project\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.csproj.GenerateResource.Cache
 C:\Users\Fabiola\Documents\Visual Studio 2013\Projects\Tennis Designer Project\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.exe
 C:\Users\Fabiola\Documents\Visual Studio 2013\Projects\Tennis Designer Project\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.pdb
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\bin\Debug\TennisDesignerGUI.exe.config
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.exe
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.pdb

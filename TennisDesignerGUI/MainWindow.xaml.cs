@@ -12,11 +12,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Controls.Primitives;
 
 namespace TennisDesignerGUI
 {
     public partial class MainWindow : Window
     {
+        Path silhouette;
         public MainWindow()
         {
             InitializeComponent();
@@ -24,47 +26,47 @@ namespace TennisDesignerGUI
             ListBoxDesigns.Items.Add("examp1");
             ListBoxDesigns.Items.Add("examp1");
             ListBoxDesigns.Items.Add("examp1");
-            ListBoxDesigns.Items.Add("examp1");    
+            ListBoxDesigns.Items.Add("examp1");
 
             //path examp
-            // Create a figure.
-            PathFigure myPathFigure = new PathFigure();
-            myPathFigure.StartPoint = new Point(10, 50);
-            myPathFigure.Segments.Add(
-                new BezierSegment(
-                    new Point(100, 0),
-                    new Point(200, 200),
-                    new Point(300, 100),
-                    true /* IsStroked */  ));
-            myPathFigure.Segments.Add(
-                new LineSegment(
-                    new Point(400, 100),
-                    true /* IsStroked */ ));
-            myPathFigure.Segments.Add(
-                new ArcSegment(
-                    new Point(200, 100),
-                    new Size(50, 50),
-                    45,
-                    true, /* IsLargeArc */
-                    SweepDirection.Clockwise,
-                    true /* IsStroked */ ));
+            // //Create a figure.
+            //PathFigure myPathFigure = new PathFigure();
+            //myPathFigure.StartPoint = new Point(30, 40);
+            //myPathFigure.Segments.Add(
+            //    new ArcSegment(new Point(50, 190),new Size(50, 55),0,true,
+            //    SweepDirection.Counterclockwise,true ));
+            //myPathFigure.Segments.Add(
+            //    new LineSegment(new Point(390, 190),true));
+            //myPathFigure.Segments.Add(
+            //    new LineSegment(new Point(325, 95), true));
+            //myPathFigure.Segments.Add(
+            //    new LineSegment(new Point(220, 40), true));
+            //myPathFigure.Segments.Add(
+            //    new LineSegment(new Point(27, 40), true));
+            
 
-            /// Create a PathGeometry to contain the figure.
-            PathGeometry myPathGeometry = new PathGeometry();
-            myPathGeometry.Figures.Add(myPathFigure);
+            ///// Create a PathGeometry to contain the figure.
+            //PathGeometry myPathGeometry = new PathGeometry();
+            //myPathGeometry.Figures.Add(myPathFigure);
 
-            // Display the PathGeometry. 
-            Path myPath = new Path();
-            myPath.Stroke = Brushes.Black;
-            myPath.StrokeThickness = 1;
-            myPath.Data = myPathGeometry;
-            Canvas.SetLeft(myPath,12);
-            Canvas.SetRight(myPath, 112);
-            canvasEdit.Children.Add(myPath);
+            //// Display the PathGeometry. 
+            //silhouette = new Path();
+            //silhouette.Stroke = Brushes.Black;
+            //silhouette.StrokeThickness = 1;
+            //silhouette.Data = myPathGeometry;
+            //Canvas.SetLeft(silhouette, 65);
+            //Canvas.SetTop(silhouette,65);
+            //canvasEdit.Children.Add(silhouette);
         }
 
-        /*Move points around 
-         the workspace*/
+        /* Draws a point in the workspace */
+        private void drawPoint()
+        {
+
+        }
+
+        /* Move points around 
+           the workspace */
         private void MouseMoveEllipse(object sender, MouseEventArgs e)
         {
             Ellipse ellipse = sender as Ellipse;
@@ -72,8 +74,22 @@ namespace TennisDesignerGUI
             {
                 (ellipse).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
                 (ellipse).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
+
             }
         }
-         
+
+        private void MouseMovePointA(object sender, MouseEventArgs e)
+        {
+            if (pointA != null && e.LeftButton == MouseButtonState.Pressed)
+            {
+                (pointA).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
+                (pointA).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
+                silhouette.StrokeThickness = 20;
+
+            }
+        }
+
     }
+
+    
 }
