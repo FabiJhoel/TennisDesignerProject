@@ -33,7 +33,7 @@ namespace TennisDesignerGUI
             ListBoxDesigns.Items.Add("examp1");
 
             //////////////////////Create a figure. //////////////////////////////
-            Point line2Point = new Point (30,190);
+            Point line2Point = new Point (390,190);
             LineSegment line2 = new LineSegment(line2Point, true);
 
             PathFigure myPathFigure = new PathFigure();
