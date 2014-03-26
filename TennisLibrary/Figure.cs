@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TennisLibrary
 {
-    class Figure
+    public class Figure
     {
         private int type;
         private int thikness;
@@ -19,9 +19,9 @@ namespace TennisLibrary
             setColor(pColor);
         }
 
-        public Point[] plot(int pAxisX, int pAxisY)
+        public MoveablePoint[] plot(int pAxisX, int pAxisY)
         {
-            Point[] points = new Point[1];
+            MoveablePoint[] points = new MoveablePoint[1];
             return points;
         }
         public void setType(int pType)

@@ -21,13 +21,13 @@
                 </TabItem.Background>
                 <!--Work Space-->
                 <Canvas x:Name="canvasEdit" Margin="7,11,9,11" AllowDrop="True" Background="White">
-                    <Ellipse x:Name="pointA" MouseMove="MouseMovePointA" Fill="#FFB1DBFF" HorizontalAlignment="Left" Height="26" Stroke="Navy" StrokeThickness="3" VerticalAlignment="Top" Width="24" RenderTransformOrigin="3,3.333" Canvas.Left="156" Canvas.Top="122"/>
+                    <!--<Ellipse x:Name="pointA" MouseMove="MouseMovePointA" Fill="#FFB1DBFF" HorizontalAlignment="Left" Height="26" Stroke="Navy" StrokeThickness="3" VerticalAlignment="Top" Width="24" RenderTransformOrigin="3,3.333" Canvas.Left="156" Canvas.Top="122"/>
                     <Ellipse x:Name="pointB" MouseMove="MouseMoveEllipse" Fill="#FFB1DBFF" HorizontalAlignment="Left" Height="26" Stroke="Navy" StrokeThickness="3" VerticalAlignment="Top" Width="24" RenderTransformOrigin="3,3.333" Canvas.Left="352" Canvas.Top="122"/>
                     <Ellipse x:Name="pointC" MouseMove="MouseMoveEllipse" Fill="#FFB1DBFF" HorizontalAlignment="Left" Height="26" Stroke="Navy" StrokeThickness="3" VerticalAlignment="Top" Width="23" RenderTransformOrigin="3,3.333" Canvas.Left="457" Canvas.Top="179"/>
                     <Ellipse x:Name="pointD" MouseMove="MouseMoveEllipse" Fill="#FFB1DBFF" HorizontalAlignment="Left" Height="26" Stroke="Navy" StrokeThickness="3" VerticalAlignment="Top" Width="24" RenderTransformOrigin="3,3.333" Canvas.Left="516" Canvas.Top="269"/>
-                    <Ellipse x:Name="pointE" MouseMove="MouseMoveEllipse" Fill="#FFB1DBFF" HorizontalAlignment="Left" Height="25" Stroke="Navy" StrokeThickness="3" VerticalAlignment="Top" Width="24" RenderTransformOrigin="3,3.333" Canvas.Left="156" Canvas.Top="269"/>
+                    <Ellipse x:Name="pointE" MouseMove="MouseMoveEllipse" Fill="#FFB1DBFF" HorizontalAlignment="Left" Height="25" Stroke="Navy" StrokeThickness="3" VerticalAlignment="Top" Width="24" RenderTransformOrigin="3,3.333" Canvas.Left="156" Canvas.Top="269"/>-->
                     
-                    <Path Name="silhouette2" Stroke="Black" StrokeThickness="1" Canvas.Left="140" Canvas.Top="94" >
+                    <!--<Path Name="silhouette2" Stroke="Black" StrokeThickness="1" Canvas.Left="140" Canvas.Top="94" >
                         <Path.Data>
                             <GeometryGroup>
                                 <PathGeometry>
@@ -45,7 +45,7 @@
                                 </PathGeometry>
                             </GeometryGroup>
                         </Path.Data>
-                    </Path>
+                    </Path>-->
 
                 </Canvas>
             </TabItem>

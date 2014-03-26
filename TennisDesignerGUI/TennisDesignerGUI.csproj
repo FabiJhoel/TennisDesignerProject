@@ -99,6 +99,12 @@
   <ItemGroup>
     <Resource Include="Resources\windowBackground.jpeg" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TennisLibrary\TennisLibrary.csproj">
+      <Project>{b823f928-6697-4e75-a79a-bdac66bc7f6f}</Project>
+      <Name>TennisLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

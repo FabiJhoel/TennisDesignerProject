@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace TennisLibrary
 {
-    class Design
+    public class Design
     {
         private string name;
-        private Point[] shapePoints;
+        private MoveablePoint[] shapePoints;
         private Figure[] decorations;
 
         public Design(string pName)
@@ -21,7 +21,7 @@ namespace TennisLibrary
         {
             name = pName;
         }
-        public void addPoint(Point pPoint)
+        public void addPoint(MoveablePoint pPoint)
         {
             shapePoints[shapePoints.Length - 1] = pPoint;
         }
