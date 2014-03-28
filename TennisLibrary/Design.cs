@@ -10,12 +10,13 @@ namespace TennisLibrary
     {
         private string name;
         private string creationDate;
-        private BasePoint[] shapePoints;
-        private Decoration[] decorations;
+        private List<BasePoint> basePoints;
+        private List<Decoration> decorations;
 
         public Design(string pName)
         {
             setName(pName);
+            setCreationDate(DateTime.Now.ToString("M/d/yyyy"));
         }
 
         public void setName(string pName)
@@ -28,11 +29,11 @@ namespace TennisLibrary
         }
         public void addPoint(BasePoint pPoint)
         {
-            shapePoints[shapePoints.Length - 1] = pPoint;
+            basePoints.Add(pPoint);
         }
         public void addDecoration(Decoration pFigure)
         {
-            decorations[decorations.Length - 1] = pFigure;
+            decorations.Add(pFigure);
         }
         public string getName()
         {
@@ -41,6 +42,10 @@ namespace TennisLibrary
         public string getCreationDate()
         {
             return this.creationDate;
+        }
+        public List<BasePoint> getBasePoints()
+        {
+            return this.basePoints;
         }
     }
 }

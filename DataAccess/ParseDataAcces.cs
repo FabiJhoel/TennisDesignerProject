@@ -23,7 +23,7 @@ namespace DataAccess
         {
             ParseObject bond = new ParseObject("Design")
             {
-                {"Name",pDesign.getName()},{"Date",pDesign.getCreationDate()}
+                {"Name",pDesign.getName()},{"Date",pDesign.getCreationDate()},
             };
             await bond.SaveAsync();
         }
