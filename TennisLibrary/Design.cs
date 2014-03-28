@@ -9,8 +9,9 @@ namespace TennisLibrary
     public class Design
     {
         private string name;
-        private MoveablePoint[] shapePoints;
-        private Figure[] decorations;
+        private string creationDate;
+        private BasePoint[] shapePoints;
+        private Decoration[] decorations;
 
         public Design(string pName)
         {
@@ -21,13 +22,25 @@ namespace TennisLibrary
         {
             name = pName;
         }
-        public void addPoint(MoveablePoint pPoint)
+        public void setCreationDate(string pDate)
+        {
+            creationDate = pDate;
+        }
+        public void addPoint(BasePoint pPoint)
         {
             shapePoints[shapePoints.Length - 1] = pPoint;
         }
-        public void addDecoration(Figure pFigure)
+        public void addDecoration(Decoration pFigure)
         {
             decorations[decorations.Length - 1] = pFigure;
+        }
+        public string getName()
+        {
+            return this.name;
+        }
+        public string getCreationDate()
+        {
+            return this.creationDate;
         }
     }
 }

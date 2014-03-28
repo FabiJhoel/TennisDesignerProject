@@ -22,7 +22,7 @@ namespace TennisDesignerGUI
     {
         //Shapes
         Path silhouette;
-        MoveablePoint pointA, pointB, pointC, pointD, pointE;
+        BasePoint pointA, pointB, pointC, pointD, pointE;
         public MainWindow()
         {
             InitializeComponent();
@@ -75,31 +75,31 @@ namespace TennisDesignerGUI
             //////////////////////Create a figure. //////////////////////////////
 
             //Draw Points
-            pointA = new MoveablePoint(1, 1, "pointA");
+            pointA = new BasePoint(1, 1, "pointA");
             pointA.drawPoint();
             Canvas.SetLeft(pointA.getPointEllipse(), 156);
             Canvas.SetTop(pointA.getPointEllipse(), 122);
             canvasEdit.Children.Add(pointA.getPointEllipse());
 
-            pointB = new MoveablePoint(1, 1, "pointB");
+            pointB = new BasePoint(1, 1, "pointB");
             pointB.drawPoint();
             Canvas.SetLeft(pointB.getPointEllipse(), 352);
             Canvas.SetTop(pointB.getPointEllipse(), 122);
             canvasEdit.Children.Add(pointB.getPointEllipse());
 
-            pointC = new MoveablePoint(1, 1, "pointC");
+            pointC = new BasePoint(1, 1, "pointC");
             pointC.drawPoint();
             Canvas.SetLeft(pointC.getPointEllipse(), 457);
             Canvas.SetTop(pointC.getPointEllipse(), 179);
             canvasEdit.Children.Add(pointC.getPointEllipse());
 
-            pointD = new MoveablePoint(1, 1, "pointD");
+            pointD = new BasePoint(1, 1, "pointD");
             pointD.drawPoint();
             Canvas.SetLeft(pointD.getPointEllipse(), 516);
             Canvas.SetTop(pointD.getPointEllipse(), 269);
             canvasEdit.Children.Add(pointD.getPointEllipse());
 
-            pointE = new MoveablePoint(1, 1, "pointE");
+            pointE = new BasePoint(1, 1, "pointE");
             pointE.drawPoint();
             Canvas.SetLeft(pointE.getPointEllipse(), 156);
             Canvas.SetTop(pointE.getPointEllipse(), 269);

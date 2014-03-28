@@ -9,14 +9,14 @@ using System.Windows.Shapes;
 
 namespace TennisLibrary
 {
-    public class MoveablePoint
+    public class BasePoint
     {
         private double AxisX;
         private double AxisY;
         private string name;
         Ellipse pointEllipse;
 
-        public MoveablePoint(int pAxisX, int pAxisY, string pName)
+        public BasePoint(int pAxisX, int pAxisY, string pName)
         {
             pointEllipse = new Ellipse();
             setAxisX(pAxisX);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TennisLibrary
 {
-    public class Circle : Figure
+    public class Circle : Decoration
     {
         private int radio;
         private bool filled;

@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace TennisLibrary
 {
-    public class Figure
+    public class Decoration
     {
         private int type;
         private int thikness;
-        private ConsoleColor color;
+        private string color;
 
-        public Figure(int pType, int pThikness, ConsoleColor pColor)
+        public Decoration(int pType, int pThikness, string pColor)
         {
             setType(pType);
             setThikness(pThikness);
             setColor(pColor);
         }
 
-        public MoveablePoint[] plot(int pAxisX, int pAxisY)
+        public BasePoint[] plot(int pAxisX, int pAxisY)
         {
-            MoveablePoint[] points = new MoveablePoint[1];
+            BasePoint[] points = new BasePoint[1];
             return points;
         }
         public void setType(int pType)
@@ -32,7 +32,7 @@ namespace TennisLibrary
         {
             this.thikness = pThikness;
         }
-        public void setColor(ConsoleColor pColor)
+        public void setColor(string pColor)
         {
             this.color = pColor;
         }
@@ -44,7 +44,7 @@ namespace TennisLibrary
         {
             return this.thikness;
         }
-        public ConsoleColor getColor()
+        public string getColor()
         {
             return this.color;
         }
