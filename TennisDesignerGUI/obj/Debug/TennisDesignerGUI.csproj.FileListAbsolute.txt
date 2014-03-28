@@ -41,3 +41,5 @@ C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\obj\Debug\TennisDesignerGU
 C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.g.resources
 C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.Properties.Resources.resources
 C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.csproj.GenerateResource.Cache
+C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\obj\Debug\nameCatcherWindow.baml
+C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\obj\Debug\nameCatcherWindow.g.cs

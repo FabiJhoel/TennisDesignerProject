@@ -11,7 +11,7 @@ namespace TennisLibrary
         private int radio;
         private bool filled;
 
-        public Circle(int pThikness, ConsoleColor pColor, int pRadio, bool pFilled)
+        public Circle(int pThikness, string pColor, int pRadio, bool pFilled)
             : base(1, pThikness, pColor)
         {
             setRadio(pRadio);

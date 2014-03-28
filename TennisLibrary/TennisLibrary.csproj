@@ -45,8 +45,8 @@
   <ItemGroup>
     <Compile Include="Circle.cs" />
     <Compile Include="Design.cs" />
-    <Compile Include="Figure.cs" />
-    <Compile Include="MoveablePoint.cs" />
+    <Compile Include="Decoration.cs" />
+    <Compile Include="BasePoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

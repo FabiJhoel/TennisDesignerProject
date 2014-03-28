@@ -138,6 +138,11 @@ namespace TennisDesignerGUI
              }
          }
 
+        private void addNewDesign(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 
     
