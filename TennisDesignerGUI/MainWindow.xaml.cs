@@ -137,10 +137,11 @@ namespace TennisDesignerGUI
 
              }
          }
-
+        
         private void addNewDesign(object sender, RoutedEventArgs e)
         {
-
+            DesignNameWindow getNameWindow = new DesignNameWindow(ListBoxDesigns);
+            getNameWindow.Show();           
         }
 
     }
