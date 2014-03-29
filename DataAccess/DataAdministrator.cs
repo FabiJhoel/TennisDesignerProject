@@ -20,5 +20,6 @@ namespace DataAccess
         {
             parseConnection.uploadDesign(pDesign);
         }
+        public void getDesign
     }
 }

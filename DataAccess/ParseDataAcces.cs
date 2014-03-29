@@ -10,6 +10,8 @@ namespace DataAccess
 {
     class ParseDataAcces
     {
+        ParseObject objectDownloaded;
+        
         public ParseDataAcces()
         {
             initializeService();
@@ -26,6 +28,14 @@ namespace DataAccess
                 {"Name",pDesign.getName()},{"Date",pDesign.getCreationDate()},
             };
             await bond.SaveAsync();
+        }
+        public async void getDesign(string pName)
+        {
+            var query = from design in ParseObject.GetQuery("Design")
+                        where design.Get<string>("Name") == pName
+                        select design;
+            IEnumerable<ParseObject> results = await query.FindAsync();
+            objectDownloaded = results.First();
         }
     }
 }
