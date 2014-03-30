@@ -145,13 +145,13 @@ namespace TennisDesignerGUI
 
             catcher.Show();
 
-            do
+            /*do
             {
                 designName = catcher.getNameCaught();
                 //System.Threading.Thread.Sleep(1);
             } while (catcher.IsVisible == true);
 
-            System.Diagnostics.Debug.Write(designName);
+            System.Diagnostics.Debug.Write(designName);*/
         }
 
     }
