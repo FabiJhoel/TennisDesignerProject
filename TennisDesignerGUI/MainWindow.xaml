@@ -21,6 +21,7 @@
                 </TabItem.Background>
                 <!--Work Space-->
                 <Canvas x:Name="canvasEdit" Margin="7,11,9,11" AllowDrop="True" Background="White">
+                    <Line X1="10" Y1="60" X2="150" Y2="60" Stroke="Black" StrokeThickness="4"/>
                     <!--<Ellipse x:Name="pointA" MouseMove="MouseMovePointA" Fill="#FFB1DBFF" HorizontalAlignment="Left" Height="26" Stroke="Navy" StrokeThickness="3" VerticalAlignment="Top" Width="24" RenderTransformOrigin="3,3.333" Canvas.Left="156" Canvas.Top="122"/>
                     <Ellipse x:Name="pointB" MouseMove="MouseMoveEllipse" Fill="#FFB1DBFF" HorizontalAlignment="Left" Height="26" Stroke="Navy" StrokeThickness="3" VerticalAlignment="Top" Width="24" RenderTransformOrigin="3,3.333" Canvas.Left="352" Canvas.Top="122"/>
                     <Ellipse x:Name="pointC" MouseMove="MouseMoveEllipse" Fill="#FFB1DBFF" HorizontalAlignment="Left" Height="26" Stroke="Navy" StrokeThickness="3" VerticalAlignment="Top" Width="23" RenderTransformOrigin="3,3.333" Canvas.Left="457" Canvas.Top="179"/>

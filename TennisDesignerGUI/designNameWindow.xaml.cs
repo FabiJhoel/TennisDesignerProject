@@ -14,25 +14,21 @@ using System.Windows.Shapes;
 
 namespace TennisDesignerGUI
 {
-    /// <summary>
-    /// Interaction logic for nameCatcherWindow.xaml
-    /// </summary>
-    public partial class nameCatcherWindow : Window
+
+    public partial class DesignNameWindow : Window
     {
-        private string nameCaught;
-        public nameCatcherWindow()
+        private ListBox designNamesListBox;
+
+        public DesignNameWindow(ListBox pListBoxDesigns)
         {
             InitializeComponent();
+            designNamesListBox = pListBoxDesigns;
         }
 
-        private void catchName(object sender, RoutedEventArgs e)
+        private void confirmNameButton_Click(object sender, RoutedEventArgs e)
         {
-            this.nameCaught = this.nameTextBox.GetLineText(0);
+            designNamesListBox.Items.Add(nameTextBox.Text);
             this.Hide();
-        }
-        public string getNameCaught()
-        {
-            return this.nameCaught;
         }
     }
 }
