@@ -21,13 +21,8 @@
                 </TabItem.Background>
                 <!--Work Space-->
                 <Canvas x:Name="canvasEdit" Margin="7,11,9,11" AllowDrop="True" Background="White">
-                    <Line X1="10" Y1="60" X2="150" Y2="60" Stroke="Black" StrokeThickness="4"/>
-                    <!--<Ellipse x:Name="pointA" MouseMove="MouseMovePointA" Fill="#FFB1DBFF" HorizontalAlignment="Left" Height="26" Stroke="Navy" StrokeThickness="3" VerticalAlignment="Top" Width="24" RenderTransformOrigin="3,3.333" Canvas.Left="156" Canvas.Top="122"/>
-                    <Ellipse x:Name="pointB" MouseMove="MouseMoveEllipse" Fill="#FFB1DBFF" HorizontalAlignment="Left" Height="26" Stroke="Navy" StrokeThickness="3" VerticalAlignment="Top" Width="24" RenderTransformOrigin="3,3.333" Canvas.Left="352" Canvas.Top="122"/>
-                    <Ellipse x:Name="pointC" MouseMove="MouseMoveEllipse" Fill="#FFB1DBFF" HorizontalAlignment="Left" Height="26" Stroke="Navy" StrokeThickness="3" VerticalAlignment="Top" Width="23" RenderTransformOrigin="3,3.333" Canvas.Left="457" Canvas.Top="179"/>
-                    <Ellipse x:Name="pointD" MouseMove="MouseMoveEllipse" Fill="#FFB1DBFF" HorizontalAlignment="Left" Height="26" Stroke="Navy" StrokeThickness="3" VerticalAlignment="Top" Width="24" RenderTransformOrigin="3,3.333" Canvas.Left="516" Canvas.Top="269"/>
-                    <Ellipse x:Name="pointE" MouseMove="MouseMoveEllipse" Fill="#FFB1DBFF" HorizontalAlignment="Left" Height="25" Stroke="Navy" StrokeThickness="3" VerticalAlignment="Top" Width="24" RenderTransformOrigin="3,3.333" Canvas.Left="156" Canvas.Top="269"/>-->
-                    
+                    <Line Name="lineaIzq" X1="161" Y1="127" X2="190" Y2="60" Stroke="Black" StrokeThickness="4" />
+        
                     <!--<Path Name="silhouette2" Stroke="Black" StrokeThickness="1" Canvas.Left="140" Canvas.Top="94" >
                         <Path.Data>
                             <GeometryGroup>
@@ -76,12 +71,21 @@
 
                 </Canvas>
             </TabItem>
-
         </TabControl>
+        
+        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="310,640,0,0" VerticalAlignment="Top" Width="45" Foreground="#FF595353" Grid.Column="1" Click="saveDesignButton">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+
         <!--Designs Panel-->
         <GroupBox Header="Designs" HorizontalAlignment="Left" Height="325" Margin="10,100,0,0" VerticalAlignment="Top" Width="215" FontWeight="Bold" Foreground="#FF595353"/>
         <ListBox x:Name="ListBoxDesigns" HorizontalAlignment="Left" Height="250" Margin="25,130,0,0" VerticalAlignment="Top" Width="185" Foreground="#FF595353"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="165,395,0,0" VerticalAlignment="Top" Width="45" Foreground="#FF595353" Click="addNewDesign">
+        <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="165,395,0,0" VerticalAlignment="Top" Width="45" Foreground="#FF595353" Click="addNewDesignButton">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -92,8 +96,10 @@
         <!--Properties Panel-->
         <GroupBox Header="Properties" HorizontalAlignment="Left" Margin="10,435,0,0" VerticalAlignment="Top" Height="220" Width="215" Foreground="#FF595353" FontWeight="Bold"/>
         <ListBox x:Name="ListBoxProperties" HorizontalAlignment="Left" Height="176" Margin="25,464,0,0" VerticalAlignment="Top" Width="185" Foreground="#FF595353"/>
+        
+        <!--Header-->
         <Rectangle Grid.ColumnSpan="2" Fill="#FF19A0D3" HorizontalAlignment="Left" Height="77.612" Stroke="#FF19A0D3" VerticalAlignment="Top" Width="1018"/>
-        <TextBlock x:Name="winTitle" HorizontalAlignment="Left" Margin="25,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Segoe WP Light" FontSize="48" Width="375" Height="68" Foreground="White" TextDecorations="{x:Null}" Text="TennisDesigner"/>
-
+        <TextBlock x:Name="headerTitle" HorizontalAlignment="Left" Margin="25,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Segoe WP Light" FontSize="48" Width="375" Height="68" Foreground="White" TextDecorations="{x:Null}" Text="TennisDesigner"/>
+        
     </Grid>
 </Window>

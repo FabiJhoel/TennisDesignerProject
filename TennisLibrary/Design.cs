@@ -10,8 +10,8 @@ namespace TennisLibrary
     {
         private string name;
         private string creationDate;
-        private List<BasePoint> basePoints;
-        private List<Decoration> decorations;
+        private List<BasePoint> basePoints = new List<BasePoint>();
+        private List<Decoration> decorations = new List<Decoration>();
 
         public Design(string pName)
         {

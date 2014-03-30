@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TennisLibrary;
+
 
 namespace TennisDesignerGUI
 {
@@ -18,16 +20,19 @@ namespace TennisDesignerGUI
     public partial class DesignNameWindow : Window
     {
         private ListBox designNamesListBox;
+        private Design design;
 
-        public DesignNameWindow(ListBox pListBoxDesigns)
+        public DesignNameWindow(ListBox pListBoxDesigns, Design pDesign)
         {
             InitializeComponent();
             designNamesListBox = pListBoxDesigns;
+            design = pDesign;
         }
 
         private void confirmNameButton_Click(object sender, RoutedEventArgs e)
         {
             designNamesListBox.Items.Add(nameTextBox.Text);
+            design.setName(nameTextBox.Text);
             this.Hide();
         }
     }

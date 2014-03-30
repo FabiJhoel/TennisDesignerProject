@@ -20,34 +20,27 @@ namespace TennisDesignerGUI
 {
     public partial class MainWindow : Window
     {
+        // Global Variables
+        Design designInstance;
+        Line segmentB;
+
         //Shapes
         Path silhouette;
-        BasePoint pointA, pointB, pointC, pointD, pointE;
+        BasePoint pointB, pointC, pointD, pointE;
         public MainWindow()
         {
             InitializeComponent();
-            ListBoxDesigns.Items.Add("examp1");
-            ListBoxDesigns.Items.Add("examp1");
-            ListBoxDesigns.Items.Add("examp1");
-            ListBoxDesigns.Items.Add("examp1");
-            ListBoxDesigns.Items.Add("examp1");
-
+           
             //////////////////////Create a figure. //////////////////////////////
-            Point line2Point = new Point (390,190);
-            LineSegment line2 = new LineSegment(line2Point, true);
-
             PathFigure myPathFigure = new PathFigure();
             myPathFigure.StartPoint = new Point(30, 40);
 
             myPathFigure.Segments.Add(
-                new ArcSegment(new Point(50, 190), new Size(50, 55), 0, true,
+                new ArcSegment(new Point(40, 190), new Size(50, 55), 0, true,
                 SweepDirection.Counterclockwise, true));
-/////////////////////////
-            line2Point.X = 0;
-            line2Point.Y = 0;
-            myPathFigure.Segments.Add(line2);
-            //myPathFigure.Segments.Add(new LineSegment(new Point(390, 190), true));
-////////////////////////
+
+/*            myPathFigure.Segments.Add(new LineSegment(new Point(390, 190), true));
+
             myPathFigure.Segments.Add(
                 new LineSegment(new Point(325, 95), true));
 
@@ -58,7 +51,7 @@ namespace TennisDesignerGUI
                 new ArcSegment(new Point(27, 40), new Size(70, 30), 0, true,
                 SweepDirection.Clockwise, true));
 
-           
+  */         
 
             /// Create a PathGeometry to contain the figure.
             PathGeometry myPathGeometry = new PathGeometry();
@@ -75,12 +68,6 @@ namespace TennisDesignerGUI
             //////////////////////Create a figure. //////////////////////////////
 
             //Draw Points
-            pointA = new BasePoint(1, 1, "pointA");
-            pointA.drawPoint();
-            Canvas.SetLeft(pointA.getPointEllipse(), 156);
-            Canvas.SetTop(pointA.getPointEllipse(), 122);
-            canvasEdit.Children.Add(pointA.getPointEllipse());
-
             pointB = new BasePoint(1, 1, "pointB");
             pointB.drawPoint();
             Canvas.SetLeft(pointB.getPointEllipse(), 352);
@@ -106,17 +93,17 @@ namespace TennisDesignerGUI
             canvasEdit.Children.Add(pointE.getPointEllipse());
 
             //Asign event to Points
-            pointA.getPointEllipse().MouseMove += MouseMovePointA;
-            pointB.getPointEllipse().MouseMove += MouseMoveEllipse;
-            pointC.getPointEllipse().MouseMove += MouseMoveEllipse;
-            pointD.getPointEllipse().MouseMove += MouseMoveEllipse;
-            pointE.getPointEllipse().MouseMove += MouseMoveEllipse;
-                      
+
+       /*   pointB.getPointEllipse().MouseMove += MouseMoveEllipseB;
+           pointC.getPointEllipse().MouseMove += MouseMoveEllipse;
+            pointD.getPointEllipse().MouseMove += MouseMoveEllipse;*/
+            pointE.getPointEllipse().MouseMove += MouseMoveEllipseE;
+                
         }
 
         /* Move points around 
            the workspace */
-        private void MouseMoveEllipse(object sender, MouseEventArgs e)
+        private void MouseMoveEllipseE(object sender, MouseEventArgs e)
         {
             Ellipse ellipse = sender as Ellipse;
             if (ellipse != null && e.LeftButton == MouseButtonState.Pressed)
@@ -124,27 +111,70 @@ namespace TennisDesignerGUI
                 (ellipse).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
                 (ellipse).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
 
+                //Move path
+                silhouette.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointE.getPointEllipse()) + 5);
+
             }
         }
 
         private void MouseMovePointA(object sender, MouseEventArgs e)
          {
-             if (pointA.getPointEllipse() != null && e.LeftButton == MouseButtonState.Pressed)
-             {
-                 (pointA.getPointEllipse()).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
-                 (pointA.getPointEllipse()).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
-                 silhouette.StrokeThickness = 20;
+             Ellipse pointA = designInstance.getBasePoints()[0].getPointEllipse();
 
+             if (designInstance.getBasePoints()[0].getPointEllipse() != null && e.LeftButton == MouseButtonState.Pressed)
+             {
+                 // Move ellipse
+                 (pointA).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
+                 (pointA).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
+          
+                 // Move line
+                 lineaIzq.X1 = Canvas.GetLeft(pointA) + 5;
+                 lineaIzq.Y1 = Canvas.GetTop(pointA) + 5;
              }
          }
         
-        private void addNewDesign(object sender, RoutedEventArgs e)
+        private void addNewDesignButton(object sender, RoutedEventArgs e)
         {
-            DesignNameWindow getNameWindow = new DesignNameWindow(ListBoxDesigns);
-            getNameWindow.Show();           
+            string designName = "";
+            designInstance = new Design(designName);
+
+            DesignNameWindow getNameWindow = new DesignNameWindow(ListBoxDesigns, designInstance);
+            getNameWindow.Show();
+            loadBasePoints();
 
         }
 
+        private void saveDesignButton(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(designInstance.getName());
+        }
+
+        private void loadBasePoints()
+        {
+            // Asign BasePoints to the new design
+            designInstance.addPoint(new BasePoint(156, 122, "pointA"));
+            designInstance.addPoint(new BasePoint(352, 122, "pointB"));
+            designInstance.addPoint(new BasePoint(457, 179, "pointC"));
+            designInstance.addPoint(new BasePoint(516, 269, "pointD"));
+            designInstance.addPoint(new BasePoint(156, 269, "pointE"));
+
+            // Draw each Basepoint on screen
+            foreach (BasePoint point in designInstance.getBasePoints())
+            {
+                point.drawPoint();
+                Canvas.SetLeft(point.getPointEllipse(), point.getAxisX());
+                Canvas.SetTop(point.getPointEllipse(), point.getAxisY());
+                canvasEdit.Children.Add(point.getPointEllipse());
+            }
+
+            // Asign events to each BasePoint
+            designInstance.getBasePoints()[0].getPointEllipse().MouseMove += MouseMovePointA; 
+        }
+
+        private void loadTenniSilhouette()
+        {
+
+        }
     }
 
     
