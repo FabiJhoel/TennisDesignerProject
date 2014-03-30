@@ -140,7 +140,18 @@ namespace TennisDesignerGUI
 
         private void addNewDesign(object sender, RoutedEventArgs e)
         {
+            nameCatcherWindow catcher = new nameCatcherWindow();
+            string designName;
 
+            catcher.Show();
+
+            do
+            {
+                designName = catcher.getNameCaught();
+                //System.Threading.Thread.Sleep(1);
+            } while (catcher.IsVisible == true);
+
+            System.Diagnostics.Debug.Write(designName);
         }
 
     }

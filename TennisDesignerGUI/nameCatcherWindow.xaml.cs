@@ -19,9 +19,20 @@ namespace TennisDesignerGUI
     /// </summary>
     public partial class nameCatcherWindow : Window
     {
+        private string nameCaught;
         public nameCatcherWindow()
         {
             InitializeComponent();
+        }
+
+        private void catchName(object sender, RoutedEventArgs e)
+        {
+            this.nameCaught = this.nameTextBox.GetLineText(0);
+            this.Hide();
+        }
+        public string getNameCaught()
+        {
+            return this.nameCaught;
         }
     }
 }
