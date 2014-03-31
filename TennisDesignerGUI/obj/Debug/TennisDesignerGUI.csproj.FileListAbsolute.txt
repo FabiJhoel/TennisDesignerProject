@@ -41,7 +41,13 @@ C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\obj\Debug\TennisDesignerGU
 C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.g.resources
 C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.Properties.Resources.resources
 C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.csproj.GenerateResource.Cache
-C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\obj\Debug\nameCatcherWindow.baml
-C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\obj\Debug\nameCatcherWindow.g.cs
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\obj\Debug\designNameWindow.baml
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\obj\Debug\designNameWindow.g.cs
+C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\obj\Debug\DesignNameWindow.baml
+C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\obj\Debug\DesignNameWindow.g.cs
+C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\bin\Debug\DataAccess.dll
+C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\bin\Debug\Parse.dll
+C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\bin\Debug\DataAccess.pdb
+C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\bin\Debug\Parse.xml
+C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\bin\Debug\Parse.NetFx45.dll
+C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\bin\Debug\Parse.NetFx45.xml

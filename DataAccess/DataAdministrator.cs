@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TennisLibrary;
+using Parse;
 
 namespace DataAccess
 {
-    class DataAdministrator
+    public class DataAdministrator
     {
         private ParseDataAcces parseConnection;
 
@@ -20,6 +21,7 @@ namespace DataAccess
         {
             parseConnection.uploadDesign(pDesign);
         }
+
         //public void getDesign
     }
 }
