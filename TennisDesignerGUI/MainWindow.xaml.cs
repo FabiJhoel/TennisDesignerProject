@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
 using TennisLibrary;
-
+using DataAccess;
 
 namespace TennisDesignerGUI
 {
@@ -23,6 +23,7 @@ namespace TennisDesignerGUI
         // Global Variables
         Design designInstance;
         Line segmentB;
+        DataAdministrator dataAdmin;
 
         //Shapes
         Path silhouette;
@@ -30,6 +31,7 @@ namespace TennisDesignerGUI
         public MainWindow()
         {
             InitializeComponent();
+            dataAdmin = new DataAdministrator();
            
             //////////////////////Create a figure. //////////////////////////////
             PathFigure myPathFigure = new PathFigure();
@@ -147,6 +149,7 @@ namespace TennisDesignerGUI
         private void saveDesignButton(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(designInstance.getName());
+            dataAdmin.saveDesign(designInstance);
         }
 
         private void loadBasePoints()

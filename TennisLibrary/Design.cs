@@ -47,5 +47,9 @@ namespace TennisLibrary
         {
             return this.basePoints;
         }
+        public List<Decoration> getDecorations()
+        {
+            return this.decorations;
+        }
     }
 }
