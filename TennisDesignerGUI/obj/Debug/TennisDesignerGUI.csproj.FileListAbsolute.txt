@@ -51,3 +51,6 @@ C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\bin\Debug\DataAccess.pdb
 C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\bin\Debug\Parse.xml
 C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\bin\Debug\Parse.NetFx45.dll
 C:\Users\jhoel_000\Documents\GitHub\TennisDesignerGUI\bin\Debug\Parse.NetFx45.xml
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerGUI\bin\Debug\TennisDesignerGUI.exe.config
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.exe
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.pdb

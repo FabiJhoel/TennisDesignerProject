@@ -216,6 +216,9 @@ namespace TennisDesignerGUI
             Canvas.SetTop(segmentA, 132);
             canvasEdit.Children.Add(segmentA);
 
+            // SegmentC: line
+            segmentC = new Line();
+
         }
     }
 
