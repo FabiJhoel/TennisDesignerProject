@@ -46,13 +46,11 @@ namespace DataAccess
             return basePointList;
         }
 
-        public async void getDesign(string pName)
+        public async void getDesignList()
         {
-            var query = from design in ParseObject.GetQuery("Design")
-                        where design.Get<string>("Name") == pName
-                        select design;
+            var query = ParseObject.GetQuery("Design");
             IEnumerable<ParseObject> results = await query.FindAsync();
-            objectDownloaded = results.First();
+            //objectDownloaded = results.First();
         }
     }
 }
