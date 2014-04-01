@@ -151,6 +151,7 @@ namespace TennisDesignerGUI
             getNameWindow.Show();
             loadBasePoints();
             loadTennisSilhouette();
+            dataAdmin.getDesignList();
 
         }
 
