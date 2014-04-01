@@ -21,8 +21,7 @@
                 </TabItem.Background>
                 <!--Work Space-->
                 <Canvas x:Name="canvasEdit" Margin="7,11,9,11" AllowDrop="True" Background="White">
-                    <Line Name="lineaIzq" X1="161" Y1="127" X2="190" Y2="60" Stroke="Black" StrokeThickness="4" />
-                    
+
                     <!--<Path Name="silhouette2" Stroke="Black" StrokeThickness="1" Canvas.Left="140" Canvas.Top="94" >
                         <Path.Data>
                             <GeometryGroup>
