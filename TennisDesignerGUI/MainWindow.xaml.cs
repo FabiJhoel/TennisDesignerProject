@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
 using TennisLibrary;
+using DataAccess;
 
 
 namespace TennisDesignerGUI
@@ -25,6 +26,7 @@ namespace TennisDesignerGUI
         Path segmentA;
         Grid segmentAContainer;
         Line segmentC;
+        DataAdministrator dataAdmin;
         
 
         //Shapes
@@ -33,6 +35,7 @@ namespace TennisDesignerGUI
         public MainWindow()
         {
             InitializeComponent();
+            dataAdmin = new DataAdministrator();
            
             //////////////////////Create a figure. //////////////////////////////
 
@@ -154,6 +157,7 @@ namespace TennisDesignerGUI
         private void saveDesignButton(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(designInstance.getName());
+            dataAdmin.saveDesign(designInstance);
         }
 
         private void loadBasePoints()
