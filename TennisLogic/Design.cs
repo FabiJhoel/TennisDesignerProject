@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
+using System.Windows.Controls;
 
 namespace TennisBusiness
 {
@@ -14,6 +15,7 @@ namespace TennisBusiness
         private List<BasePoint> basePoints = new List<BasePoint>();
         private List<Decoration> decorations = new List<Decoration>();
         Path segmentA, segmentB;
+        Grid segmentAContainer, segmentBContainer;
         Line segmentC, segmentD, segmentE;
 
         public Design(string pName)
@@ -21,7 +23,11 @@ namespace TennisBusiness
             setName(pName);
             setCreationDate(DateTime.Now.ToString("M/d/yyyy"));
             segmentA = new Path();
+            segmentAContainer = new Grid();
+            segmentAContainer.Children.Add(getSegmentA());
             segmentB = new Path();
+            segmentBContainer = new Grid();
+            segmentBContainer.Children.Add(getSegmentB());
             segmentC = new Line();
             segmentD = new Line();
             segmentE = new Line();
@@ -72,9 +78,19 @@ namespace TennisBusiness
             return segmentA;
         }
 
+        public Grid getSegmentAContainer()
+        {
+            return segmentAContainer;
+        }
+
         public Path getSegmentB()
         {
             return segmentB;
+        }
+
+        public Grid getSegmentBContainer()
+        {
+            return segmentBContainer;
         }
 
         public Line getSegmentC()

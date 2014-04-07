@@ -33,7 +33,5 @@ C:\Users\Fabiola\Documents\GitHub\DataAccess\obj\Debug\DataAccess.dll
 C:\Users\Fabiola\Documents\GitHub\DataAccess\obj\Debug\DataAccess.pdb
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\DataAccess\bin\Debug\TennisLogic.dll
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\DataAccess\bin\Debug\TennisLogic.pdb
-C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\DataAccess\bin\Debug\TennisLibrary.dll
-C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\DataAccess\bin\Debug\TennisLibrary.pdb
 C:\Users\jhoel_000\Documents\GitHub\DataAccess\bin\Debug\TennisLogic.dll
 C:\Users\jhoel_000\Documents\GitHub\DataAccess\bin\Debug\TennisLogic.pdb

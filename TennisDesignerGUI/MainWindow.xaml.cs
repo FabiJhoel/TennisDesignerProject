@@ -24,12 +24,10 @@ namespace TennisDesignerGUI
     {   
         // Global Variables
         Design designInstance;
-        DataAdministrator dataAdmin;
         
         public MainWindow()
         {
             InitializeComponent();
-            dataAdmin = new DataAdministrator();
             DataManager.loadDesignList(ListBoxDesigns); 
         }
         
@@ -49,6 +47,15 @@ namespace TennisDesignerGUI
             designInstance.getBasePoints()[2].getPointEllipse().MouseMove += MouseMovePointC;
             designInstance.getBasePoints()[3].getPointEllipse().MouseMove += MouseMovePointD;
             designInstance.getBasePoints()[4].getPointEllipse().MouseMove += MouseMovePointE;
+
+           /* Path segmentA = designInstance.getSegmentA();
+            PathGeometry g = segmentA.Data.GetFlattenedPathGeometry();
+
+            foreach (var f in g.Figures)
+            {
+                Point pt1 = f.StartPoint;
+                MessageBox.Show(pt1.ToString());
+            }*/
         }
 
         private void saveDesignButton(object sender, RoutedEventArgs e)
@@ -60,12 +67,26 @@ namespace TennisDesignerGUI
         private void MouseMovePointA(object sender, MouseEventArgs e)
         {
             Ellipse pointA = designInstance.getBasePoints()[0].getPointEllipse();
+            Ellipse pointE = designInstance.getBasePoints()[4].getPointEllipse();
+            Grid segmentB = designInstance.getSegmentBContainer();
+            Grid segmentA = designInstance.getSegmentAContainer();
 
             if (pointA != null && e.LeftButton == MouseButtonState.Pressed)
             {
                 // Move ellipse
                 (pointA).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
                 (pointA).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
+
+                // Move auxiliar ellipse
+                (pointE).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y + 130);
+
+                // Move arc
+                segmentB.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointA) + 5);
+
+                // Move auxiliar arc
+                segmentA.SetValue(Canvas.TopProperty, Canvas.GetTop(pointA) + 5);
+                //segmentA.Height = Math.Abs(Canvas.GetTop(pointA) + 50);
+                segmentA.Height = Math.Abs(Canvas.GetTop(pointE) - 120);
             }
         }
 
@@ -128,9 +149,11 @@ namespace TennisDesignerGUI
 
         private void MouseMovePointE(object sender, MouseEventArgs e)
         {
-            string strGeom = "";
             Ellipse pointE = designInstance.getBasePoints()[4].getPointEllipse();
+            Ellipse pointA = designInstance.getBasePoints()[0].getPointEllipse();
             Line segmentE = designInstance.getSegmentE();
+            Grid segmentA = designInstance.getSegmentAContainer();
+            Grid segmentB = designInstance.getSegmentBContainer();
 
             if (pointE != null && e.LeftButton == MouseButtonState.Pressed)
             {
@@ -138,40 +161,37 @@ namespace TennisDesignerGUI
                 (pointE).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
                 (pointE).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
 
+                // Move auxiliar ellipse
+                (pointA).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
+
                 // Move line
                 segmentE.X2 = Canvas.GetLeft(pointE) + 5;
                 segmentE.Y2 = Canvas.GetTop(pointE) + 5;
 
-                /********************************************/
-                //Move segment ARC
-                //segmentAContainer.Width = Math.Abs(Canvas.GetLeft(pointE) - 80);
+                // Move arcs
+                segmentA.Width = Math.Abs(Canvas.GetLeft(pointE) - 80);
+                segmentA.Height = Math.Abs(Canvas.GetTop(pointE) - 120);
+
+                // Move auxiliar arc
+                //segmentB.Width = Math.Abs(Canvas.GetLeft(pointA) - 20);
+                segmentB.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointA) + 5);
+                //segmentB.Height = Math.Abs(Canvas.GetTop(pointA) - 120);
+
+                
+
+               /* canvasEdit.Children.Remove(segmentA);
                
-                /* PathGeometry g = segmentA.Data.GetFlattenedPathGeometry();
+                PathGeometry pathGeo = segmentA.Data.GetFlattenedPathGeometry();
 
-                foreach (var f in g.Figures)
+                foreach (var figs in pathGeo.Figures)
                 {
-                    Point pt1 = f.StartPoint;
-                    pt1.X = pt1.X * 10;
-                    pt1.Y = pt1.Y * 5;
-                    strGeom += "M" + pt1.ToString() + "A 50,55 0 1 0";
-                    foreach (var s in f.Segments)
-                        if (s is ArcSegment)
-                        {
-                            var pt = ((ArcSegment)s).Point;
+                    Point start = figs.StartPoint;
+                    //MessageBox.Show(start.ToString());
+                }*/
 
-                            Point pts = new Point(pt.X * 10, pt.Y * 5);
-                            strGeom += " " + pts.ToString();
+            }
+      
 
-
-                        }
-                }
-            */}
-            /*   segmentA = new Path();
-               segmentA.Data = Geometry.Parse(strGeom);
-               segmentA.Stroke = Brushes.Red;
-               canvasEdit.Children.Add(segmentA);*/
-
-            /********************************************/
         }
 
         private void ListBoxDesigns_SelectionChanged(object sender, SelectionChangedEventArgs e)

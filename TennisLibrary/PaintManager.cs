@@ -33,10 +33,18 @@ namespace TennisLibrary
             }
         }
 
+        public static void removeBasePoints(Design pDesign, Canvas pCanvas)
+        {
+            foreach (BasePoint point in pDesign.getBasePoints())
+            {
+                pCanvas.Children.Remove(point.getPointEllipse());
+            }
+        }
+
         public static void loadTennisSilhouette(Design pDesign, Canvas pCanvas)
         {
             //Grid segmentAContainer;
-
+            
             // SegmentA: arc
             PathFigure myPathFigure = new PathFigure();
             myPathFigure.StartPoint = new Point(30, 40);
@@ -53,18 +61,15 @@ namespace TennisLibrary
             pDesign.getSegmentA().StrokeThickness = 3;
             pDesign.getSegmentA().Data = myPathGeometry;
 
-            /*segmentAContainer = new Grid();
-            segmentAContainer.Background = System.Windows.Media.Brushes.LightBlue; 
-            segmentAContainer.Children.Add(segmentA);
+            ////////////////////////////
+            Canvas.SetLeft(pDesign.getSegmentAContainer(), 100);
+            Canvas.SetTop(pDesign.getSegmentAContainer(), 132);
+            pCanvas.Children.Add(pDesign.getSegmentAContainer());
+            /////////////////////////////
 
-            Canvas.SetLeft(segmentAContainer, 100);
-            Canvas.SetTop(segmentAContainer, 132);
-            canvasEdit.Children.Add(segmentAContainer);*/
-
-
-            Canvas.SetLeft(pDesign.getSegmentA(), 100);
+            /*Canvas.SetLeft(pDesign.getSegmentA(), 100);
             Canvas.SetTop(pDesign.getSegmentA(), 132);
-            pCanvas.Children.Add(pDesign.getSegmentA());
+            pCanvas.Children.Add(pDesign.getSegmentA());*/
 
             // SegmentB: arc
             PathFigure myPathFigureB = new PathFigure();
@@ -82,18 +87,14 @@ namespace TennisLibrary
             pDesign.getSegmentB().StrokeThickness = 3;
             pDesign.getSegmentB().Data = myPathGeometryB;
 
-           /* segmentAContainer = new Grid();
-            segmentAContainer.Background = System.Windows.Media.Brushes.LightBlue;
-            segmentAContainer.Children.Add(segmentA);*/
+            pDesign.getSegmentBContainer().Background = System.Windows.Media.Brushes.LightBlue;
+            Canvas.SetLeft(pDesign.getSegmentBContainer(), 165);
+            Canvas.SetTop(pDesign.getSegmentBContainer(), 132);
+            pCanvas.Children.Add(pDesign.getSegmentBContainer());
 
-            /*Canvas.SetLeft(segmentAContainer, 100);
-            Canvas.SetTop(segmentAContainer, 132);
-            canvasEdit.Children.Add(segmentAContainer);
-            */
-
-            Canvas.SetLeft(pDesign.getSegmentB(), 165);
+           /* Canvas.SetLeft(pDesign.getSegmentB(), 165);
             Canvas.SetTop(pDesign.getSegmentB(), 132);
-            pCanvas.Children.Add(pDesign.getSegmentB());
+            pCanvas.Children.Add(pDesign.getSegmentB());*/
 
             // SegmentC: line
             pDesign.getSegmentC().X1 = 365;

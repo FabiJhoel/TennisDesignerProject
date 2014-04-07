@@ -16,3 +16,7 @@ C:\Users\jhoel_000\Documents\GitHub\TennisLibrary\bin\Debug\Parse.xml
 C:\Users\jhoel_000\Documents\GitHub\TennisLibrary\obj\Debug\TennisLibrary.csprojResolveAssemblyReference.cache
 C:\Users\jhoel_000\Documents\GitHub\TennisLibrary\obj\Debug\TennisLibrary.dll
 C:\Users\jhoel_000\Documents\GitHub\TennisLibrary\obj\Debug\TennisLibrary.pdb
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisLibrary\bin\Debug\DataAccess.dll
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisLibrary\bin\Debug\Parse.dll
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisLibrary\bin\Debug\DataAccess.pdb
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisLibrary\bin\Debug\Parse.xml
