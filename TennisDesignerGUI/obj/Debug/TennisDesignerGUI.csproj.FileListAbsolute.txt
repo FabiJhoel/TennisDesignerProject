@@ -80,3 +80,5 @@ C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\bin\De
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\bin\Debug\DataAccess.pdb
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\bin\Debug\Parse.xml
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\bin\Debug\Parse.NetFx45.xml
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\bin\Debug\TennisLogic.dll
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\bin\Debug\TennisLogic.pdb

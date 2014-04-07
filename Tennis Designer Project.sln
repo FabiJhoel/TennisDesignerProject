@@ -6,6 +6,10 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{1382D3E7-0267-41FE-A8AA-D65431CB2A99}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisDesignerGUI", "TennisDesignerGUI\TennisDesignerGUI.csproj", "{A2DACCF7-35A2-4DE4-8DE0-6DFD91BA35FD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B823F928-6697-4E75-A79A-BDAC66BC7F6F} = {B823F928-6697-4E75-A79A-BDAC66BC7F6F}
+		{D0284563-15E6-4CB7-A6DB-764AA1239B99} = {D0284563-15E6-4CB7-A6DB-764AA1239B99}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisLogic", "TennisLogic\TennisLogic.csproj", "{D0284563-15E6-4CB7-A6DB-764AA1239B99}"
 EndProject

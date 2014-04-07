@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Shapes;
 
-namespace TennisLibrary
+namespace TennisBusiness
 {
     public class Design
     {
@@ -12,11 +13,18 @@ namespace TennisLibrary
         private string creationDate;
         private List<BasePoint> basePoints = new List<BasePoint>();
         private List<Decoration> decorations = new List<Decoration>();
+        Path segmentA, segmentB;
+        Line segmentC, segmentD, segmentE;
 
         public Design(string pName)
         {
             setName(pName);
             setCreationDate(DateTime.Now.ToString("M/d/yyyy"));
+            segmentA = new Path();
+            segmentB = new Path();
+            segmentC = new Line();
+            segmentD = new Line();
+            segmentE = new Line();
         }
 
         public void setName(string pName)
@@ -57,6 +65,31 @@ namespace TennisLibrary
         public List<Decoration> getDecorations()
         {
             return this.decorations;
+        }
+
+        public Path getSegmentA()
+        {
+            return segmentA;
+        }
+
+        public Path getSegmentB()
+        {
+            return segmentB;
+        }
+
+        public Line getSegmentC()
+        {
+            return segmentC;
+        }
+
+        public Line getSegmentD()
+        {
+            return segmentD;
+        }
+
+        public Line getSegmentE()
+        {
+            return segmentE;
         }
     }
 }

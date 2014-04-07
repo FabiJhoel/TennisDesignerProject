@@ -44,11 +44,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Circle.cs" />
-    <Compile Include="Design.cs" />
-    <Compile Include="Decoration.cs" />
-    <Compile Include="BasePoint.cs" />
+    <Compile Include="DataManager.cs" />
+    <Compile Include="PaintManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TennisLogic\TennisLogic.csproj">
+      <Project>{d0284563-15e6-4cb7-a6db-764aa1239b99}</Project>
+      <Name>TennisLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

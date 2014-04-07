@@ -13,19 +13,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
-using TennisLibrary;
 using DataAccess;
+using TennisBusiness;
+using TennisLibrary;
 
 
 namespace TennisDesignerGUI
 {
     public partial class MainWindow : Window
-    {
+    {   
         // Global Variables
         Design designInstance;
-        Path segmentA, segmentB;
-        Grid segmentAContainer;
-        Line segmentC, segmentD, segmentE;
         DataAdministrator dataAdmin;
         
         public MainWindow()
@@ -42,33 +40,8 @@ namespace TennisDesignerGUI
             DesignNameWindow getNameWindow = new DesignNameWindow(ListBoxDesigns, designInstance);
 
             getNameWindow.Show();
-            loadTennisSilhouette();
-            loadBasePoints();            
-        }
-
-        private void saveDesignButton(object sender, RoutedEventArgs e)
-        {
-            dataAdmin.saveDesign(designInstance);
-            MessageBox.Show("Your design has been saved as: " + designInstance.getName());
-        }
-
-        private void loadBasePoints()
-        {
-            // Asign BasePoints to the new design
-            designInstance.addPoint(new BasePoint(156, 122, "pointA"));
-            designInstance.addPoint(new BasePoint(352, 122, "pointB"));
-            designInstance.addPoint(new BasePoint(457, 179, "pointC"));
-            designInstance.addPoint(new BasePoint(516, 269, "pointD"));
-            designInstance.addPoint(new BasePoint(156, 269, "pointE"));
-
-            // Draw each Basepoint on screen
-            foreach (BasePoint point in designInstance.getBasePoints())
-            {
-                point.drawPoint();
-                Canvas.SetLeft(point.getPointEllipse(), point.getAxisX());
-                Canvas.SetTop(point.getPointEllipse(), point.getAxisY());
-                canvasEdit.Children.Add(point.getPointEllipse());
-            }
+            PaintManager.loadTennisSilhouette(designInstance, canvasEdit);
+            PaintManager.loadBasePoints(designInstance, canvasEdit);
 
             // Asign events to each BasePoint
             designInstance.getBasePoints()[0].getPointEllipse().MouseMove += MouseMovePointA;
@@ -76,6 +49,12 @@ namespace TennisDesignerGUI
             designInstance.getBasePoints()[2].getPointEllipse().MouseMove += MouseMovePointC;
             designInstance.getBasePoints()[3].getPointEllipse().MouseMove += MouseMovePointD;
             designInstance.getBasePoints()[4].getPointEllipse().MouseMove += MouseMovePointE;
+        }
+
+        private void saveDesignButton(object sender, RoutedEventArgs e)
+        {
+            dataAdmin.saveDesign(designInstance);
+            MessageBox.Show("Your design has been saved as: " + designInstance.getName());
         }
 
         // BasePoint Events
@@ -94,6 +73,7 @@ namespace TennisDesignerGUI
         private void MouseMovePointB(object sender, MouseEventArgs e)
         {
             Ellipse pointB = designInstance.getBasePoints()[1].getPointEllipse();
+            Line segmentC = designInstance.getSegmentC();
 
             if (pointB != null && e.LeftButton == MouseButtonState.Pressed)
             {
@@ -110,6 +90,8 @@ namespace TennisDesignerGUI
         private void MouseMovePointC(object sender, MouseEventArgs e)
         {
             Ellipse pointC = designInstance.getBasePoints()[2].getPointEllipse();
+            Line segmentC = designInstance.getSegmentC();
+            Line segmentD = designInstance.getSegmentD();
 
             if (pointC != null && e.LeftButton == MouseButtonState.Pressed)
             {
@@ -128,6 +110,8 @@ namespace TennisDesignerGUI
         private void MouseMovePointD(object sender, MouseEventArgs e)
         {
             Ellipse pointD = designInstance.getBasePoints()[3].getPointEllipse();
+            Line segmentD = designInstance.getSegmentD();
+            Line segmentE = designInstance.getSegmentE();
 
             if (pointD != null && e.LeftButton == MouseButtonState.Pressed)
             {
@@ -147,6 +131,7 @@ namespace TennisDesignerGUI
         {
             string strGeom = "";
             Ellipse pointE = designInstance.getBasePoints()[4].getPointEllipse();
+            Line segmentE = designInstance.getSegmentE();
 
             if (pointE != null && e.LeftButton == MouseButtonState.Pressed)
             {
@@ -161,7 +146,6 @@ namespace TennisDesignerGUI
                 /********************************************/
                 //Move segment ARC
                 //segmentAContainer.Width = Math.Abs(Canvas.GetLeft(pointE) - 80);
-                segmentAContainer.Background = System.Windows.Media.Brushes.Red; 
                
                 /* PathGeometry g = segmentA.Data.GetFlattenedPathGeometry();
 
@@ -189,99 +173,6 @@ namespace TennisDesignerGUI
                canvasEdit.Children.Add(segmentA);*/
 
             /********************************************/
-        }
-
-        private void loadTennisSilhouette()
-        {
-            // SegmentA: arc
-            PathFigure myPathFigure = new PathFigure();
-            myPathFigure.StartPoint = new Point(30, 40);
-            myPathFigure.Segments.Add(new ArcSegment(new Point(30, 190), new Size(50, 55),
-                                        0, true, SweepDirection.Counterclockwise, true));
-
-            PathGeometry myPathGeometry = new PathGeometry();
-            myPathGeometry.Figures.Add(myPathFigure);
- 
-            segmentA = new Path();
-            segmentA.Height = Double.NaN;
-            segmentA.Width = Double.NaN;
-            segmentA.Stretch = Stretch.Fill;
-            segmentA.Stroke = Brushes.Black;
-            segmentA.StrokeThickness = 3;
-            segmentA.Data = myPathGeometry;
-           
-            /*segmentAContainer = new Grid();
-            segmentAContainer.Background = System.Windows.Media.Brushes.LightBlue; 
-            segmentAContainer.Children.Add(segmentA);
-
-            Canvas.SetLeft(segmentAContainer, 100);
-            Canvas.SetTop(segmentAContainer, 132);
-            canvasEdit.Children.Add(segmentAContainer);*/
-            
-           
-            Canvas.SetLeft(segmentA, 100);
-            Canvas.SetTop(segmentA, 132);
-            canvasEdit.Children.Add(segmentA);
-
-            // SegmentB: arc
-            PathFigure myPathFigureB = new PathFigure();
-            myPathFigureB.StartPoint = new Point(30, 40);
-            myPathFigureB.Segments.Add(new ArcSegment(new Point(227, 40), new Size(70, 30),
-                                       0, true, SweepDirection.Counterclockwise, true));
-
-            PathGeometry myPathGeometryB = new PathGeometry();
-            myPathGeometryB.Figures.Add(myPathFigureB);
-
-            segmentB = new Path();
-            segmentB.Height = Double.NaN;
-            segmentB.Width = Double.NaN;
-            segmentB.Stretch = Stretch.Fill;
-            segmentB.Stroke = Brushes.Black;
-            segmentB.StrokeThickness = 3;
-            segmentB.Data = myPathGeometryB;
-
-            segmentAContainer = new Grid();
-            segmentAContainer.Background = System.Windows.Media.Brushes.LightBlue;
-            //segmentAContainer.Children.Add(segmentA);
-
-            /*Canvas.SetLeft(segmentAContainer, 100);
-            Canvas.SetTop(segmentAContainer, 132);
-            canvasEdit.Children.Add(segmentAContainer);
-            */
-
-            Canvas.SetLeft(segmentB, 165);
-            Canvas.SetTop(segmentB, 132);
-            canvasEdit.Children.Add(segmentB);
-
-            // SegmentC: line
-            segmentC = new Line();
-            segmentC.X1 = 365;
-            segmentC.Y1 = 135;
-            segmentC.X2 = 470;
-            segmentC.Y2 = 193;
-            segmentC.Stroke = System.Windows.Media.Brushes.Black;
-            segmentC.StrokeThickness = 3;
-            canvasEdit.Children.Add(segmentC);
-
-            // SegmentD: line
-            segmentD = new Line();
-            segmentD.X1 = 470;
-            segmentD.Y1 = 193;
-            segmentD.X2 = 530;
-            segmentD.Y2 = 285;
-            segmentD.Stroke = System.Windows.Media.Brushes.Black;
-            segmentD.StrokeThickness = 3;
-            canvasEdit.Children.Add(segmentD);
-
-            // SegmentE: line
-            segmentE = new Line();
-            segmentE.X1 = 530;
-            segmentE.Y1 = 285;
-            segmentE.X2 = 165;
-            segmentE.Y2 = 285;
-            segmentE.Stroke = System.Windows.Media.Brushes.Black;
-            segmentE.StrokeThickness = 3;
-            canvasEdit.Children.Add(segmentE);
         }
 
         public void loadDesignList()

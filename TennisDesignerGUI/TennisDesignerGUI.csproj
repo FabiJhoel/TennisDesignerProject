@@ -109,12 +109,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\windowBackground3.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\windowBackground.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{1382d3e7-0267-41fe-a8aa-d65431cb2a99}</Project>
       <Name>DataAccess</Name>
@@ -122,6 +116,10 @@
     <ProjectReference Include="..\TennisLibrary\TennisLibrary.csproj">
       <Project>{b823f928-6697-4e75-a79a-bdac66bc7f6f}</Project>
       <Name>TennisLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TennisLogic\TennisLogic.csproj">
+      <Project>{d0284563-15e6-4cb7-a6db-764aa1239b99}</Project>
+      <Name>TennisLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

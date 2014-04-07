@@ -1,10 +1,5 @@
-C:\Users\Fabiola\Documents\Visual Studio 2013\Projects\Tennis Designer Project\TennisLogic\bin\Debug\TennisLogic.dll
-C:\Users\Fabiola\Documents\Visual Studio 2013\Projects\Tennis Designer Project\TennisLogic\bin\Debug\TennisLogic.pdb
-C:\Users\Fabiola\Documents\Visual Studio 2013\Projects\Tennis Designer Project\TennisLogic\obj\Debug\TennisLogic.csprojResolveAssemblyReference.cache
-C:\Users\Fabiola\Documents\Visual Studio 2013\Projects\Tennis Designer Project\TennisLogic\obj\Debug\TennisLogic.dll
-C:\Users\Fabiola\Documents\Visual Studio 2013\Projects\Tennis Designer Project\TennisLogic\obj\Debug\TennisLogic.pdb
-C:\Users\Fabiola\Documents\GitHub\TennisLogic\bin\Debug\TennisLogic.dll
-C:\Users\Fabiola\Documents\GitHub\TennisLogic\bin\Debug\TennisLogic.pdb
-C:\Users\Fabiola\Documents\GitHub\TennisLogic\obj\Debug\TennisLogic.csprojResolveAssemblyReference.cache
-C:\Users\Fabiola\Documents\GitHub\TennisLogic\obj\Debug\TennisLogic.dll
-C:\Users\Fabiola\Documents\GitHub\TennisLogic\obj\Debug\TennisLogic.pdb
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisLogic\bin\Debug\TennisLogic.dll
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisLogic\bin\Debug\TennisLogic.pdb
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisLogic\obj\Debug\TennisLogic.csprojResolveAssemblyReference.cache
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisLogic\obj\Debug\TennisLogic.dll
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisLogic\obj\Debug\TennisLogic.pdb
