@@ -3,3 +3,8 @@ C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisLogic\bin\Debug\Te
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisLogic\obj\Debug\TennisLogic.csprojResolveAssemblyReference.cache
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisLogic\obj\Debug\TennisLogic.dll
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisLogic\obj\Debug\TennisLogic.pdb
+C:\Users\jhoel_000\Documents\GitHub\TennisLogic\bin\Debug\TennisLogic.dll
+C:\Users\jhoel_000\Documents\GitHub\TennisLogic\bin\Debug\TennisLogic.pdb
+C:\Users\jhoel_000\Documents\GitHub\TennisLogic\obj\Debug\TennisLogic.csprojResolveAssemblyReference.cache
+C:\Users\jhoel_000\Documents\GitHub\TennisLogic\obj\Debug\TennisLogic.dll
+C:\Users\jhoel_000\Documents\GitHub\TennisLogic\obj\Debug\TennisLogic.pdb

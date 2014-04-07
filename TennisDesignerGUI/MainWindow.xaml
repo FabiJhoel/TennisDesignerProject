@@ -83,7 +83,7 @@
 
         <!--Designs Panel-->
         <GroupBox Header="Designs" HorizontalAlignment="Left" Height="325" Margin="10,100,0,0" VerticalAlignment="Top" Width="215" FontWeight="Bold" Foreground="#FF595353"/>
-        <ListBox x:Name="ListBoxDesigns" HorizontalAlignment="Left" Height="250" Margin="25,130,0,0" VerticalAlignment="Top" Width="185" Foreground="#FF595353"/>
+        <ListBox x:Name="ListBoxDesigns" HorizontalAlignment="Left" Height="250" Margin="25,130,0,0" VerticalAlignment="Top" Width="185" Foreground="#FF595353" SelectionChanged="ListBoxDesigns_SelectionChanged"/>
         <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="165,395,0,0" VerticalAlignment="Top" Width="45" Foreground="#FF595353" Click="addNewDesignButton">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">

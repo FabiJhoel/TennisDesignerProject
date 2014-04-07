@@ -11,12 +11,9 @@ namespace DataAccess
 {
     class ParseDataAcces
     {
-        private List<string> nameList = new List<string>();
-
         public ParseDataAcces()
         {
             initializeService();
-            //List<string> nameList = new List<string>();
         }
 
         public void initializeService()
@@ -50,20 +47,46 @@ namespace DataAccess
             return basePointList;
         }
 
-        public async void getDesignList()
+        public async Task<List<string>> getDesignList()
         {
             var query = ParseObject.GetQuery("Design");
             IEnumerable<ParseObject> results = await query.FindAsync();
 
-            foreach(ParseObject tempObject in results)
+            List<string> nameList = new List<string>();
+            foreach (ParseObject tempObject in results)
             {
                 nameList.Add(tempObject.Get<string>("Name"));
             }
+
+            return nameList;
         }
 
-        public List<string> getNameList()
+        public async Task<Design> getDesign(string pName)
         {
-            return nameList;
+            var query = from search in ParseObject.GetQuery("Design")
+                        where search.Get<string>("Name") == pName
+                        select search;
+
+            IEnumerable<ParseObject> resultDesign = await query.FindAsync();
+
+            return parseObjectToDesign(resultDesign.First());
+        }
+
+        public Design parseObjectToDesign(ParseObject pParseObject)
+        {
+            Design design = new Design(pParseObject.Get<string>("Name"));
+            design.setCreationDate(pParseObject.Get<string>("Date"));
+
+            /*List<ParseObject> pointsList = pParseObject.Get<List<ParseObject>>("Points");
+            BasePoint point;
+
+            foreach (ParseObject tempBasePoint in pointsList)
+            {
+                point = new BasePoint(tempBasePoint.Get<int>("AxisX"), tempBasePoint.Get<int>("AxisY"), " ");
+                design.addPoint(point);
+            }*/
+
+            return design;
         }
     }
 }

@@ -15,8 +15,6 @@ C:\Users\jhoel_000\Documents\GitHub\DataAccess\bin\Debug\DataAccess.dll
 C:\Users\jhoel_000\Documents\GitHub\DataAccess\bin\Debug\DataAccess.pdb
 C:\Users\jhoel_000\Documents\GitHub\DataAccess\bin\Debug\Parse.dll
 C:\Users\jhoel_000\Documents\GitHub\DataAccess\bin\Debug\Parse.NetFx45.dll
-C:\Users\jhoel_000\Documents\GitHub\DataAccess\bin\Debug\TennisLibrary.dll
-C:\Users\jhoel_000\Documents\GitHub\DataAccess\bin\Debug\TennisLibrary.pdb
 C:\Users\jhoel_000\Documents\GitHub\DataAccess\bin\Debug\Parse.xml
 C:\Users\jhoel_000\Documents\GitHub\DataAccess\bin\Debug\Parse.NetFx45.xml
 C:\Users\jhoel_000\Documents\GitHub\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
@@ -37,3 +35,5 @@ C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\DataAccess\bin\Debug\Ten
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\DataAccess\bin\Debug\TennisLogic.pdb
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\DataAccess\bin\Debug\TennisLibrary.dll
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\DataAccess\bin\Debug\TennisLibrary.pdb
+C:\Users\jhoel_000\Documents\GitHub\DataAccess\bin\Debug\TennisLogic.dll
+C:\Users\jhoel_000\Documents\GitHub\DataAccess\bin\Debug\TennisLogic.pdb

@@ -30,7 +30,7 @@ namespace TennisDesignerGUI
         {
             InitializeComponent();
             dataAdmin = new DataAdministrator();
-            loadDesignList(); 
+            DataManager.loadDesignList(ListBoxDesigns); 
         }
         
         private void addNewDesignButton(object sender, RoutedEventArgs e)
@@ -53,8 +53,7 @@ namespace TennisDesignerGUI
 
         private void saveDesignButton(object sender, RoutedEventArgs e)
         {
-            dataAdmin.saveDesign(designInstance);
-            MessageBox.Show("Your design has been saved as: " + designInstance.getName());
+            DataManager.saveDesign(designInstance);
         }
 
         // BasePoint Events
@@ -175,15 +174,12 @@ namespace TennisDesignerGUI
             /********************************************/
         }
 
-        public void loadDesignList()
+        private void ListBoxDesigns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<string> names = dataAdmin.getDesignList();
-            MessageBox.Show("" + names.Count());
-
-            foreach (string name in names)
-            {
-                ListBoxDesigns.Items.Add(name);
-            }
+            //http://shrinandvyas.blogspot.com/2011/07/wpf-get-listboxitem-from.html
+            ListBoxItem rowSelected = ListBoxDesigns.ItemContainerGenerator.ContainerFromItem(ListBoxDesigns.SelectedItem) as ListBoxItem;
+            DataManager.loadDesign(rowSelected.Content.ToString());
         }
+
     }
 }

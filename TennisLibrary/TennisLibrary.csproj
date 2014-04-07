@@ -49,6 +49,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{1382d3e7-0267-41fe-a8aa-d65431cb2a99}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TennisLogic\TennisLogic.csproj">
       <Project>{d0284563-15e6-4cb7-a6db-764aa1239b99}</Project>
       <Name>TennisLogic</Name>

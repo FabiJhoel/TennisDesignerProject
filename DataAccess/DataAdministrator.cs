@@ -22,10 +22,14 @@ namespace DataAccess
             parseConnection.uploadDesign(pDesign);
         }
 
-        public List<string> getDesignList()
+        public async Task<List<string>> getDesignList()
         {
-            parseConnection.getDesignList();
-            return parseConnection.getNameList();
+            return await parseConnection.getDesignList();
+        }
+
+        public async Task<Design> getDesign(string pName)
+        {
+            return await parseConnection.getDesign(pName);
         }
     }
 }
