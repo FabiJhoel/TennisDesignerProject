@@ -36,6 +36,7 @@
     <Reference Include="Parse.NetFx45">
       <HintPath>..\packages\Parse.1.2.14\lib\net45\Parse.NetFx45.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

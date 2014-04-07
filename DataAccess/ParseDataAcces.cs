@@ -5,22 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using Parse;
 using TennisLibrary;
+using System.Windows;
 
 namespace DataAccess
 {
     class ParseDataAcces
     {
-        ParseObject objectDownloaded;
-        
+        private List<string> nameList = new List<string>();
+
         public ParseDataAcces()
         {
             initializeService();
+            //List<string> nameList = new List<string>();
         }
 
         public void initializeService()
         {
             ParseClient.Initialize("gP8GuldBPgMRplqDnnJaJ6KJgsH92Zh5vZKmukxS", "IHJqchPq13I8m3vWw8B2tbKYyavLpQxvQWHAqQeV");
         }
+
         public async void uploadDesign(Design pDesign)
         {
             ParseObject bond = new ParseObject("Design")
@@ -30,6 +33,7 @@ namespace DataAccess
             };
             await bond.SaveAsync();
         }
+
         private List<ParseObject> getBasePointsFromDesign(Design pDesign)
         {
             List<ParseObject> basePointList = new List<ParseObject>();
@@ -50,7 +54,16 @@ namespace DataAccess
         {
             var query = ParseObject.GetQuery("Design");
             IEnumerable<ParseObject> results = await query.FindAsync();
-            //objectDownloaded = results.First();
+
+            foreach(ParseObject tempObject in results)
+            {
+                nameList.Add(tempObject.Get<string>("Name"));
+            }
+        }
+
+        public List<string> getNameList()
+        {
+            return nameList;
         }
     }
 }

@@ -74,3 +74,9 @@ C:\Users\Fabiola\Documents\GitHub\TennisDesignerGUI\obj\Debug\TennisDesignerGUI_
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.g.resources
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.Properties.Resources.resources
 C:\Users\Fabiola\Documents\GitHub\TennisDesignerGUI\obj\Debug\TennisDesignerGUI.csproj.GenerateResource.Cache
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\bin\Debug\DataAccess.dll
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\bin\Debug\Parse.dll
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\bin\Debug\Parse.NetFx45.dll
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\bin\Debug\DataAccess.pdb
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\bin\Debug\Parse.xml
+C:\Users\Fabiola\Documents\GitHub\TennisDesignerProject\TennisDesignerGUI\bin\Debug\Parse.NetFx45.xml

@@ -32,6 +32,7 @@ namespace TennisDesignerGUI
         {
             InitializeComponent();
             dataAdmin = new DataAdministrator();
+            loadDesignList(); 
         }
         
         private void addNewDesignButton(object sender, RoutedEventArgs e)
@@ -281,6 +282,17 @@ namespace TennisDesignerGUI
             segmentE.Stroke = System.Windows.Media.Brushes.Black;
             segmentE.StrokeThickness = 3;
             canvasEdit.Children.Add(segmentE);
+        }
+
+        public void loadDesignList()
+        {
+            List<string> names = dataAdmin.getDesignList();
+            MessageBox.Show("" + names.Count());
+
+            foreach (string name in names)
+            {
+                ListBoxDesigns.Items.Add(name);
+            }
         }
     }
 }

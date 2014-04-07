@@ -22,9 +22,10 @@ namespace DataAccess
             parseConnection.uploadDesign(pDesign);
         }
 
-        public void getDesignList()
+        public List<string> getDesignList()
         {
             parseConnection.getDesignList();
+            return parseConnection.getNameList();
         }
     }
 }
