@@ -33,7 +33,7 @@ namespace TennisLibrary
         public static async void loadDesign(string pName)
         {
             Design design = await dataAdmin.getDesign(pName);
-            MessageBox.Show(design.getCreationDate());
+            MessageBox.Show(" " + design.getBasePoints()[0].getAxisX());
         }
     }
 }
