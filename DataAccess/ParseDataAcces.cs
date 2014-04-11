@@ -69,22 +69,26 @@ namespace DataAccess
 
             IEnumerable<ParseObject> resultDesign = await query.FindAsync();
 
-            return parseObjectToDesign(resultDesign.First());
+            Design design = await parseObjectToDesign(resultDesign.First());
+            return design;
         }
 
-        public Design parseObjectToDesign(ParseObject pParseObject)
+        public async Task<Design> parseObjectToDesign(ParseObject pParseObject)
         {
             Design design = new Design(pParseObject.Get<string>("Name"));
             design.setCreationDate(pParseObject.Get<string>("Date"));
 
-            /*List<ParseObject> pointsList = pParseObject.Get<List<ParseObject>>("Points");
             BasePoint point;
+            IList<ParseObject> pointsList = pParseObject.Get<IList<ParseObject>>("Points");
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("BasePoint");
+            ParseObject basePoint;
 
             foreach (ParseObject tempBasePoint in pointsList)
             {
-                point = new BasePoint(tempBasePoint.Get<int>("AxisX"), tempBasePoint.Get<int>("AxisY"), " ");
+                basePoint = await query.GetAsync(tempBasePoint.ObjectId);
+                point = new BasePoint(basePoint.Get<double>("AxisX"), basePoint.Get<double>("AxisY"), " ");
                 design.addPoint(point);
-            }*/
+            }
 
             return design;
         }

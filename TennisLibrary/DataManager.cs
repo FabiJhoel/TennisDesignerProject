@@ -30,10 +30,9 @@ namespace TennisLibrary
             }
         }
 
-        public static async void loadDesign(string pName)
+        public static async Task<Design> loadDesign(string pName)
         {
-            Design design = await dataAdmin.getDesign(pName);
-            MessageBox.Show(design.getCreationDate());
+            return await dataAdmin.getDesign(pName);
         }
     }
 }

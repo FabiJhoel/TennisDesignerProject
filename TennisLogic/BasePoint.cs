@@ -16,7 +16,7 @@ namespace TennisBusiness
         private string name;
         Ellipse pointEllipse;
 
-        public BasePoint(int pAxisX, int pAxisY, string pName)
+        public BasePoint(double pAxisX, double pAxisY, string pName)
         {
             pointEllipse = new Ellipse();
             setAxisX(pAxisX);
@@ -24,12 +24,12 @@ namespace TennisBusiness
             setName(pName);
         }
 
-        public void setAxisX(int pAxisX)
+        public void setAxisX(double pAxisX)
         {
             this.AxisX = pAxisX;
         }
 
-        public void setAxisY(int pAxisY)
+        public void setAxisY(double pAxisY)
         {
             this.AxisY = pAxisY;
         }

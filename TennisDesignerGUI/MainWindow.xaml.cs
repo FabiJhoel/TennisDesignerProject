@@ -38,6 +38,7 @@ namespace TennisDesignerGUI
             DesignNameWindow getNameWindow = new DesignNameWindow(ListBoxDesigns, designInstance);
 
             getNameWindow.Show();
+            canvasEdit.Children.Clear();
             PaintManager.loadTennisSilhouette(designInstance, canvasEdit);
             PaintManager.loadBasePoints(designInstance, canvasEdit);
 
@@ -75,7 +76,9 @@ namespace TennisDesignerGUI
             {
                 // Move ellipse
                 (pointA).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
+                designInstance.getBasePoints()[0].setAxisX(e.GetPosition(canvasEdit).X - 10);
                 (pointA).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
+                designInstance.getBasePoints()[0].setAxisY(e.GetPosition(canvasEdit).Y - 10);
 
                 // Move auxiliar ellipse
                 (pointE).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y + 130);
@@ -99,12 +102,16 @@ namespace TennisDesignerGUI
             {
                 // Move ellipse
                 (pointB).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
+                designInstance.getBasePoints()[1].setAxisX(e.GetPosition(canvasEdit).X - 10);
                 (pointB).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
+                designInstance.getBasePoints()[1].setAxisY(e.GetPosition(canvasEdit).Y - 10);
 
                 // Move line
                 segmentC.X1 = Canvas.GetLeft(pointB) + 5;
                 segmentC.Y1 = Canvas.GetTop(pointB) + 5;
             }
+
+            // Set actual value in designInstance
         }
 
         private void MouseMovePointC(object sender, MouseEventArgs e)
@@ -117,7 +124,10 @@ namespace TennisDesignerGUI
             {
                 // Move ellipse
                 (pointC).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
+                designInstance.getBasePoints()[2].setAxisX(e.GetPosition(canvasEdit).X - 10);
                 (pointC).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
+                designInstance.getBasePoints()[2].setAxisY(e.GetPosition(canvasEdit).Y - 10);
+
 
                 // Move line
                 segmentC.X2 = Canvas.GetLeft(pointC) + 5;
@@ -137,7 +147,9 @@ namespace TennisDesignerGUI
             {
                 // Move ellipse
                 (pointD).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
+                designInstance.getBasePoints()[3].setAxisX(e.GetPosition(canvasEdit).X - 10);
                 (pointD).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
+                designInstance.getBasePoints()[3].setAxisY(e.GetPosition(canvasEdit).Y - 10);
 
                 // Move line
                 segmentD.X2 = Canvas.GetLeft(pointD) + 5;
@@ -159,7 +171,9 @@ namespace TennisDesignerGUI
             {
                 // Move ellipse
                 (pointE).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
+                designInstance.getBasePoints()[4].setAxisX(e.GetPosition(canvasEdit).X - 10);
                 (pointE).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
+                designInstance.getBasePoints()[4].setAxisY(e.GetPosition(canvasEdit).Y - 10);
 
                 // Move auxiliar ellipse
                 (pointA).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
@@ -194,11 +208,13 @@ namespace TennisDesignerGUI
 
         }
 
-        private void ListBoxDesigns_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void ListBoxDesigns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //http://shrinandvyas.blogspot.com/2011/07/wpf-get-listboxitem-from.html
             ListBoxItem rowSelected = ListBoxDesigns.ItemContainerGenerator.ContainerFromItem(ListBoxDesigns.SelectedItem) as ListBoxItem;
-            DataManager.loadDesign(rowSelected.Content.ToString());
+            Design design = await DataManager.loadDesign(rowSelected.Content.ToString());
+            canvasEdit.Children.Clear();
+            MessageBox.Show(" " + design.getBasePoints()[0].getAxisX());
         }
 
     }
