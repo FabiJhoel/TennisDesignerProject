@@ -86,7 +86,7 @@ namespace DataAccess
             foreach (ParseObject tempBasePoint in pointsList)
             {
                 basePoint = await query.GetAsync(tempBasePoint.ObjectId);
-                point = new BasePoint(basePoint.Get<int>("AxisX"), basePoint.Get<int>("AxisY"), " ");
+                point = new BasePoint(basePoint.Get<double>("AxisX"), basePoint.Get<double>("AxisY"), " ");
                 design.addPoint(point);
             }
 
