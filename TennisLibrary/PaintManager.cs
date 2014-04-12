@@ -61,16 +61,10 @@ namespace TennisLibrary
             pDesign.getSegmentA().StrokeThickness = 3;
             pDesign.getSegmentA().Data = myPathGeometry;
 
-            ////////////////////////////
             //pDesign.getSegmentAContainer().Background = System.Windows.Media.Brushes.LightBlue;
             Canvas.SetLeft(pDesign.getSegmentAContainer(), 100);
             Canvas.SetTop(pDesign.getSegmentAContainer(), 132);
             pCanvas.Children.Add(pDesign.getSegmentAContainer());
-            /////////////////////////////
-
-            /*Canvas.SetLeft(pDesign.getSegmentA(), 100);
-            Canvas.SetTop(pDesign.getSegmentA(), 132);
-            pCanvas.Children.Add(pDesign.getSegmentA());*/
 
             // SegmentB: arc
             PathFigure myPathFigureB = new PathFigure();
@@ -92,10 +86,6 @@ namespace TennisLibrary
             Canvas.SetLeft(pDesign.getSegmentBContainer(), 165);
             Canvas.SetTop(pDesign.getSegmentBContainer(), 132);
             pCanvas.Children.Add(pDesign.getSegmentBContainer());
-
-           /* Canvas.SetLeft(pDesign.getSegmentB(), 165);
-            Canvas.SetTop(pDesign.getSegmentB(), 132);
-            pCanvas.Children.Add(pDesign.getSegmentB());*/
 
             // SegmentC: line
             pDesign.getSegmentC().X1 = 365;
