@@ -71,25 +71,39 @@ namespace TennisDesignerGUI
             Ellipse pointE = designInstance.getBasePoints()[4].getPointEllipse();
             Grid segmentB = designInstance.getSegmentBContainer();
             Grid segmentA = designInstance.getSegmentAContainer();
+            Line segmentE = designInstance.getSegmentE();
 
             if (pointA != null && e.LeftButton == MouseButtonState.Pressed)
             {
                 // Move ellipse
-                (pointA).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
+                if (Canvas.GetLeft(segmentA)> 1)
+                    (pointA).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
+                else
+                    (pointA).SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointA) + 1);
+
+
                 designInstance.getBasePoints()[0].setAxisX(e.GetPosition(canvasEdit).X - 10);
                 (pointA).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
                 designInstance.getBasePoints()[0].setAxisY(e.GetPosition(canvasEdit).Y - 10);
 
-                // Move auxiliar ellipse
-                (pointE).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y + 130);
-
                 // Move arc
-                segmentB.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointA) + 5);
+                segmentB.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointA) + 10);
+                segmentB.SetValue(Canvas.TopProperty, Canvas.GetTop(pointA) + 10);
+                //segmentB.Width = Math.Abs(Canvas.GetTop(pointA));
 
                 // Move auxiliar arc
                 segmentA.SetValue(Canvas.TopProperty, Canvas.GetTop(pointA) + 5);
-                //segmentA.Height = Math.Abs(Canvas.GetTop(pointA) + 50);
-                segmentA.Height = Math.Abs(Canvas.GetTop(pointE) - 120);
+                segmentA.SetValue(Canvas.LeftProperty, (Canvas.GetLeft(pointA) + 5) - segmentA.ActualWidth);
+
+                // Move auxiliar ellipse
+                (pointE).SetValue(Canvas.TopProperty, Canvas.GetTop(pointA) + segmentA.ActualHeight - 5);
+                (pointE).SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointA));
+
+                //Move auxiliar line
+                segmentE.X2 = Canvas.GetLeft(pointE) + 5;
+                segmentE.Y2 = Canvas.GetTop(pointE) + 5;
+
+
             }
         }
 
@@ -170,39 +184,31 @@ namespace TennisDesignerGUI
             if (pointE != null && e.LeftButton == MouseButtonState.Pressed)
             {
                 // Move ellipse
-                (pointE).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
-                designInstance.getBasePoints()[4].setAxisX(e.GetPosition(canvasEdit).X - 10);
+
+                if (segmentA.Width > 2 && Canvas.GetLeft(segmentA) < Canvas.GetLeft(pointE))
+                    (pointE).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
+                else
+                    (pointE).SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointE) + 1);
+
+                designInstance.getBasePoints()[4].setAxisX(e.GetPosition(canvasEdit).X - 10);//GetLeft(pointE)
                 (pointE).SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
-                designInstance.getBasePoints()[4].setAxisY(e.GetPosition(canvasEdit).Y - 10);
+                designInstance.getBasePoints()[4].setAxisY(e.GetPosition(canvasEdit).Y - 10);//GetTop(pointE)
 
                 // Move auxiliar ellipse
-                (pointA).SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
+                Canvas.SetLeft(pointA, Canvas.GetLeft(pointE));
 
                 // Move line
                 segmentE.X2 = Canvas.GetLeft(pointE) + 5;
                 segmentE.Y2 = Canvas.GetTop(pointE) + 5;
 
                 // Move arcs
-                segmentA.Width = Math.Abs(Canvas.GetLeft(pointE) - 80);
-                segmentA.Height = Math.Abs(Canvas.GetTop(pointE) - 120);
+                segmentA.Width = Math.Abs((Canvas.GetLeft(pointE) - Canvas.GetLeft(segmentA)) + 5);
+                segmentA.Height = Math.Abs(Canvas.GetTop(pointE) - Canvas.GetTop(pointA));
+
+
 
                 // Move auxiliar arc
-                //segmentB.Width = Math.Abs(Canvas.GetLeft(pointA) - 20);
                 segmentB.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointA) + 5);
-                //segmentB.Height = Math.Abs(Canvas.GetTop(pointA) - 120);
-
-                
-
-               /* canvasEdit.Children.Remove(segmentA);
-               
-                PathGeometry pathGeo = segmentA.Data.GetFlattenedPathGeometry();
-
-                foreach (var figs in pathGeo.Figures)
-                {
-                    Point start = figs.StartPoint;
-                    //MessageBox.Show(start.ToString());
-                }*/
-
             }
       
 
