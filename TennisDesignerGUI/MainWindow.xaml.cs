@@ -315,7 +315,8 @@ namespace TennisDesignerGUI
             ListBoxItem rowSelected = ListBoxDesigns.ItemContainerGenerator.ContainerFromItem(ListBoxDesigns.SelectedItem) as ListBoxItem;
             Design design = await DataManager.loadDesign(rowSelected.Content.ToString());
             canvasEdit.Children.Clear();
-            MessageBox.Show(" " + design.getBasePoints()[0].getAxisX());
+            PaintManager.loadTennisSilhouetteee(design, canvasEdit);
+            PaintManager.loadBasePoints(design, canvasEdit);
         }
     }
 }
