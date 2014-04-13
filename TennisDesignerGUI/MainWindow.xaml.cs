@@ -39,15 +39,10 @@ namespace TennisDesignerGUI
 
             getNameWindow.Show();
             canvasEdit.Children.Clear();
-            PaintManager.loadTennisSilhouette(designInstance, canvasEdit);
+            PaintManager.createBasePoints(designInstance);
+            PaintManager.loadTennisSilhouette(designInstance, canvasEdit);           
             PaintManager.loadBasePoints(designInstance, canvasEdit);
-
-            // Asign events to each BasePoint
-            designInstance.getBasePoints()[0].getPointEllipse().MouseMove += MouseMovePointA;
-            designInstance.getBasePoints()[1].getPointEllipse().MouseMove += MouseMovePointB;
-            designInstance.getBasePoints()[2].getPointEllipse().MouseMove += MouseMovePointC;
-            designInstance.getBasePoints()[3].getPointEllipse().MouseMove += MouseMovePointD;
-            designInstance.getBasePoints()[4].getPointEllipse().MouseMove += MouseMovePointE;
+            asignEventToBasePoint();
         }
 
         private void saveDesignButton(object sender, RoutedEventArgs e)
@@ -56,13 +51,22 @@ namespace TennisDesignerGUI
         }
 
         /* BasePoint Events */
+        private void asignEventToBasePoint()
+        {
+            designInstance.getBasePoints()[0].getPointEllipse().MouseMove += MouseMovePointA;
+            designInstance.getBasePoints()[1].getPointEllipse().MouseMove += MouseMovePointB;
+            designInstance.getBasePoints()[2].getPointEllipse().MouseMove += MouseMovePointC;
+            designInstance.getBasePoints()[3].getPointEllipse().MouseMove += MouseMovePointD;
+            designInstance.getBasePoints()[4].getPointEllipse().MouseMove += MouseMovePointE;
+        }
+
         private void MouseMovePointA(object sender, MouseEventArgs e)
         {
             Ellipse pointA = designInstance.getBasePoints()[0].getPointEllipse();
             Ellipse pointB = designInstance.getBasePoints()[1].getPointEllipse();
             Ellipse pointE = designInstance.getBasePoints()[4].getPointEllipse();
-            Grid segmentA = designInstance.getSegmentAContainer();
-            Grid segmentB = designInstance.getSegmentBContainer();
+            Grid segmentA = designInstance.getSegmentA().getSegmentContainer();
+            Grid segmentB = designInstance.getSegmentB().getSegmentContainer();
             Line segmentC = designInstance.getSegmentC();
             Line segmentE = designInstance.getSegmentE();          
 
@@ -79,9 +83,7 @@ namespace TennisDesignerGUI
                     else
                         pointA.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointA) - 1);
                 }
-
-                designInstance.getBasePoints()[0].setAxisX(Canvas.GetLeft(pointA));
-
+               
                 if (Canvas.GetTop(pointE) < 435 && Canvas.GetTop(pointA) > 5)
                     pointA.SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
                 else
@@ -92,9 +94,7 @@ namespace TennisDesignerGUI
                     if (Canvas.GetTop(pointA) <= 5)
                         pointA.SetValue(Canvas.TopProperty, Canvas.GetTop(pointA) + 1);
                 }
-
-                designInstance.getBasePoints()[0].setAxisY(Canvas.GetTop(pointA));
-
+               
                 // Move auxiliar ellipse
                 pointB.SetValue(Canvas.TopProperty, Canvas.GetTop(pointA));
                 pointB.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointA) + segmentB.ActualWidth);
@@ -114,6 +114,12 @@ namespace TennisDesignerGUI
                 segmentC.Y1 = Canvas.GetTop(pointB) + 5;
                 segmentE.X2 = Canvas.GetLeft(pointE) + 5;
                 segmentE.Y2 = Canvas.GetTop(pointE) + 5;
+
+                // Set design values 
+                designInstance.getBasePoints()[0].setAxisX(Canvas.GetLeft(pointA));
+                designInstance.getBasePoints()[0].setAxisY(Canvas.GetTop(pointA));
+                designInstance.getSegmentA().setAxisX((Canvas.GetLeft(pointA) + 5) - segmentA.ActualWidth);
+                designInstance.getSegmentA().setAxisY(Canvas.GetTop(pointA) + 5);
             }
         }
 
@@ -122,8 +128,8 @@ namespace TennisDesignerGUI
             Ellipse pointA = designInstance.getBasePoints()[0].getPointEllipse();
             Ellipse pointB = designInstance.getBasePoints()[1].getPointEllipse();
             Ellipse pointE = designInstance.getBasePoints()[4].getPointEllipse();
-            Grid segmentA = designInstance.getSegmentAContainer();
-            Grid segmentB = designInstance.getSegmentBContainer();
+            Grid segmentA = designInstance.getSegmentA().getSegmentContainer();
+            Grid segmentB = designInstance.getSegmentB().getSegmentContainer();
             Line segmentC = designInstance.getSegmentC();
             Line segmentE = designInstance.getSegmentE();
 
@@ -134,9 +140,7 @@ namespace TennisDesignerGUI
                     pointB.SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
                 else
                     pointB.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointB) - 1);
-
-                designInstance.getBasePoints()[1].setAxisX(Canvas.GetLeft(pointB));
-
+                
                 if (Canvas.GetTop(pointE) < 435 && Canvas.GetTop(pointB) > 5) 
                     pointB.SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
                 else
@@ -147,9 +151,7 @@ namespace TennisDesignerGUI
                     else if (Canvas.GetTop(pointB) <= 5)
                         pointB.SetValue(Canvas.TopProperty, Canvas.GetTop(pointB) + 1);
                 }
-
-                designInstance.getBasePoints()[1].setAxisY(Canvas.GetTop(pointB));
-
+               
                 // Move auxiliar ellipse
                 pointA.SetValue(Canvas.TopProperty, Canvas.GetTop(pointB));
                 pointE.SetValue(Canvas.TopProperty, Canvas.GetTop(pointA) + segmentA.ActualHeight - 5);
@@ -169,7 +171,14 @@ namespace TennisDesignerGUI
 
                 //Move auxiliar line
                 segmentE.X2 = Canvas.GetLeft(pointE) + 5;
-                segmentE.Y2 = Canvas.GetTop(pointE) + 5;               
+                segmentE.Y2 = Canvas.GetTop(pointE) + 5;   
+            
+                // Set design values
+                designInstance.getBasePoints()[1].setAxisX(Canvas.GetLeft(pointB));
+                designInstance.getBasePoints()[1].setAxisY(Canvas.GetTop(pointB));
+                designInstance.getSegmentA().setAxisX((Canvas.GetLeft(pointA) + 5) - segmentA.ActualWidth);
+                designInstance.getSegmentA().setAxisY(Canvas.GetTop(pointA) + 5);
+                designInstance.getSegmentB().setAxisY(Canvas.GetTop(pointB) + 5);
             }
         }
 
@@ -186,9 +195,7 @@ namespace TennisDesignerGUI
                     pointC.SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
                 else
                     pointC.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointC) - 1);
-
-                designInstance.getBasePoints()[2].setAxisX(Canvas.GetLeft(pointC));
-
+               
                 if (Canvas.GetTop(pointC) < 435 && Canvas.GetTop(pointC) > 5)
                     pointC.SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
                 else
@@ -200,13 +207,15 @@ namespace TennisDesignerGUI
                         pointC.SetValue(Canvas.TopProperty, Canvas.GetTop(pointC) + 1);
                 }
 
-                designInstance.getBasePoints()[2].setAxisY(Canvas.GetTop(pointC));
-
                 // Move line
                 segmentC.X2 = Canvas.GetLeft(pointC) + 5;
                 segmentC.Y2 = Canvas.GetTop(pointC) + 5;
                 segmentD.X1 = Canvas.GetLeft(pointC) + 7;
                 segmentD.Y1 = Canvas.GetTop(pointC) + 7;
+
+                // Set design values
+                designInstance.getBasePoints()[2].setAxisX(Canvas.GetLeft(pointC));
+                designInstance.getBasePoints()[2].setAxisY(Canvas.GetTop(pointC));
             }
         }
 
@@ -223,9 +232,7 @@ namespace TennisDesignerGUI
                     pointD.SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 10);
                 else
                     pointD.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointD) - 1);
-
-                designInstance.getBasePoints()[3].setAxisX(Canvas.GetLeft(pointD));
-
+                
                 if (Canvas.GetTop(pointD) < 435 && Canvas.GetTop(pointD) > 5)
                     pointD.SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
                 else
@@ -237,13 +244,15 @@ namespace TennisDesignerGUI
                         pointD.SetValue(Canvas.TopProperty, Canvas.GetTop(pointD) + 1);
                 }
 
-                designInstance.getBasePoints()[3].setAxisY(Canvas.GetTop(pointD));
-
                 // Move line
                 segmentD.X2 = Canvas.GetLeft(pointD) + 5;
                 segmentD.Y2 = Canvas.GetTop(pointD) + 5;
                 segmentE.X1 = Canvas.GetLeft(pointD) + 7;
                 segmentE.Y1 = Canvas.GetTop(pointD) + 7;
+
+                // Set design values
+                designInstance.getBasePoints()[3].setAxisX(Canvas.GetLeft(pointD));
+                designInstance.getBasePoints()[3].setAxisY(Canvas.GetTop(pointD));
             }
         }
 
@@ -253,8 +262,8 @@ namespace TennisDesignerGUI
             Ellipse pointB = designInstance.getBasePoints()[1].getPointEllipse();
             Ellipse pointD = designInstance.getBasePoints()[3].getPointEllipse();
             Ellipse pointE = designInstance.getBasePoints()[4].getPointEllipse();
-            Grid segmentA = designInstance.getSegmentAContainer();
-            Grid segmentB = designInstance.getSegmentBContainer();
+            Grid segmentA = designInstance.getSegmentA().getSegmentContainer();
+            Grid segmentB = designInstance.getSegmentB().getSegmentContainer();
             Line segmentC = designInstance.getSegmentC();
             Line segmentE = designInstance.getSegmentE();
 
@@ -273,8 +282,6 @@ namespace TennisDesignerGUI
                     pointE.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointE) + 1);
                 }
 
-                designInstance.getBasePoints()[4].setAxisX(Canvas.GetLeft(pointE));
-
                 if (Canvas.GetTop(pointE) < 435 && Canvas.GetTop(pointE) > Canvas.GetTop(pointA))
                     pointE.SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 10);
                 else
@@ -285,8 +292,6 @@ namespace TennisDesignerGUI
                     else if (Canvas.GetTop(pointE) <= Canvas.GetTop(pointA))
                         pointE.SetValue(Canvas.TopProperty, Canvas.GetTop(pointE) + 1);
                 }
-
-                designInstance.getBasePoints()[4].setAxisY(Canvas.GetTop(pointE));
 
                 // Move auxiliar ellipse
                 Canvas.SetLeft(pointA, Canvas.GetLeft(pointE));
@@ -306,17 +311,21 @@ namespace TennisDesignerGUI
                 // Move auxiliar line
                 segmentC.X1 = Canvas.GetLeft(pointB) + 5;
                 segmentC.Y1 = Canvas.GetTop(pointB) + 5;
+
+                // Set design values
+                designInstance.getBasePoints()[4].setAxisX(Canvas.GetLeft(pointE));
+                designInstance.getBasePoints()[4].setAxisY(Canvas.GetTop(pointE));
+                designInstance.getSegmentB().setAxisX(Canvas.GetLeft(pointA) + 5);
             }
         }
 
         private async void ListBoxDesigns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //http://shrinandvyas.blogspot.com/2011/07/wpf-get-listboxitem-from.html
-            ListBoxItem rowSelected = ListBoxDesigns.ItemContainerGenerator.ContainerFromItem(ListBoxDesigns.SelectedItem) as ListBoxItem;
-            Design design = await DataManager.loadDesign(rowSelected.Content.ToString());
+            designInstance = await DataManager.loadDesign(ListBoxDesigns.SelectedItem.ToString());
             canvasEdit.Children.Clear();
-            PaintManager.loadTennisSilhouetteee(design, canvasEdit);
-            PaintManager.loadBasePoints(design, canvasEdit);
+            PaintManager.loadTennisSilhouette(designInstance, canvasEdit);
+            PaintManager.loadBasePoints(designInstance, canvasEdit);
+            asignEventToBasePoint();
         }
     }
 }

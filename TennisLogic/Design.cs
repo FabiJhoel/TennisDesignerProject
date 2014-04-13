@@ -14,23 +14,18 @@ namespace TennisBusiness
         private string creationDate;
         private List<BasePoint> basePoints = new List<BasePoint>();
         private List<Decoration> decorations = new List<Decoration>();
-        Path segmentA, segmentB;
-        Grid segmentAContainer, segmentBContainer;
+        Arc segmentA, segmentB;
         Line segmentC, segmentD, segmentE;
 
         public Design(string pName)
         {
-            setName(pName);
-            setCreationDate(DateTime.Now.ToString("M/d/yyyy"));
-            segmentA = new Path();
-            segmentAContainer = new Grid();
-            segmentAContainer.Children.Add(getSegmentA());
-            segmentB = new Path();
-            segmentBContainer = new Grid();
-            segmentBContainer.Children.Add(getSegmentB());
+            segmentA = new Arc(100, 132);
+            segmentB = new Arc(165, 132);
             segmentC = new Line();
             segmentD = new Line();
             segmentE = new Line();
+            setName(pName);
+            setCreationDate(DateTime.Now.ToString("M/d/yyyy"));
         }
 
         public void setName(string pName)
@@ -73,25 +68,25 @@ namespace TennisBusiness
             return this.decorations;
         }
 
-        public Path getSegmentA()
+        public Arc getSegmentA()
         {
             return segmentA;
         }
 
-        public Grid getSegmentAContainer()
+       /* public Grid getSegmentAContainer()
         {
             return segmentAContainer;
-        }
+        }*/
 
-        public Path getSegmentB()
+        public Arc getSegmentB()
         {
             return segmentB;
         }
 
-        public Grid getSegmentBContainer()
+        /*public Grid getSegmentBContainer()
         {
             return segmentBContainer;
-        }
+        }*/
 
         public Line getSegmentC()
         {
