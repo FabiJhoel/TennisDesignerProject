@@ -108,19 +108,17 @@ namespace DataAccess
             Arc segmentA;
             ParseQuery<ParseObject> queryS = ParseObject.GetQuery("Arc");
             ParseObject objectA = await queryS.GetAsync(pParseObject.Get<ParseObject>("SegmentA").ObjectId);
-            segmentA = new Arc(objectA.Get<double>("AxisX"), objectA.Get<double>("AxisY"));
-            segmentA.setSegmentContainerHeight(objectA.Get<double>("GridHeight"));
-            segmentA.setSegmentContainerWidth(objectA.Get<double>("GridWidth"));
-            //MessageBox.Show("" + objectA.Get<double>("GridWidth"));
-            //MessageBox.Show("" + segmentA.getSegmentContainerWidth());
+            segmentA = new Arc(objectA.Get<double>("AxisX"), objectA.Get<double>("AxisY"), objectA.Get<double>("GridWidth"), objectA.Get<double>("GridHeight"));
+            /*segmentA.setSegmentContainerHeight(objectA.Get<double>("GridHeight"));
+            segmentA.setSegmentContainerWidth(objectA.Get<double>("GridWidth"));*/
             design.setSegmentA(segmentA);
 
             //Get SegmentB fromm the object
             Arc segmentB;
             ParseObject objectB = await queryS.GetAsync(pParseObject.Get<ParseObject>("SegmentB").ObjectId);
-            segmentB = new Arc(objectB.Get<double>("AxisX"), objectB.Get<double>("AxisY"));
-            segmentB.setSegmentContainerHeight(objectB.Get<double>("GridHeight"));
-            segmentB.setSegmentContainerWidth(objectB.Get<double>("GridWidth"));
+            segmentB = new Arc(objectB.Get<double>("AxisX"), objectB.Get<double>("AxisY"), objectB.Get<double>("GridWidth"), objectB.Get<double>("GridHeight"));
+            /*segmentB.setSegmentContainerHeight(objectB.Get<double>("GridHeight"));
+            segmentB.setSegmentContainerWidth(objectB.Get<double>("GridWidth"));*/
             design.setSegmentB(segmentB);
 
             return design;

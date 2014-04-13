@@ -19,8 +19,8 @@ namespace TennisBusiness
 
         public Design(string pName)
         {
-            segmentA = new Arc(100, 132);
-            segmentB = new Arc(165, 132);
+            segmentA = new Arc(100, 132, 71, 153);
+            segmentB = new Arc(165, 132, 200, 45);
             segmentC = new Line();
             segmentD = new Line();
             segmentE = new Line();
@@ -90,7 +90,7 @@ namespace TennisBusiness
 
         public void setSegmentB(Arc pSegmentB)
         {
-            segmentA = pSegmentB;
+            segmentB = pSegmentB;
         }
 
         /*public Grid getSegmentBContainer()

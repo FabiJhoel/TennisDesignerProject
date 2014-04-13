@@ -128,8 +128,14 @@ namespace TennisDesignerGUI
                 // Set design values 
                 designInstance.getBasePoints()[0].setAxisX(Canvas.GetLeft(pointA));
                 designInstance.getBasePoints()[0].setAxisY(Canvas.GetTop(pointA));
-                designInstance.getSegmentA().setAxisX((Canvas.GetLeft(pointA) + 5) - segmentA.ActualWidth);
-                designInstance.getSegmentA().setAxisY(Canvas.GetTop(pointA) + 5);
+                designInstance.getBasePoints()[1].setAxisX(Canvas.GetLeft(pointB));
+                designInstance.getBasePoints()[1].setAxisY(Canvas.GetTop(pointB));
+                designInstance.getBasePoints()[4].setAxisX(Canvas.GetLeft(pointE));
+                designInstance.getBasePoints()[4].setAxisY(Canvas.GetTop(pointE));
+                designInstance.getSegmentA().setAxisX(Canvas.GetLeft(segmentA));
+                designInstance.getSegmentA().setAxisY(Canvas.GetTop(segmentA));
+                designInstance.getSegmentB().setAxisX(Canvas.GetLeft(segmentB));
+                designInstance.getSegmentB().setAxisY(Canvas.GetTop(segmentB));
             }
         }
 
@@ -184,11 +190,16 @@ namespace TennisDesignerGUI
                 segmentE.Y2 = Canvas.GetTop(pointE) + 5;   
             
                 // Set design values
+                designInstance.getBasePoints()[0].setAxisX(Canvas.GetLeft(pointA));
+                designInstance.getBasePoints()[0].setAxisY(Canvas.GetTop(pointA));
                 designInstance.getBasePoints()[1].setAxisX(Canvas.GetLeft(pointB));
                 designInstance.getBasePoints()[1].setAxisY(Canvas.GetTop(pointB));
-                designInstance.getSegmentA().setAxisX((Canvas.GetLeft(pointA) + 5) - segmentA.ActualWidth);
-                designInstance.getSegmentA().setAxisY(Canvas.GetTop(pointA) + 5);
-                designInstance.getSegmentB().setAxisY(Canvas.GetTop(pointB) + 5);
+                designInstance.getBasePoints()[4].setAxisX(Canvas.GetLeft(pointE));
+                designInstance.getBasePoints()[4].setAxisY(Canvas.GetTop(pointE));
+                designInstance.getSegmentA().setAxisX(Canvas.GetLeft(segmentA));
+                designInstance.getSegmentA().setAxisY(Canvas.GetTop(segmentA));
+                designInstance.getSegmentB().setAxisX(Canvas.GetLeft(segmentB));
+                designInstance.getSegmentB().setAxisY(Canvas.GetTop(segmentB));
             }
         }
 
@@ -311,6 +322,8 @@ namespace TennisDesignerGUI
                 segmentA.Width = Math.Abs((Canvas.GetLeft(pointE) - Canvas.GetLeft(segmentA)) + 5);
                 segmentA.Height = Math.Abs(Canvas.GetTop(pointE) - Canvas.GetTop(pointA));
 
+                designInstance.getSegmentA().setSegmentContainerWidth(segmentA.Width);
+
                 // Move auxiliar arc
                 segmentB.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointA) + 5);
 
@@ -323,11 +336,17 @@ namespace TennisDesignerGUI
                 segmentC.Y1 = Canvas.GetTop(pointB) + 5;
 
                 // Set design values
+                designInstance.getBasePoints()[0].setAxisX(Canvas.GetLeft(pointA));
+                designInstance.getBasePoints()[0].setAxisY(Canvas.GetTop(pointA));
+                designInstance.getBasePoints()[1].setAxisX(Canvas.GetLeft(pointB));
+                designInstance.getBasePoints()[1].setAxisY(Canvas.GetTop(pointB));
                 designInstance.getBasePoints()[4].setAxisX(Canvas.GetLeft(pointE));
                 designInstance.getBasePoints()[4].setAxisY(Canvas.GetTop(pointE));
-                designInstance.getSegmentB().setAxisX(Canvas.GetLeft(pointA) + 5);
+                designInstance.getSegmentA().setAxisX(Canvas.GetLeft(segmentA));
+                designInstance.getSegmentA().setAxisY(Canvas.GetTop(segmentA));
+                designInstance.getSegmentB().setAxisX(Canvas.GetLeft(segmentB));
+                designInstance.getSegmentB().setAxisY(Canvas.GetTop(segmentB));
             }
         }
-
     }
 }

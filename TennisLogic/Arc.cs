@@ -15,10 +15,12 @@ namespace TennisBusiness
         Path segment;
         Grid segmentContainer;
 
-        public Arc(double pAxisX, double pAxisY)
+        public Arc(double pAxisX, double pAxisY, double pWidth, double pHeight)
         {
             segment = new Path();
             segmentContainer = new Grid();
+            setSegmentContainerWidth(pWidth);
+            setSegmentContainerHeight(pHeight);
             segmentContainer.Children.Add(getSegment());
             setAxisX(pAxisX);
             setAxisY(pAxisY);
@@ -51,7 +53,7 @@ namespace TennisBusiness
 
         public double getSegmentContainerWidth()
         {
-            return segmentContainer.ActualWidth;
+            return segmentContainer.Width; 
         }
 
         public void setSegmentContainerHeight(double pHeight)
@@ -61,7 +63,7 @@ namespace TennisBusiness
 
         public double getSegmentContainerHeight()
         {
-            return segmentContainer.ActualHeight;
+            return segmentContainer.Height; 
         }
 
         public Path getSegment()

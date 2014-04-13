@@ -55,7 +55,7 @@ namespace TennisLibrary
             pDesign.getSegmentA().getSegment().StrokeThickness = 3;
             pDesign.getSegmentA().getSegment().Data = myPathGeometry;
 
-            //pDesign.getSegmentAContainer().Background = System.Windows.Media.Brushes.LightBlue;
+            pDesign.getSegmentA().getSegmentContainer().Background = System.Windows.Media.Brushes.LightBlue;
             Canvas.SetLeft(pDesign.getSegmentA().getSegmentContainer(), pDesign.getSegmentA().getAxisX());
             Canvas.SetTop(pDesign.getSegmentA().getSegmentContainer(), pDesign.getSegmentA().getAxisY());
             pCanvas.Children.Add(pDesign.getSegmentA().getSegmentContainer());
@@ -74,7 +74,7 @@ namespace TennisLibrary
             pDesign.getSegmentB().getSegment().StrokeThickness = 3;
             pDesign.getSegmentB().getSegment().Data = myPathGeometryB;
 
-            //pDesign.getSegmentBContainer().Background = System.Windows.Media.Brushes.LightBlue;
+            pDesign.getSegmentB().getSegmentContainer().Background = System.Windows.Media.Brushes.LightBlue;
             Canvas.SetLeft(pDesign.getSegmentB().getSegmentContainer(), pDesign.getSegmentB().getAxisX());
             Canvas.SetTop(pDesign.getSegmentB().getSegmentContainer(), pDesign.getSegmentB().getAxisY());
             pCanvas.Children.Add(pDesign.getSegmentB().getSegmentContainer());
