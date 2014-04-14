@@ -26,6 +26,7 @@ namespace TennisLibrary
                 pDesign.addPoint(new BasePoint(156, 269, "pointE"));
             }
         }
+
         public static void loadBasePoints(Design pDesign, Canvas pCanvas)
         {
             // Draw each Basepoint on screen
@@ -105,6 +106,5 @@ namespace TennisLibrary
             pDesign.getSegmentE().StrokeThickness = 3;
             pCanvas.Children.Add(pDesign.getSegmentE());
         }
-
     }
 }

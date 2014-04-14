@@ -14,8 +14,8 @@ namespace TennisBusiness
         private string creationDate;
         private List<BasePoint> basePoints = new List<BasePoint>();
         private List<Decoration> decorations = new List<Decoration>();
-        Arc segmentA, segmentB;
-        Line segmentC, segmentD, segmentE;
+        private Arc segmentA, segmentB;
+        private Line segmentC, segmentD, segmentE;
 
         public Design(string pName)
         {
@@ -73,6 +73,11 @@ namespace TennisBusiness
             return segmentA;
         }
 
+        public void setSegmentA(Arc pSegmentA)
+        {
+            segmentA = pSegmentA;
+        }
+
        /* public Grid getSegmentAContainer()
         {
             return segmentAContainer;
@@ -81,6 +86,11 @@ namespace TennisBusiness
         public Arc getSegmentB()
         {
             return segmentB;
+        }
+
+        public void setSegmentB(Arc pSegmentB)
+        {
+            segmentA = pSegmentB;
         }
 
         /*public Grid getSegmentBContainer()

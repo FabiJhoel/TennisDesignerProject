@@ -49,9 +49,19 @@ namespace TennisBusiness
             segmentContainer.Width = pWidth;
         }
 
+        public double getSegmentContainerWidth()
+        {
+            return segmentContainer.ActualWidth;
+        }
+
         public void setSegmentContainerHeight(double pHeight)
         {
             segmentContainer.Height = pHeight;
+        }
+
+        public double getSegmentContainerHeight()
+        {
+            return segmentContainer.ActualHeight;
         }
 
         public Path getSegment()

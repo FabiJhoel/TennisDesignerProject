@@ -50,6 +50,16 @@ namespace TennisDesignerGUI
             DataManager.saveDesign(designInstance);
         }
 
+        private async void ListBoxDesigns_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            designInstance = await DataManager.loadDesign(ListBoxDesigns.SelectedItem.ToString());
+            canvasEdit.Children.Clear();
+            //MessageBox.Show(""+designInstance.getSegmentA().getSegmentContainer().Height);
+            PaintManager.loadTennisSilhouette(designInstance, canvasEdit);
+            PaintManager.loadBasePoints(designInstance, canvasEdit);
+            asignEventToBasePoint();
+        }
+
         /* BasePoint Events */
         private void asignEventToBasePoint()
         {
@@ -319,13 +329,5 @@ namespace TennisDesignerGUI
             }
         }
 
-        private async void ListBoxDesigns_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            designInstance = await DataManager.loadDesign(ListBoxDesigns.SelectedItem.ToString());
-            canvasEdit.Children.Clear();
-            PaintManager.loadTennisSilhouette(designInstance, canvasEdit);
-            PaintManager.loadBasePoints(designInstance, canvasEdit);
-            asignEventToBasePoint();
-        }
     }
 }
