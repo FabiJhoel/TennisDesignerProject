@@ -11,11 +11,20 @@ namespace DataAccess
 {
     class ParseDataAcces
     {
-        public ParseDataAcces()
+        private static ParseDataAcces parseDataInstance = null;
+
+        protected ParseDataAcces()
         {
             initializeService();
         }
 
+        public static ParseDataAcces getInstance() //SingleTone Implementation
+        {
+            if (parseDataInstance == null)
+                parseDataInstance = new ParseDataAcces();
+            return parseDataInstance; 
+        }
+        
         public void initializeService()
         {
             ParseClient.Initialize("gP8GuldBPgMRplqDnnJaJ6KJgsH92Zh5vZKmukxS", "IHJqchPq13I8m3vWw8B2tbKYyavLpQxvQWHAqQeV");
@@ -32,7 +41,7 @@ namespace DataAccess
             return await query.FindAsync();
         }
 
-        public async Task<Design> getDesign(string pName)
+        public async Task<ParseObject> getDesign(string pName)
         {
             var query = from search in ParseObject.GetQuery("Design")
                         where search.Get<string>("Name") == pName
@@ -43,7 +52,7 @@ namespace DataAccess
             if (resultDesign.Count() == 0)
                 return null;
             else
-                return await parseObjectToDesign(resultDesign.First());
+                return resultDesign.First();
         }
 
         public async Task<Design> parseObjectToDesign(ParseObject pParseObject)
@@ -86,6 +95,21 @@ namespace DataAccess
             }
 
             return basePoints;
+        }
+
+        public void deleteBasePoints(ParseObject pParseObject)
+        {
+            IList<ParseObject> parseBasePoints = pParseObject.Get<IList<ParseObject>>("Points");
+
+            foreach (ParseObject tempBasePoint in parseBasePoints)
+            {
+                tempBasePoint.DeleteAsync();
+            }
+        }
+
+        public void deleteSegment(ParseObject pParseObject)
+        {
+            pParseObject.DeleteAsync();
         }
     }
 }

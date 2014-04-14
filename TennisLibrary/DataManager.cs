@@ -12,7 +12,7 @@ namespace TennisLibrary
 {
     public static class DataManager
     {
-        static DataAdministrator dataAdmin = new DataAdministrator();
+        static DataAdministrator dataAdmin = DataAdministrator.getInstance();
 
         public static void saveDesign(Design pDesign)
         {

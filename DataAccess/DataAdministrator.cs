@@ -11,20 +11,44 @@ namespace DataAccess
     public class DataAdministrator
     {
         private ParseDataAcces parseConnection;
+        private static DataAdministrator dataAdminInstance = null;
 
-        public DataAdministrator()
+        protected DataAdministrator()
         {
-            parseConnection = new ParseDataAcces();
+            parseConnection = ParseDataAcces.getInstance();
         }
 
-        public void saveDesign(Design pDesign)
+        public static DataAdministrator getInstance() //SingleTon Implementation
         {
-            ParseObject parseObject = new ParseObject("Design")
+            if (dataAdminInstance == null)
+                dataAdminInstance = new DataAdministrator();
+            return dataAdminInstance;
+        }
+
+        public async void saveDesign(Design pDesign)
+        {
+            ParseObject parseObject = await parseConnection.getDesign(pDesign.getName());
+            if (parseObject == null)
             {
-                {"Name",pDesign.getName()},{"Date",pDesign.getCreationDate()},
-                {"Points",getBasePointsFromDesign(pDesign)}, {"SegmentA",getSegmentFromDesign(pDesign.getSegmentA())}, 
-                {"SegmentB",getSegmentFromDesign(pDesign.getSegmentB())}
-            };
+                parseObject = new ParseObject("Design")
+                {
+                    {"Name",pDesign.getName()},{"Date",pDesign.getCreationDate()},
+                    {"Points",getBasePointsFromDesign(pDesign)}, {"SegmentA",getSegmentFromDesign(pDesign.getSegmentA())}, 
+                    {"SegmentB",getSegmentFromDesign(pDesign.getSegmentB())}
+                };
+            }
+            else
+            {
+                parseConnection.deleteBasePoints(parseObject);
+                parseObject["Points"] = getBasePointsFromDesign(pDesign);
+                
+                parseConnection.deleteSegment(parseObject.Get<ParseObject>("SegmentA"));
+                parseObject["SegmentA"] = getSegmentFromDesign(pDesign.getSegmentA());
+                
+                parseConnection.deleteSegment(parseObject.Get<ParseObject>("SegmentB"));
+                parseObject["SegmentB"] = getSegmentFromDesign(pDesign.getSegmentB());
+            }
+
             parseConnection.uploadDesign(parseObject);
         }
 
@@ -71,7 +95,12 @@ namespace DataAccess
 
         public async Task<Design> getDesign(string pName)
         {
-            return await parseConnection.getDesign(pName);
+            ParseObject result = await parseConnection.getDesign(pName);
+
+            if (result == null)
+                return null;
+            else
+                return await parseConnection.parseObjectToDesign(result);
         }
     }
 }
