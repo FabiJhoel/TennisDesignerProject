@@ -30,47 +30,39 @@ namespace TennisBusiness
         {
             this.AxisX = pAxisX;
         }
-
-        public double getAxisX()
-        {
-            return this.AxisX;
-        }
-
         public void setAxisY(double pAxisY)
         {
             this.AxisY = pAxisY;
         }
-
-        public double getAxisY()
-        {
-            return this.AxisY;
-        }
-
         public void setSegmentContainerWidth(double pWidth)
         {
             segmentContainer.Width = pWidth;
         }
-
-        public double getSegmentContainerWidth()
-        {
-            return segmentContainer.Width; 
-        }
-
         public void setSegmentContainerHeight(double pHeight)
         {
             segmentContainer.Height = pHeight;
         }
 
+        public double getAxisX()
+        {
+            return this.AxisX;
+        }
+        public double getAxisY()
+        {
+            return this.AxisY;
+        }
+        public double getSegmentContainerWidth()
+        {
+            return segmentContainer.Width; 
+        }
         public double getSegmentContainerHeight()
         {
             return segmentContainer.Height; 
         }
-
         public Path getSegment()
         {
             return segment;
         }
-
         public Grid getSegmentContainer()
         {
             return segmentContainer;

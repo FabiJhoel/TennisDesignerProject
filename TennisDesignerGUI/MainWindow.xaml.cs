@@ -52,12 +52,17 @@ namespace TennisDesignerGUI
 
         private async void ListBoxDesigns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            designInstance = await DataManager.loadDesign(ListBoxDesigns.SelectedItem.ToString());
-            canvasEdit.Children.Clear();
-            //MessageBox.Show(""+designInstance.getSegmentA().getSegmentContainer().Height);
-            PaintManager.loadTennisSilhouette(designInstance, canvasEdit);
-            PaintManager.loadBasePoints(designInstance, canvasEdit);
-            asignEventToBasePoint();
+            Design design = await DataManager.loadDesign(ListBoxDesigns.SelectedItem.ToString());
+            if (design != null)
+            {
+                designInstance = design;
+                canvasEdit.Children.Clear();
+                PaintManager.loadTennisSilhouette(designInstance, canvasEdit);
+                PaintManager.loadBasePoints(designInstance, canvasEdit);
+                asignEventToBasePoint();
+            }
+            else
+                MessageBox.Show("The selected design is not saved");
         }
 
         /* BasePoint Events */

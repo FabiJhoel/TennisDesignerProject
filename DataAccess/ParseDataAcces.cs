@@ -21,57 +21,15 @@ namespace DataAccess
             ParseClient.Initialize("gP8GuldBPgMRplqDnnJaJ6KJgsH92Zh5vZKmukxS", "IHJqchPq13I8m3vWw8B2tbKYyavLpQxvQWHAqQeV");
         }
 
-        public async void uploadDesign(Design pDesign)
+        public async void uploadDesign(ParseObject bond)
         {
-            ParseObject bond = new ParseObject("Design")
-            {
-                {"Name",pDesign.getName()},{"Date",pDesign.getCreationDate()},
-                {"Points",getBasePointsFromDesign(pDesign)}, {"SegmentA",getSegmentFromDesign(pDesign.getSegmentA())}, 
-                {"SegmentB",getSegmentFromDesign(pDesign.getSegmentB())}
-            };
             await bond.SaveAsync();
         }
 
-        private List<ParseObject> getBasePointsFromDesign(Design pDesign)
-        {
-            List<ParseObject> basePointList = new List<ParseObject>();
-            ParseObject point;
-            foreach (BasePoint bPoint in pDesign.getBasePoints())
-            {
-                point = new ParseObject("BasePoint")
-                {
-                    {"AxisX",bPoint.getAxisX()},
-                    {"AxisY",bPoint.getAxisY()}
-                };
-                basePointList.Add(point);
-            }
-            return basePointList;
-        }
-
-        private ParseObject getSegmentFromDesign(Arc pArc)
-        {
-            ParseObject arc = new ParseObject("Arc")
-            {
-                {"AxisX", pArc.getAxisX()}, {"AxisY", pArc.getAxisY()},
-                {"GridWidth", pArc.getSegmentContainerWidth()},
-                {"GridHeight", pArc.getSegmentContainerHeight()}
-            };
-
-            return arc;
-        }
-
-        public async Task<List<string>> getDesignList()
+        public async Task<IEnumerable<ParseObject>> getDesignList()
         {
             var query = ParseObject.GetQuery("Design");
-            IEnumerable<ParseObject> results = await query.FindAsync();
-
-            List<string> nameList = new List<string>();
-            foreach (ParseObject tempObject in results)
-            {
-                nameList.Add(tempObject.Get<string>("Name"));
-            }
-
-            return nameList;
+            return await query.FindAsync();
         }
 
         public async Task<Design> getDesign(string pName)
@@ -82,8 +40,10 @@ namespace DataAccess
 
             IEnumerable<ParseObject> resultDesign = await query.FindAsync();
 
-            Design design = await parseObjectToDesign(resultDesign.First());
-            return design;
+            if (resultDesign.Count() == 0)
+                return null;
+            else
+                return await parseObjectToDesign(resultDesign.First());
         }
 
         public async Task<Design> parseObjectToDesign(ParseObject pParseObject)
@@ -92,36 +52,40 @@ namespace DataAccess
             design.setCreationDate(pParseObject.Get<string>("Date"));
 
             //Get BasePoints from the object
-            BasePoint point;
-            IList<ParseObject> pointsList = pParseObject.Get<IList<ParseObject>>("Points");
-            ParseQuery<ParseObject> queryBP = ParseObject.GetQuery("BasePoint");
-            ParseObject basePoint;
+            design.setBasePoints(await getBasePointsFromParse(pParseObject.Get<IList<ParseObject>>("Points")));
 
-            foreach (ParseObject tempBasePoint in pointsList)
-            {
-                basePoint = await queryBP.GetAsync(tempBasePoint.ObjectId);
-                point = new BasePoint(basePoint.Get<double>("AxisX"), basePoint.Get<double>("AxisY"), " ");
-                design.addPoint(point);
-            }
-
-            //Get SegmentA fromm the object
-            Arc segmentA;
-            ParseQuery<ParseObject> queryS = ParseObject.GetQuery("Arc");
-            ParseObject objectA = await queryS.GetAsync(pParseObject.Get<ParseObject>("SegmentA").ObjectId);
-            segmentA = new Arc(objectA.Get<double>("AxisX"), objectA.Get<double>("AxisY"), objectA.Get<double>("GridWidth"), objectA.Get<double>("GridHeight"));
-            /*segmentA.setSegmentContainerHeight(objectA.Get<double>("GridHeight"));
-            segmentA.setSegmentContainerWidth(objectA.Get<double>("GridWidth"));*/
-            design.setSegmentA(segmentA);
+            //Get SegmentA from the object
+            design.setSegmentA(await getSegmentFromParse(pParseObject, "SegmentA"));
 
             //Get SegmentB fromm the object
-            Arc segmentB;
-            ParseObject objectB = await queryS.GetAsync(pParseObject.Get<ParseObject>("SegmentB").ObjectId);
-            segmentB = new Arc(objectB.Get<double>("AxisX"), objectB.Get<double>("AxisY"), objectB.Get<double>("GridWidth"), objectB.Get<double>("GridHeight"));
-            /*segmentB.setSegmentContainerHeight(objectB.Get<double>("GridHeight"));
-            segmentB.setSegmentContainerWidth(objectB.Get<double>("GridWidth"));*/
-            design.setSegmentB(segmentB);
+            design.setSegmentB(await getSegmentFromParse(pParseObject, "SegmentB"));
 
             return design;
+        }
+
+        private async Task<Arc> getSegmentFromParse(ParseObject pParseObject, string key)
+        {
+            ParseObject parseSegment = await ParseObject.GetQuery("Arc").GetAsync(pParseObject.Get<ParseObject>(key).ObjectId);
+            Arc segment = new Arc(parseSegment.Get<double>("AxisX"), parseSegment.Get<double>("AxisY"),
+                parseSegment.Get<double>("GridWidth"), parseSegment.Get<double>("GridHeight"));
+
+            return segment;
+        }
+
+        private async Task<List<BasePoint>> getBasePointsFromParse(IList<ParseObject> parseBasePoints)
+        {
+            //Get BasePoints from the object
+            ParseQuery<ParseObject> queryBP = ParseObject.GetQuery("BasePoint");
+            ParseObject basePoint;
+            List<BasePoint> basePoints = new List<BasePoint>();
+
+            foreach (ParseObject tempBasePoint in parseBasePoints)
+            {
+                basePoint = await queryBP.GetAsync(tempBasePoint.ObjectId);
+                basePoints.Add(new BasePoint(basePoint.Get<double>("AxisX"), basePoint.Get<double>("AxisY"), " "));
+            }
+
+            return basePoints;
         }
     }
 }
