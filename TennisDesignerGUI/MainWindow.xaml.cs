@@ -28,7 +28,7 @@ namespace TennisDesignerGUI
         public MainWindow()
         {
             InitializeComponent();
-            DataManager.loadDesignList(ListBoxDesigns); 
+            DataManager.loadDesignList(ListBoxDesigns);
         }
         
         private void addNewDesignButton(object sender, RoutedEventArgs e)
@@ -50,7 +50,7 @@ namespace TennisDesignerGUI
             DataManager.saveDesign(designInstance);
         }
 
-        private async void ListBoxDesigns_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void listBoxDesigns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Design design = await DataManager.loadDesign(ListBoxDesigns.SelectedItem.ToString());
             if (design != null)
@@ -353,5 +353,35 @@ namespace TennisDesignerGUI
                 designInstance.getSegmentB().setAxisY(Canvas.GetTop(segmentB));
             }
         }
+
+        private void cmbxDecorations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string statment = "System.Windows.Controls.ComboBoxItem: ";
+
+            // Enable joint property
+            cmbxColor.IsEnabled = true;
+
+            // Disable disjoint properties
+            cmbxSize.IsEnabled = false;
+            cmbxThikness.IsEnabled = false; 
+            
+            if (cmbxDecorations.SelectedItem.ToString() == statment + "Circle" ||
+                cmbxDecorations.SelectedItem.ToString() == statment +  "Filled Circle")
+            {
+                cmbxSize.IsEnabled = true;
+                if (cmbxDecorations.SelectedItem.ToString() == statment + "Circle")
+                    cmbxThikness.IsEnabled = true; 
+            }
+
+            else
+                cmbxThikness.IsEnabled = true;
+        }
+
+        private void addDecorationButton(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+ 
     }
 }

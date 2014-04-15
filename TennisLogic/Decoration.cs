@@ -24,26 +24,32 @@ namespace TennisBusiness
             BasePoint[] points = new BasePoint[1];
             return points;
         }
+
         public void setType(int pType)
         {
             this.type = pType;
         }
+
         public void setThikness(int pThikness)
         {
             this.thikness = pThikness;
         }
+
         public void setColor(string pColor)
         {
             this.color = pColor;
         }
+
         public int getType()
         {
             return this.type;
         }
+
         public int getThikness()
         {
             return this.thikness;
         }
+
         public string getColor()
         {
             return this.color;
