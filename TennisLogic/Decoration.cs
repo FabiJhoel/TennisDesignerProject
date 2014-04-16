@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace TennisBusiness
 {
     public class Decoration
     {
-        private int type;
-        private int thikness;
-        private string color;
+        private int type; /* 0= Line  1= Circle  2= Filled Circle  3= Outline  4= Shoe Sole */
+        private int thickness;
+        private Color color;
 
-        public Decoration(int pType, int pThikness, string pColor)
+        public Decoration(int pType, int pThickness, Color pColor)
         {
             setType(pType);
-            setThikness(pThikness);
+            setThikness(pThickness);
             setColor(pColor);
         }
 
@@ -32,10 +33,10 @@ namespace TennisBusiness
 
         public void setThikness(int pThikness)
         {
-            this.thikness = pThikness;
+            this.thickness = pThikness;
         }
 
-        public void setColor(string pColor)
+        public void setColor(Color pColor)
         {
             this.color = pColor;
         }
@@ -47,10 +48,10 @@ namespace TennisBusiness
 
         public int getThikness()
         {
-            return this.thikness;
+            return this.thickness;
         }
 
-        public string getColor()
+        public Color getColor()
         {
             return this.color;
         }

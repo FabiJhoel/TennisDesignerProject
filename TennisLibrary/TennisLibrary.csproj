@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataManager.cs" />
+    <Compile Include="DesignManager.cs" />
     <Compile Include="PaintManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

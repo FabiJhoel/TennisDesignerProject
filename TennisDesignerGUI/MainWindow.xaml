@@ -70,20 +70,50 @@
         </Button>
         
         <!--Properties Panel-->
-        <GroupBox Header="Tools" HorizontalAlignment="Left" Margin="10,430,0,0" VerticalAlignment="Top" Height="220" Width="215" Foreground="#FF595353" FontWeight="Bold"/>
+        <GroupBox Header="Decorations" HorizontalAlignment="Left" Margin="10,430,0,0" VerticalAlignment="Top" Height="220" Width="215" Foreground="#FF595353" FontWeight="Bold"/>
         <ComboBox x:Name="cmbxDecorations" HorizontalAlignment="Left" Margin="25,460,0,0" VerticalAlignment="Top" Width="185" Foreground="#FF595353" FontWeight="Normal" Text="Choose a decoration" IsEditable="True" IsReadOnly="True" SelectionChanged="cmbxDecorations_SelectionChanged">
             <ComboBoxItem Content="Line" HorizontalAlignment="Left" Width="183"/>
             <ComboBoxItem Content="Circle" HorizontalAlignment="Left" Width="183"/>
             <ComboBoxItem Content="Filled Circle" HorizontalAlignment="Left" Width="183"/>
-            <ComboBoxItem Content="Shoe Sole" HorizontalAlignment="Left" Width="183"/>
-            <ComboBoxItem Content="Outline of Figure" HorizontalAlignment="Left" Width="183"/>
+            <ComboBoxItem Content="Outline" HorizontalAlignment="Left" Width="183"/>
+            <ComboBoxItem Content="Shoe Sole" HorizontalAlignment="Left" Width="183"/>           
         </ComboBox>
         <Label Content="Size" HorizontalAlignment="Left" Margin="25,502,0,0" VerticalAlignment="Top" Foreground="#FF595353"/>
-        <ComboBox x:Name="cmbxSize" HorizontalAlignment="Left" Margin="80,502,0,0" VerticalAlignment="Top" Width="81" IsEnabled="False"/>
+        <ComboBox x:Name="cmbxSize" HorizontalAlignment="Left" Margin="86,502,0,0" VerticalAlignment="Top" Width="107" IsEnabled="False" Foreground="#FF595353">
+            <ComboBoxItem Content="Small" HorizontalAlignment="Left" Width="92"/>
+            <ComboBoxItem Content="Medium" HorizontalAlignment="Left" Width="92"/>
+            <ComboBoxItem Content="Large" HorizontalAlignment="Left" Width="92"/>
+        </ComboBox>
         <Label Content="Color" HorizontalAlignment="Left" Margin="25,533,0,0" VerticalAlignment="Top" Foreground="#FF595353"/>
-        <ComboBox x:Name="cmbxColor" HorizontalAlignment="Left" Margin="80,537,0,0" VerticalAlignment="Top" Width="81" IsEnabled="False"/>
-        <Label Content="Thikness" HorizontalAlignment="Left" Margin="25,574,0,0" VerticalAlignment="Top" Foreground="#FF595353"/>
-        <ComboBox x:Name="cmbxThikness" HorizontalAlignment="Left" Margin="80,574,0,0" VerticalAlignment="Top" Width="81" IsEnabled="False"/>
+        <ComboBox x:Name="cmbxColor" HorizontalAlignment="Left" Margin="86,537,0,0" VerticalAlignment="Top" Width="107" IsEnabled="False" Foreground="#FF595353">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2" />
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+            <!--<ComboBoxItem Content="Red" HorizontalAlignment="Left" Width="92"/>
+            <ComboBoxItem Content="Green" HorizontalAlignment="Left" Width="92"/>
+            <ComboBoxItem Content="Blue" HorizontalAlignment="Left" Width="92"/>
+            <ComboBoxItem Content="Yellow" HorizontalAlignment="Left" Width="92"/>
+            <ComboBoxItem Content="Black" HorizontalAlignment="Left" Width="92"/>
+            <ComboBoxItem Content="Pink" HorizontalAlignment="Left" Width="92"/>
+            <ComboBoxItem Content="Orange" HorizontalAlignment="Left" Width="92"/>-->
+        </ComboBox>
+        <Label Content="Thickness" HorizontalAlignment="Left" Margin="25,574,0,0" VerticalAlignment="Top" Foreground="#FF595353"/>
+        <ComboBox x:Name="cmbxThikness" HorizontalAlignment="Left" Margin="86,574,0,0" VerticalAlignment="Top" Width="107" IsEnabled="False" Foreground="#FF595353">
+            <ComboBoxItem>
+                <Image Source="Resources/1px.png" />
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <Image Source="Resources/3px.png" />
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <Image Source="Resources/5px.png" />
+            </ComboBoxItem>
+        </ComboBox>
         <Button x:Name="addDesignButton_Copy" Content="Add" HorizontalAlignment="Left" Margin="165,620,0,0" VerticalAlignment="Top" Width="45" Foreground="#FF595353" Click="addDecorationButton" RenderTransformOrigin="0.739,6.262">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">

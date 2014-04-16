@@ -13,9 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
+using System.Reflection;
 using DataAccess;
 using TennisBusiness;
 using TennisLibrary;
+
 
 
 namespace TennisDesignerGUI
@@ -28,7 +30,8 @@ namespace TennisDesignerGUI
         public MainWindow()
         {
             InitializeComponent();
-            DataManager.loadDesignList(ListBoxDesigns);
+            cmbxColor.ItemsSource = typeof(Colors).GetProperties();
+            DataManager.loadDesignList(ListBoxDesigns); 
         }
         
         private void addNewDesignButton(object sender, RoutedEventArgs e)
@@ -63,6 +66,90 @@ namespace TennisDesignerGUI
             }
             else
                 MessageBox.Show("The selected design is not saved");
+        }
+
+        private void cmbxDecorations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string statment = "System.Windows.Controls.ComboBoxItem: ";
+
+            // Enable joint property
+            cmbxColor.IsEnabled = true;
+            cmbxColor.SelectedIndex = -1;
+
+            // Disable disjoint properties
+            cmbxSize.IsEnabled = false;
+            cmbxSize.SelectedIndex = -1;
+            cmbxThikness.IsEnabled = false;
+            cmbxThikness.SelectedIndex = -1;
+
+            if (cmbxDecorations.SelectedItem.ToString() == statment + "Circle" ||
+                cmbxDecorations.SelectedItem.ToString() == statment + "Filled Circle")
+            {
+                cmbxSize.IsEnabled = true;
+                if (cmbxDecorations.SelectedItem.ToString() == statment + "Circle")
+                    cmbxThikness.IsEnabled = true;
+            }
+
+            else
+                cmbxThikness.IsEnabled = true;
+        }
+
+        private void addDecorationButton(object sender, RoutedEventArgs e)
+        {
+            int selectedDeco = cmbxDecorations.SelectedIndex;
+            Color selectedColor;
+            int selectedThickness;
+            int selectedSize;
+            bool valid = false;
+
+            try
+            {
+                selectedColor = (Color)(cmbxColor.SelectedItem as PropertyInfo).GetValue(null, null);
+                selectedThickness = cmbxThikness.SelectedIndex;
+                selectedSize = cmbxSize.SelectedIndex;
+
+                if (selectedDeco == 0 || selectedDeco == 3 || selectedDeco == 4)
+                {
+                    if (selectedThickness != -1)
+                        valid = true;
+                }
+
+                else if (selectedDeco == 1)
+                {
+                    if (selectedSize != -1 && selectedThickness != -1)
+                        valid = true;
+                }
+
+                else if (selectedDeco == 2)
+                {
+                    if (selectedSize != -1)
+                        valid = true;
+                }
+
+                switch (selectedThickness)
+                {
+                    case 0:
+                            selectedThickness = 1;
+                            break;
+                    case 1:
+                            selectedThickness = 3;
+                            break;
+                    case 2:
+                            selectedThickness = 5;
+                            break;             
+                }
+
+                if (valid)
+                    DesignManager.addDecoration(designInstance, selectedDeco, selectedSize,
+                                                    selectedColor, selectedThickness);
+                else
+                    MessageBox.Show("Properties hasn't been set correctly");
+            }
+   
+            catch
+                {
+                    MessageBox.Show("Properties hasn't been set correctly");
+                }
         }
 
         /* BasePoint Events */
@@ -354,33 +441,7 @@ namespace TennisDesignerGUI
             }
         }
 
-        private void cmbxDecorations_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string statment = "System.Windows.Controls.ComboBoxItem: ";
-
-            // Enable joint property
-            cmbxColor.IsEnabled = true;
-
-            // Disable disjoint properties
-            cmbxSize.IsEnabled = false;
-            cmbxThikness.IsEnabled = false; 
-            
-            if (cmbxDecorations.SelectedItem.ToString() == statment + "Circle" ||
-                cmbxDecorations.SelectedItem.ToString() == statment +  "Filled Circle")
-            {
-                cmbxSize.IsEnabled = true;
-                if (cmbxDecorations.SelectedItem.ToString() == statment + "Circle")
-                    cmbxThikness.IsEnabled = true; 
-            }
-
-            else
-                cmbxThikness.IsEnabled = true;
-        }
-
-        private void addDecorationButton(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
  
     }

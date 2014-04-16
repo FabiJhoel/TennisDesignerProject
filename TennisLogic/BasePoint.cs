@@ -11,8 +11,8 @@ namespace TennisBusiness
 {
     public class BasePoint
     {
-        private double AxisX;
-        private double AxisY;
+        private double axisX;
+        private double axisY;
         private string name;
         Ellipse pointEllipse;
 
@@ -26,12 +26,12 @@ namespace TennisBusiness
 
         public void setAxisX(double pAxisX)
         {
-            this.AxisX = pAxisX;
+            this.axisX = pAxisX;
         }
 
         public void setAxisY(double pAxisY)
         {
-            this.AxisY = pAxisY;
+            this.axisY = pAxisY;
         }
 
         public void setName(string pName)
@@ -41,12 +41,12 @@ namespace TennisBusiness
 
         public double getAxisX()
         {
-            return this.AxisX;
+            return this.axisX;
         }
 
         public double getAxisY()
         {
-            return this.AxisY;
+            return this.axisY;
         }
 
         public string getName()

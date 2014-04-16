@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace TennisBusiness
 {
@@ -14,6 +15,8 @@ namespace TennisBusiness
         private string creationDate;
         private List<BasePoint> basePoints = new List<BasePoint>();
         private List<Decoration> decorations = new List<Decoration>();
+        private Decoration outline;
+        private Decoration shoeSole;
         private Arc segmentA, segmentB;
         private Line segmentC, segmentD, segmentE;
 
@@ -24,8 +27,20 @@ namespace TennisBusiness
             segmentC = new Line();
             segmentD = new Line();
             segmentE = new Line();
+            outline = new Decoration(3, 3, Color.FromArgb(255, 0, 0, 0));
+            shoeSole = new Decoration(3, 3, Color.FromArgb(255, 0, 0, 0));
             setName(pName);
             setCreationDate(DateTime.Now.ToString("M/d/yyyy"));
+        }
+
+        public Decoration getOutline()
+        {
+            return outline;
+        }
+
+        public Decoration getShoeSole()
+        {
+            return shoeSole;
         }
 
         public void setName(string pName)
