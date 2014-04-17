@@ -441,6 +441,12 @@ namespace TennisDesignerGUI
             }
         }
 
+        private void ArcadeMode_Selection(object sender, ContextMenuEventArgs e)
+        {
+            canvasArcade.Children.Clear();
+            PaintManager.arcadeMode(designInstance, canvasArcade);
+        }
+
         
 
  

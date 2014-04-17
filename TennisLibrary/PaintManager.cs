@@ -121,5 +121,48 @@ namespace TennisLibrary
             pDesign.getSegmentD().StrokeThickness = pThickness;
             pDesign.getSegmentE().StrokeThickness = pThickness;
         }
+
+        public static void arcadeMode(Design pDesign, Canvas pCanvas)
+        {
+            //loadTennisSilhouette(pDesign, pCanvas);
+
+            Polygon myPolygon = new Polygon();
+            myPolygon.Fill = System.Windows.Media.Brushes.LightSeaGreen;
+            myPolygon.StrokeThickness = 0;
+            myPolygon.HorizontalAlignment = HorizontalAlignment.Left;
+            myPolygon.VerticalAlignment = VerticalAlignment.Center;
+            System.Windows.Point Point1 = new System.Windows.Point(pDesign.getBasePoints()[0].getAxisX() + 8, pDesign.getBasePoints()[0].getAxisY() + 15);
+            System.Windows.Point Point2 = new System.Windows.Point(pDesign.getBasePoints()[1].getAxisX(), pDesign.getBasePoints()[1].getAxisY() + 15);
+            System.Windows.Point Point3 = new System.Windows.Point(pDesign.getBasePoints()[2].getAxisX() + 15, pDesign.getBasePoints()[2].getAxisY() + 15);
+            System.Windows.Point Point4 = new System.Windows.Point(pDesign.getBasePoints()[3].getAxisX() + 15, pDesign.getBasePoints()[3].getAxisY() + 15);
+            System.Windows.Point Point5 = new System.Windows.Point(pDesign.getBasePoints()[4].getAxisX() + 8, pDesign.getBasePoints()[4].getAxisY() + 15);
+
+            PointCollection myPointCollection = new PointCollection();
+            myPointCollection.Add(Point1);
+            myPointCollection.Add(Point2);
+            myPointCollection.Add(Point3);
+            myPointCollection.Add(Point4);
+            myPointCollection.Add(Point5);
+            myPolygon.Points = myPointCollection;
+            pCanvas.Children.Add(myPolygon);
+
+            Ellipse test = new Ellipse();
+            test.Fill = System.Windows.Media.Brushes.LightSeaGreen;
+            test.StrokeThickness = 0;
+            test.Width = pDesign.getSegmentA().getSegmentContainerWidth() * 2;
+            test.Height = pDesign.getBasePoints()[4].getAxisY() - pDesign.getBasePoints()[0].getAxisY();
+            Canvas.SetLeft(test, pDesign.getSegmentA().getAxisX());
+            Canvas.SetTop(test, pDesign.getSegmentA().getAxisY() + 10);
+            pCanvas.Children.Add(test);
+
+            Ellipse test2 = new Ellipse();
+            test2.Fill = System.Windows.Media.Brushes.White;
+            test2.StrokeThickness = 0;
+            test2.Width = pDesign.getBasePoints()[1].getAxisX() - pDesign.getBasePoints()[0].getAxisX();
+            test2.Height = pDesign.getSegmentB().getSegmentContainerHeight() * 2;
+            Canvas.SetLeft(test2, pDesign.getSegmentB().getAxisX());
+            Canvas.SetTop(test2, pDesign.getSegmentB().getAxisY() - pDesign.getSegmentB().getSegmentContainerHeight());
+            pCanvas.Children.Add(test2);
+        }
     }
 }

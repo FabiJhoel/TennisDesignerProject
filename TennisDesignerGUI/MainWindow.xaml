@@ -22,7 +22,7 @@
                 </Canvas>
             </TabItem>
 
-            <TabItem Header="Arcade Mode" Foreground="#FF595353">
+            <TabItem Header="Arcade Mode" Foreground="#FF595353" ContextMenuOpening="ArcadeMode_Selection">
                 <TabItem.Background>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                         <GradientStop Color="#FFF0F0F0" Offset="0"/>
