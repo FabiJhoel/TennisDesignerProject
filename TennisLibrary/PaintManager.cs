@@ -155,6 +155,14 @@ namespace TennisLibrary
             pCanvas.Children.Add(circleDeco.getEllipse());
         }
 
+        public static void PaintLineDecoration(Canvas pCanvas, LineDec lineDeco)
+        {
+            lineDeco.drawLine();
+            Canvas.SetLeft(lineDeco.getLine(), lineDeco.getAxisX());
+            Canvas.SetTop(lineDeco.getLine(), lineDeco.getAxisY());
+            pCanvas.Children.Add(lineDeco.getLine());
+        }
+
         static void decoLine_MouseMove(object sender, MouseEventArgs e)
         {
            

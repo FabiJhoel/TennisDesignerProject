@@ -15,6 +15,7 @@ namespace TennisBusiness
         private string creationDate;
         private List<BasePoint> basePoints = new List<BasePoint>();
         private List<Circle> circleDecorations = new List<Circle>();
+        private List<LineDec> lineDecorations = new List<LineDec>();
         private Decoration outline;
         private Decoration shoeSole;
         private Arc segmentA, segmentB;
@@ -88,6 +89,11 @@ namespace TennisBusiness
             return this.circleDecorations;
         }
 
+        public List<LineDec> getLineDecorations()
+        {
+            return this.lineDecorations;
+        }
+
         public Arc getSegmentA()
         {
             return segmentA;
@@ -121,6 +127,11 @@ namespace TennisBusiness
         public void addCircleDecoration(Circle pCircle)
         {
             circleDecorations.Add(pCircle);
+        }
+
+        public void addLineDecoration(LineDec pLine)
+        {
+            lineDecorations.Add(pLine);
         }
     }
 }

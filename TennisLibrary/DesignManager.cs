@@ -17,9 +17,9 @@ namespace TennisLibrary
             switch (typeDeco)
             {
                 case 0:
-                        Decoration line = new Decoration (typeDeco, pThickness, pColor);
-                        //pDesign.addDecoration(line);
-                        //PaintManager.PaintDecoration(pCanvas, line);
+                        LineDec line = new LineDec(pThickness, pColor);
+                        pDesign.addLineDecoration(line);
+                        PaintManager.PaintLineDecoration(pCanvas, line);
                         MessageBox.Show("linea agregada");
                         break;
 

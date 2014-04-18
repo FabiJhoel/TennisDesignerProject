@@ -15,7 +15,7 @@ namespace TennisBusiness
         private Ellipse ellipse;
 
         public Circle(int pThikness, Color pColor, int pSize, bool pFilled, double pAxisX, double pAxisY)
-            : base(1, pThikness, pColor)
+                       : base(1, pThikness, pColor)
         {
             ellipse = new Ellipse();
             setSize(pSize);
@@ -78,14 +78,11 @@ namespace TennisBusiness
 
         public void drawCircle()
         {
-            //Brush to fill the ellipse
-            SolidColorBrush colorBrush = new SolidColorBrush();
-            colorBrush.Color = getColor();
             ellipse.StrokeThickness = getThikness();
-            ellipse.Stroke = colorBrush;
+            ellipse.Stroke = new SolidColorBrush(getColor());
 
             if (filled)
-                ellipse.Fill = colorBrush;
+                ellipse.Fill = new SolidColorBrush(getColor());
             else
                 ellipse.Fill = Brushes.Transparent;
         }
