@@ -282,7 +282,6 @@ namespace TennisDesignerGUI
                 designInstance.getSegmentB().setAxisY(Canvas.GetTop(segmentB));
             }
         }
-
         private void MouseMovePointB(object sender, MouseEventArgs e)
         {
             Ellipse pointA = designInstance.getBasePoints()[0].getPointEllipse();
@@ -346,7 +345,6 @@ namespace TennisDesignerGUI
                 designInstance.getSegmentB().setAxisY(Canvas.GetTop(segmentB));
             }
         }
-
         private void MouseMovePointC(object sender, MouseEventArgs e)
         {
             Ellipse pointC = designInstance.getBasePoints()[2].getPointEllipse();
@@ -383,7 +381,6 @@ namespace TennisDesignerGUI
                 designInstance.getBasePoints()[2].setAxisY(Canvas.GetTop(pointC));
             }
         }
-
         private void MouseMovePointD(object sender, MouseEventArgs e)
         {
             Ellipse pointD = designInstance.getBasePoints()[3].getPointEllipse();
@@ -420,7 +417,6 @@ namespace TennisDesignerGUI
                 designInstance.getBasePoints()[3].setAxisY(Canvas.GetTop(pointD));
             }
         }
-
         private void MouseMovePointE(object sender, MouseEventArgs e)
         {
             Ellipse pointA = designInstance.getBasePoints()[0].getPointEllipse();

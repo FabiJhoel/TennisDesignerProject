@@ -24,14 +24,14 @@ namespace TennisLibrary
                         break;
 
                 case 1:
-                        Circle circle = new Circle(pThickness, pColor, pSize, false, 0, 0);
+                        Circle circle = new Circle(pThickness, pColor, pSize, false, 300, 180);
                         pDesign.addCircleDecoration(circle);
                         PaintManager.PaintCircleDecoration(pCanvas, circle);
                         MessageBox.Show("circulo agregado");
                         break;
 
                 case 2:
-                        Circle fCircle = new Circle(pThickness, pColor, pSize, true, 0, 0);
+                        Circle fCircle = new Circle(pThickness, pColor, pSize, true, 300, 180);
                         pDesign.addCircleDecoration(fCircle);
                         PaintManager.PaintCircleDecoration(pCanvas, fCircle);
                         MessageBox.Show("circulo relleno agregado");

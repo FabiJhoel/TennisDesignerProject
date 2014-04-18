@@ -20,8 +20,8 @@ namespace TennisBusiness
             ellipse = new Ellipse();
             setSize(pSize);
             setFilled(pFilled);
-            setAxisX(300);
-            setAxisY(180);
+            setAxisX(pAxisX);
+            setAxisY(pAxisY);
         }
 
         public void setSize(int pSize)
@@ -29,30 +29,24 @@ namespace TennisBusiness
             this.size = pSize;
             
             if (pSize == 0) /* Small */ 
-            {
-                ellipse.Width = 27;
-                ellipse.Height = 27;
-            }
+                ellipse.Width =  ellipse.Height = 27;
 
             else if (pSize == 1) /* Medium */
-            {
-                ellipse.Width = 64;
-                ellipse.Height = 64;
-            }
+                ellipse.Width = ellipse.Height = 64;
 
             else /* Large */
-            {
-                ellipse.Width = 110;
-                ellipse.Height = 110;
-            }
+                ellipse.Width = ellipse.Height = 110;
         }
-
         public void setFilled(bool pFilled)
         {
             this.filled = pFilled;
         }
 
-        public string getSize()
+        public int getSize()
+        {
+            return size;
+        }
+        public string getSizeName()
         {
             string stringSize = "";
 
@@ -65,17 +59,10 @@ namespace TennisBusiness
 
             return stringSize;
         }
-
-        public int getSizeNumber()
-        {
-            return size;
-        }
-
         public bool getFilled()
         {
             return this.filled;
         }
-
         public Ellipse getEllipse()
         {
             return ellipse;

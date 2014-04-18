@@ -114,7 +114,7 @@ namespace DataAccess
                 {
                     {"Color", dCircle.getColor().ToString()},
                     {"Thickness", dCircle.getThickness()},
-                    {"Size", dCircle.getSizeNumber()}, {"Filled", dCircle.getFilled()}, 
+                    {"Size", dCircle.getSize()}, {"Filled", dCircle.getFilled()}, 
                     {"AxisX", dCircle.getAxisX()}, {"AxisY", dCircle.getAxisY()}
                 };
                 circleList.Add(circle);
