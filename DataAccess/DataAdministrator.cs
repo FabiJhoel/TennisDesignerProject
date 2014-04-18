@@ -34,19 +34,31 @@ namespace DataAccess
                 {
                     {"Name",pDesign.getName()},{"Date",pDesign.getCreationDate()},
                     {"Points",getBasePointsFromDesign(pDesign)}, {"SegmentA",getSegmentFromDesign(pDesign.getSegmentA())}, 
-                    {"SegmentB",getSegmentFromDesign(pDesign.getSegmentB())}
+                    {"SegmentB",getSegmentFromDesign(pDesign.getSegmentB())},
+                    {"ShoeSole",getDecorationFromDesign(pDesign.getShoeSole())},
+                    {"OutLine", getDecorationFromDesign(pDesign.getOutline())},
+                    {"Circles", getCirclesFromDesign(pDesign)}
                 };
             }
             else
             {
-                parseConnection.deleteBasePoints(parseObject);
+                parseConnection.deleteColletion(parseObject.Get<IList<ParseObject>>("Points"));
                 parseObject["Points"] = getBasePointsFromDesign(pDesign);
                 
-                parseConnection.deleteSegment(parseObject.Get<ParseObject>("SegmentA"));
+                parseConnection.deleteObject(parseObject.Get<ParseObject>("SegmentA"));
                 parseObject["SegmentA"] = getSegmentFromDesign(pDesign.getSegmentA());
                 
-                parseConnection.deleteSegment(parseObject.Get<ParseObject>("SegmentB"));
+                parseConnection.deleteObject(parseObject.Get<ParseObject>("SegmentB"));
                 parseObject["SegmentB"] = getSegmentFromDesign(pDesign.getSegmentB());
+
+                parseConnection.deleteObject(parseObject.Get<ParseObject>("ShoeSole"));
+                parseObject["ShoeSole"] = getDecorationFromDesign(pDesign.getShoeSole());
+
+                parseConnection.deleteObject(parseObject.Get<ParseObject>("OutLine"));
+                parseObject["OutLine"] = getDecorationFromDesign(pDesign.getOutline());
+
+                parseConnection.deleteColletion(parseObject.Get<IList<ParseObject>>("Circles"));
+                parseObject["Circles"] = getCirclesFromDesign(pDesign);
             }
 
             parseConnection.uploadDesign(parseObject);
@@ -78,6 +90,36 @@ namespace DataAccess
             };
 
             return arc;
+        }
+
+        private ParseObject getDecorationFromDesign(Decoration pDecoration)
+        {
+            ParseObject decoration = new ParseObject("Decoration")
+            {
+                {"Color", pDecoration.getColor().ToString()},
+                {"Thickness", pDecoration.getThickness()},
+                {"Type", pDecoration.getType()}
+            };
+
+            return decoration;
+        }
+
+        private List<ParseObject> getCirclesFromDesign(Design pDesign)
+        {
+            List<ParseObject> circleList = new List<ParseObject>();
+            ParseObject circle;
+            foreach (Circle dCircle in pDesign.getCircleDecorations())
+            {
+                circle = new ParseObject("Circle")
+                {
+                    {"Color", dCircle.getColor().ToString()},
+                    {"Thickness", dCircle.getThickness()},
+                    {"Size", dCircle.getSizeNumber()}, {"Filled", dCircle.getFilled()}, 
+                    {"AxisX", dCircle.getAxisX()}, {"AxisY", dCircle.getAxisY()}
+                };
+                circleList.Add(circle);
+            }
+            return circleList;
         }
         
         public async Task<List<string>> getDesignList()

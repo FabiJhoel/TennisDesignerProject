@@ -39,14 +39,14 @@ namespace TennisLibrary
 
                 case 3:
                         pDesign.getOutline().setColor(pColor);
-                        pDesign.getOutline().setThikness(pThickness);
+                        pDesign.getOutline().setThickness(pThickness);
                         PaintManager.paintOutline(pDesign, pColor, pThickness);
                         MessageBox.Show("contorno cambiado");
                         break;
 
                 case 4:
                         pDesign.getShoeSole().setColor(pColor);
-                        pDesign.getShoeSole().setThikness(pThickness);
+                        pDesign.getShoeSole().setThickness(pThickness);
                         PaintManager.paintShoeSole(pDesign, pColor, pThickness);
                         MessageBox.Show("suela cambiada");
                         break;

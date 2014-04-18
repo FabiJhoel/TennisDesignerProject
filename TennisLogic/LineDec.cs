@@ -52,7 +52,7 @@ namespace TennisBusiness
         public void drawLine()
         {
             line.Stroke = new SolidColorBrush(getColor());
-            line.StrokeThickness = getThikness();
+            line.StrokeThickness = getThickness();
             line.X1 = getAxisX();
             line.Y1 = getAxisY();
             line.X2 = getAxisX2();

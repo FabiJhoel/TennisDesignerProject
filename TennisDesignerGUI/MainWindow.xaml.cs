@@ -63,6 +63,7 @@ namespace TennisDesignerGUI
                 canvasEdit.Children.Clear();
                 PaintManager.loadTennisSilhouette(designInstance, canvasEdit);
                 PaintManager.loadBasePoints(designInstance, canvasEdit);
+                PaintManager.loadCircleDecorations(designInstance, canvasEdit);
                 asignEventToBasePoint();
             }
 
@@ -492,17 +493,11 @@ namespace TennisDesignerGUI
             }
         }
 
-        private void ArcadeMode_Selection(object sender, ContextMenuEventArgs e)
+        private void FireMode_Selected(object sender, MouseButtonEventArgs e)
         {
-            //canvasArcade.Children.Clear();
-            PaintManager.arcadeMode(designInstance, canvasArcade);
+            canvasFire.Children.Clear();
+            PaintManager.fireMode(designInstance, canvasFire);
         }
-
-        /*private void ArcadeMode_Selection(object sender, RoutedEventArgs e)
-        {
-            canvasArcade.Children.Clear();
-            PaintManager.arcadeMode(designInstance, canvasArcade);
-        }*/
 
     }
 }

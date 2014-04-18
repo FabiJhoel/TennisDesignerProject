@@ -34,7 +34,7 @@
                 </Canvas>
             </TabItem>
 
-            <TabItem Header="Fire Mode" Foreground="#FF595353">
+            <TabItem Header="Fire Mode" Foreground="#FF595353" MouseDoubleClick="FireMode_Selected">
                 <TabItem.Background>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                         <GradientStop Color="#FFF0F0F0" Offset="0"/>

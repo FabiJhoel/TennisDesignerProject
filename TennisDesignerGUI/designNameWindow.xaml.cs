@@ -31,9 +31,24 @@ namespace TennisDesignerGUI
 
         private void confirmNameButton_Click(object sender, RoutedEventArgs e)
         {
-            designNamesListBox.Items.Add(nameTextBox.Text);
-            design.setName(nameTextBox.Text);
-            this.Hide();
+            bool valid = true;
+
+            foreach (string name in designNamesListBox.Items)
+            {
+                if (name == nameTextBox.Text)
+                    valid = false;
+            }
+
+            if (nameTextBox.Text == "")
+                MessageBox.Show("The design name must contain at least one character");
+            else if (valid == false)
+                MessageBox.Show("This design name already exists, please write a different one");
+            else
+            {
+                designNamesListBox.Items.Add(nameTextBox.Text);
+                design.setName(nameTextBox.Text);
+                this.Hide();
+            }
         }
     }
 }

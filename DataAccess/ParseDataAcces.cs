@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Parse;
 using TennisBusiness;
 using System.Windows;
+using System.Windows.Media;
 
 namespace DataAccess
 {
@@ -69,6 +70,15 @@ namespace DataAccess
             //Get SegmentB fromm the object
             design.setSegmentB(await getSegmentFromParse(pParseObject, "SegmentB"));
 
+            //Get ShoeSole from object
+            design.setShoeSole(await getDecorationFromParse(pParseObject, "ShoeSole"));
+
+            //Get Outline from object
+            design.setOutline(await getDecorationFromParse(pParseObject, "OutLine"));
+
+            //Get Circles from object
+            design.setCircleDecoration(await getCirclesFromParse(pParseObject.Get<IList<ParseObject>>("Circles")));
+
             return design;
         }
 
@@ -80,7 +90,6 @@ namespace DataAccess
 
             return segment;
         }
-
         private async Task<List<BasePoint>> getBasePointsFromParse(IList<ParseObject> parseBasePoints)
         {
             //Get BasePoints from the object
@@ -96,18 +105,41 @@ namespace DataAccess
 
             return basePoints;
         }
-
-        public void deleteBasePoints(ParseObject pParseObject)
+        private async Task<List<Circle>> getCirclesFromParse(IList<ParseObject> parseCircles)
         {
-            IList<ParseObject> parseBasePoints = pParseObject.Get<IList<ParseObject>>("Points");
+            //Get Circles from the object
+            ParseQuery<ParseObject> queryC = ParseObject.GetQuery("Circle");
+            ParseObject circle;
+            List<Circle> circles = new List<Circle>();
 
-            foreach (ParseObject tempBasePoint in parseBasePoints)
+            foreach (ParseObject tempCircle in parseCircles)
             {
-                tempBasePoint.DeleteAsync();
+                circle = await queryC.GetAsync(tempCircle.ObjectId);
+                circles.Add(new Circle(circle.Get<int>("Thickness"),
+                            (Color)ColorConverter.ConvertFromString(circle.Get<string>("Color")),
+                            circle.Get<int>("Size"), circle.Get<bool>("Filled"),
+                            circle.Get<double>("AxisX"), circle.Get<double>("AxisY")));
+            }
+
+            return circles;
+        }
+        private async Task<Decoration> getDecorationFromParse(ParseObject pParseObject, string key)
+        {
+            ParseObject parseDecoration = await ParseObject.GetQuery("Decoration").GetAsync(pParseObject.Get<ParseObject>(key).ObjectId);
+            Decoration decoration = new Decoration(parseDecoration.Get<int>("Type"), parseDecoration.Get<int>("Thickness"),
+                (Color)ColorConverter.ConvertFromString(parseDecoration.Get<string>("Color")));
+
+            return decoration;
+        }
+        public void deleteColletion(IList<ParseObject> pParseCollection)
+        {
+            foreach (ParseObject tempParseObject in pParseCollection)
+            {
+                deleteObject(tempParseObject);
             }
         }
 
-        public void deleteSegment(ParseObject pParseObject)
+        public void deleteObject(ParseObject pParseObject)
         {
             pParseObject.DeleteAsync();
         }

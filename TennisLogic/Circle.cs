@@ -66,6 +66,11 @@ namespace TennisBusiness
             return stringSize;
         }
 
+        public int getSizeNumber()
+        {
+            return size;
+        }
+
         public bool getFilled()
         {
             return this.filled;
@@ -78,7 +83,7 @@ namespace TennisBusiness
 
         public void drawCircle()
         {
-            ellipse.StrokeThickness = getThikness();
+            ellipse.StrokeThickness = getThickness();
             ellipse.Stroke = new SolidColorBrush(getColor());
 
             if (filled)

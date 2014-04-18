@@ -19,7 +19,7 @@ namespace TennisBusiness
         public Decoration(int pType, int pThickness, Color pColor)
         {
             setType(pType);
-            setThikness(pThickness);
+            setThickness(pThickness);
             setColor(pColor);
         }
 
@@ -38,7 +38,7 @@ namespace TennisBusiness
             this.type = pType;
         }
 
-        public void setThikness(int pThikness)
+        public void setThickness(int pThikness)
         {
             this.thickness = pThikness;
         }
@@ -53,7 +53,7 @@ namespace TennisBusiness
             return this.type;
         }
 
-        public int getThikness()
+        public int getThickness()
         {
             return this.thickness;
         }
