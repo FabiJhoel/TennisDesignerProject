@@ -144,7 +144,8 @@ namespace TennisLibrary
 
         public static void loadCircleDecorations(Design pDesign, Canvas pCanvas)
         {
-            foreach (Circle circle in pDesign.getCircleDecorations()){
+            foreach (Circle circle in pDesign.getCircleDecorations())
+            {
                 PaintCircleDecoration(pCanvas, circle);
             }
         }
