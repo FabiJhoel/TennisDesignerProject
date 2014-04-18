@@ -14,7 +14,7 @@ namespace TennisBusiness
         private double axisX;
         private double axisY;
         private string name;
-        Ellipse pointEllipse;
+        private Ellipse pointEllipse;
 
         public BasePoint(double pAxisX, double pAxisY, string pName)
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace TennisBusiness
 {
@@ -11,6 +12,8 @@ namespace TennisBusiness
     {
         private int type; /* 0= Line  1= Circle  2= Filled Circle  3= Outline  4= Shoe Sole */
         private int thickness;
+        private double axisX;
+        private double axisY;
         private Color color;
 
         public Decoration(int pType, int pThickness, Color pColor)
@@ -20,10 +23,14 @@ namespace TennisBusiness
             setColor(pColor);
         }
 
-        public BasePoint[] plot(int pAxisX, int pAxisY)
+        public void setAxisX(double pAxisX)
         {
-            BasePoint[] points = new BasePoint[1];
-            return points;
+            this.axisX = pAxisX;
+        }
+
+        public void setAxisY(double pAxisY)
+        {
+            this.axisY = pAxisY;
         }
 
         public void setType(int pType)
@@ -54,6 +61,16 @@ namespace TennisBusiness
         public Color getColor()
         {
             return this.color;
+        }
+
+        public double getAxisX()
+        {
+            return this.axisX;
+        }
+
+        public double getAxisY()
+        {
+            return this.axisY;
         }
     }
 }

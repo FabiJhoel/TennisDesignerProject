@@ -56,6 +56,7 @@ namespace TennisDesignerGUI
         private async void listBoxDesigns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Design design = await DataManager.loadDesign(ListBoxDesigns.SelectedItem.ToString());
+
             if (design != null)
             {
                 designInstance = design;
@@ -64,8 +65,9 @@ namespace TennisDesignerGUI
                 PaintManager.loadBasePoints(designInstance, canvasEdit);
                 asignEventToBasePoint();
             }
+
             else
-                MessageBox.Show("The selected design is not saved");
+                MessageBox.Show("The selected design was not saved");
         }
 
         private void cmbxDecorations_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -136,12 +138,20 @@ namespace TennisDesignerGUI
                             break;
                     case 2:
                             selectedThickness = 5;
-                            break;             
+                            break;
+                    case 3:
+                            selectedThickness = 8;
+                            break; 
                 }
 
                 if (valid)
-                    DesignManager.addDecoration(designInstance, selectedDeco, selectedSize,
-                                                    selectedColor, selectedThickness);
+                {
+                    DesignManager.addDecoration(canvasEdit, designInstance, selectedDeco, selectedSize,
+                                                selectedColor, selectedThickness);
+                    asignEventToDecoration(selectedDeco);
+                    //PaintManager.PaintDecoration();
+                }
+
                 else
                     MessageBox.Show("Properties hasn't been set correctly");
             }
@@ -150,6 +160,47 @@ namespace TennisDesignerGUI
                 {
                     MessageBox.Show("Properties hasn't been set correctly");
                 }
+        }
+
+        /* Decoration Events */
+        public void asignEventToDecoration(int typeDeco)
+        {
+            if (typeDeco == 0) /* Line */
+            {
+                /*foreach (Line decoration in designInstance.getDecorations())
+                {
+
+                }*/
+            }
+
+            else if (typeDeco == 1 || typeDeco == 2) /* Circle */
+            {
+                foreach (Circle circle in designInstance.getCircleDecorations())
+                {
+                    circle.getEllipse().MouseMove += circleDecorations_MouseMove;
+                }
+
+            }
+        }
+
+        void circleDecorations_MouseMove(object sender, MouseEventArgs e)
+        {
+            Ellipse circle = sender as Ellipse;
+            int variance = 0;
+
+            if (circle != null && e.LeftButton == MouseButtonState.Pressed)
+            {
+                if (circle.Width == 27)
+                    variance = 10;
+                else if (circle.Width == 64)
+                    variance = 30;
+                else
+                    variance = 50;
+
+                circle.SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - variance);
+                circle.SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - variance);
+                DesignManager.saveCirclesDecoPosition(designInstance);
+            }            
         }
 
         /* BasePoint Events */
@@ -443,12 +494,15 @@ namespace TennisDesignerGUI
 
         private void ArcadeMode_Selection(object sender, ContextMenuEventArgs e)
         {
-            canvasArcade.Children.Clear();
+            //canvasArcade.Children.Clear();
             PaintManager.arcadeMode(designInstance, canvasArcade);
         }
 
-        
+        /*private void ArcadeMode_Selection(object sender, RoutedEventArgs e)
+        {
+            canvasArcade.Children.Clear();
+            PaintManager.arcadeMode(designInstance, canvasArcade);
+        }*/
 
- 
     }
 }

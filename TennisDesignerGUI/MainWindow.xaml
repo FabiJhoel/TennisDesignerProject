@@ -18,11 +18,10 @@
                     </LinearGradientBrush>
                 </TabItem.Background>
                 <!--Work Space-->
-                <Canvas x:Name="canvasEdit" Margin="7,11,9,11" AllowDrop="True" Background="White">
-                </Canvas>
+                <Canvas x:Name="canvasEdit" Margin="7,11,9,11" AllowDrop="True" Background="White"/>
             </TabItem>
 
-            <TabItem Header="Arcade Mode" Foreground="#FF595353" ContextMenuOpening="ArcadeMode_Selection">
+            <TabItem Header="Arcade Mode" Foreground="#FF595353">
                 <TabItem.Background>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                         <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -112,6 +111,9 @@
             </ComboBoxItem>
             <ComboBoxItem>
                 <Image Source="Resources/5px.png" />
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <Image Source="Resources/8px.png" />
             </ComboBoxItem>
         </ComboBox>
         <Button x:Name="addDesignButton_Copy" Content="Add" HorizontalAlignment="Left" Margin="165,620,0,0" VerticalAlignment="Top" Width="45" Foreground="#FF595353" Click="addDecorationButton" RenderTransformOrigin="0.739,6.262">

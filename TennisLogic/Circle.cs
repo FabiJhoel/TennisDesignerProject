@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace TennisBusiness
 {
@@ -11,29 +12,83 @@ namespace TennisBusiness
     {
         private int size;
         private bool filled;
+        private Ellipse ellipse;
 
         public Circle(int pThikness, Color pColor, int pSize, bool pFilled, double pAxisX, double pAxisY)
             : base(1, pThikness, pColor)
         {
-            setRadio(pSize);
+            ellipse = new Ellipse();
+            setSize(pSize);
             setFilled(pFilled);
+            setAxisX(300);
+            setAxisY(180);
         }
 
-        public void setRadio(int pRadio)
+        public void setSize(int pSize)
         {
-            this.size = pRadio;
+            this.size = pSize;
+            
+            if (pSize == 0) /* Small */ 
+            {
+                ellipse.Width = 27;
+                ellipse.Height = 27;
+            }
+
+            else if (pSize == 1) /* Medium */
+            {
+                ellipse.Width = 64;
+                ellipse.Height = 64;
+            }
+
+            else /* Large */
+            {
+                ellipse.Width = 110;
+                ellipse.Height = 110;
+            }
         }
+
         public void setFilled(bool pFilled)
         {
             this.filled = pFilled;
         }
-        public int getRadio()
+
+        public string getSize()
         {
-            return this.size;
+            string stringSize = "";
+
+            if (size == 0)
+                stringSize = "Small";
+            if (size == 1)
+                stringSize = "Medium";
+            if (size == 2)
+                stringSize = "Large";
+
+            return stringSize;
         }
+
         public bool getFilled()
         {
             return this.filled;
         }
+
+        public Ellipse getEllipse()
+        {
+            return ellipse;
+        }
+
+        public void drawCircle()
+        {
+            //Brush to fill the ellipse
+            SolidColorBrush colorBrush = new SolidColorBrush();
+            colorBrush.Color = getColor();
+            ellipse.StrokeThickness = getThikness();
+            ellipse.Stroke = colorBrush;
+
+            if (filled)
+                ellipse.Fill = colorBrush;
+            else
+                ellipse.Fill = Brushes.Transparent;
+        }
+
     }
 }
