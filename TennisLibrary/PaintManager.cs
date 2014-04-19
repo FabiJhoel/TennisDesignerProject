@@ -107,6 +107,15 @@ namespace TennisLibrary
             pDesign.getSegmentE().MouseLeftButtonDown += PaintManager_MouseLeftButtonDown; 
             pDesign.getSegmentE().MouseRightButtonDown += PaintManager_MouseRightButtonDown;
             pCanvas.Children.Add(pDesign.getSegmentE());
+
+            //Remarks
+            Canvas.SetLeft(pDesign.getShoeSole().getRemarks(), 15);
+            Canvas.SetTop(pDesign.getShoeSole().getRemarks(), 405);
+            pCanvas.Children.Add(pDesign.getShoeSole().getRemarks());
+
+            Canvas.SetLeft(pDesign.getOutline().getRemarks(), 115);
+            Canvas.SetTop(pDesign.getOutline().getRemarks(), 405);
+            pCanvas.Children.Add(pDesign.getOutline().getRemarks());
         }
 
         static void PaintManager_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -134,8 +143,8 @@ namespace TennisLibrary
 
         public static void paintShoeSole(Design pDesign, Color pColor, int pThickness)
         {
-            //CONVERT STRING TO COLOR
-           /* Color newColor = (Color)ColorConverter.ConvertFromString(pColor.ToString());
+            /*//CONVERT STRING TO COLOR
+            Color newColor = (Color)ColorConverter.ConvertFromString(pColor.ToString());
             pColor = newColor;*/
 
             pDesign.getSegmentE().Stroke = new SolidColorBrush(pColor);
@@ -156,6 +165,10 @@ namespace TennisLibrary
             Canvas.SetLeft(circleDeco.getEllipse(), circleDeco.getAxisX());
             Canvas.SetTop(circleDeco.getEllipse(), circleDeco.getAxisY());
             pCanvas.Children.Add(circleDeco.getEllipse());
+
+            Canvas.SetLeft(circleDeco.getRemarks(), circleDeco.getAxisX() + circleDeco.getEllipse().Width / 2);
+            Canvas.SetTop(circleDeco.getRemarks(), circleDeco.getAxisY() + circleDeco.getEllipse().Height / 2);
+            pCanvas.Children.Add(circleDeco.getRemarks());
         }
 
         public static void loadLineDecorations(Design pDesign, Canvas pCanvas, int pModo)
@@ -182,6 +195,10 @@ namespace TennisLibrary
                 Canvas.SetTop(point.getPointEllipse(), point.getAxisY());
                 pCanvas.Children.Add(point.getPointEllipse());
             }
+
+            Canvas.SetLeft(lineDeco.getRemarks(), lineDeco.getBasePoints()[0].getAxisX() + 15);
+            Canvas.SetTop(lineDeco.getRemarks(), lineDeco.getBasePoints()[0].getAxisY() + 15);
+            pCanvas.Children.Add(lineDeco.getRemarks());
         }
 
         //------------------------------------------------------------------------------

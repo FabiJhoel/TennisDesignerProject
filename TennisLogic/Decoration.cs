@@ -16,13 +16,15 @@ namespace TennisBusiness
         private double axisX;
         private double axisY;
         private Color color;
-        private Label remarks;
+        private Label remarks = new Label();
 
         public Decoration(int pType, int pThickness, Color pColor)
         {
             setType(pType);
             setThickness(pThickness);
             setColor(pColor);
+            remarks.FontSize = 10;
+            remarks.Background = Brushes.AliceBlue;
         }
 
         public void setAxisX(double pAxisX)
@@ -50,6 +52,11 @@ namespace TennisBusiness
             this.color = pColor;
         }
 
+        public void setRemarks(string pRemarks)
+        {
+            remarks.Content = pRemarks;
+        }
+
         public int getType()
         {
             return this.type;
@@ -73,6 +80,11 @@ namespace TennisBusiness
         public double getAxisY()
         {
             return this.axisY;
+        }
+
+        public Label getRemarks()
+        {
+            return remarks;
         }
     }
 }

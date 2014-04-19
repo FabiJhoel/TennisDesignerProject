@@ -69,7 +69,13 @@ namespace TennisDesignerGUI
                 {
                     PaintManager.loadCircleDecorations(designInstance, canvasEdit, 1);
                     asignEventToDecoration(1);
-                }                
+                }
+
+                if (designInstance.getLineDecorations().Count != 0)
+                {
+                    PaintManager.loadLineDecorations(designInstance, canvasEdit, 1);
+                    asignEventToDecoration(0);
+                }    
             }
 
             else
@@ -176,6 +182,8 @@ namespace TennisDesignerGUI
                 {
                     line.getBasePoints()[0].getPointEllipse().MouseMove += axis1Line_MouseMove;
                     line.getBasePoints()[1].getPointEllipse().MouseMove += axis2Line_MouseMove;
+                    line.getBasePoints()[0].getPointEllipse().MouseLeftButtonUp += axis1_MouseLeftButtonUp;
+                    line.getBasePoints()[0].getPointEllipse().MouseRightButtonDown +=axis1_MouseRightButtonDown;
                 }
             }
 
@@ -184,9 +192,79 @@ namespace TennisDesignerGUI
                 foreach (Circle circle in designInstance.getCircleDecorations())
                 {
                     circle.getEllipse().MouseMove += circleDecorations_MouseMove;
+                    circle.getEllipse().MouseLeftButtonUp += circle_MouseLeftButtonUp;
+                    circle.getEllipse().MouseRightButtonDown += circle_MouseRightButtonDown;
                 }
 
             }
+        }
+
+        void circle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Ellipse circle = sender as Ellipse;
+
+            if (circle != null)
+            {
+                foreach (Circle circleDeco in designInstance.getCircleDecorations())
+                {
+                    if (circle == circleDeco.getEllipse())
+                    {
+                        if (!canvasEdit.Children.Contains(circleDeco.getRemarks()))
+                            canvasEdit.Children.Add(circleDeco.getRemarks());
+                    }
+                }
+            }
+        }
+
+        void circle_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Ellipse circle = sender as Ellipse;
+
+            if (circle != null)
+            {
+                foreach (Circle circleDeco in designInstance.getCircleDecorations())
+                {
+                    if (circle == circleDeco.getEllipse())
+                    {
+                        if (canvasEdit.Children.Contains(circleDeco.getRemarks()))
+                            canvasEdit.Children.Remove(circleDeco.getRemarks());
+                    }
+                }
+            }
+        }
+
+        void axis1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Ellipse axis1 = sender as Ellipse;
+
+            if (axis1 != null)
+            {
+                foreach (LineDec lineDeco in designInstance.getLineDecorations())
+                {
+                    if (axis1 == lineDeco.getBasePoints()[0].getPointEllipse())
+                    {
+                        if (!canvasEdit.Children.Contains(lineDeco.getRemarks()))
+                            canvasEdit.Children.Add(lineDeco.getRemarks());
+                    }
+                }
+            }
+        }
+
+        void axis1_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Ellipse axis1 = sender as Ellipse;
+
+            if (axis1 != null)
+            {
+                foreach (LineDec lineDeco in designInstance.getLineDecorations())
+                {
+                    if (axis1 == lineDeco.getBasePoints()[0].getPointEllipse())
+                    {
+                        if (canvasEdit.Children.Contains(lineDeco.getRemarks()))
+                            canvasEdit.Children.Remove(lineDeco.getRemarks());
+                    }
+                }
+            }         
         }
 
         void axis1Line_MouseMove(object sender, MouseEventArgs e)
@@ -198,12 +276,16 @@ namespace TennisDesignerGUI
                 axis1.SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 5);
                 axis1.SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 5);
 
-                foreach (LineDec line in designInstance.getLineDecorations())
+                foreach (LineDec lineDeco in designInstance.getLineDecorations())
                 {
-                    if (axis1 == line.getBasePoints()[0].getPointEllipse())
+                    if (axis1 == lineDeco.getBasePoints()[0].getPointEllipse())
                     {
-                        line.getLine().X1 = Canvas.GetLeft(axis1) + 5;
-                        line.getLine().Y1 = Canvas.GetTop(axis1) + 5; 
+                        lineDeco.getLine().X1 = Canvas.GetLeft(axis1) + 5;
+                        lineDeco.getLine().Y1 = Canvas.GetTop(axis1) + 5; 
+
+                        //Move Remarks
+                        Canvas.SetLeft(lineDeco.getRemarks(), lineDeco.getBasePoints()[0].getAxisX() + 15);
+                        Canvas.SetTop(lineDeco.getRemarks(), lineDeco.getBasePoints()[0].getAxisY() + 15);
                     }
                 }
 
@@ -220,12 +302,12 @@ namespace TennisDesignerGUI
                 axis2.SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 5);
                 axis2.SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 5);
 
-                foreach (LineDec line in designInstance.getLineDecorations())
+                foreach (LineDec lineDeco in designInstance.getLineDecorations())
                 {
-                    if (axis2 == line.getBasePoints()[1].getPointEllipse())
+                    if (axis2 == lineDeco.getBasePoints()[1].getPointEllipse())
                     {
-                        line.getLine().X2 = Canvas.GetLeft(axis2) + 5;
-                        line.getLine().Y2 = Canvas.GetTop(axis2) + 5;
+                        lineDeco.getLine().X2 = Canvas.GetLeft(axis2) + 5;
+                        lineDeco.getLine().Y2 = Canvas.GetTop(axis2) + 5;
                     }
                 }
 
@@ -250,6 +332,16 @@ namespace TennisDesignerGUI
                 circle.SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - variance);
                 circle.SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - variance);
                 DesignManager.saveCirclesDecoPosition(designInstance);
+
+                //Move Remarks
+                foreach (Circle circleDeco in designInstance.getCircleDecorations())
+                {
+                    if (circle == circleDeco.getEllipse())
+                    {                        
+                        Canvas.SetLeft(circleDeco.getRemarks(), circleDeco.getAxisX() + circleDeco.getEllipse().Width / 2);
+                        Canvas.SetTop(circleDeco.getRemarks(), circleDeco.getAxisY() + circleDeco.getEllipse().Height / 2);           
+                    }
+                }
             }            
         }
 
@@ -379,8 +471,8 @@ namespace TennisDesignerGUI
 
                 //Move auxiliar line
                 segmentE.X2 = Canvas.GetLeft(pointE) + 5;
-                segmentE.Y2 = Canvas.GetTop(pointE) + 5;   
-            
+                segmentE.Y2 = Canvas.GetTop(pointE) + 5;
+
                 // Set design values
                 designInstance.getBasePoints()[0].setAxisX(Canvas.GetLeft(pointA));
                 designInstance.getBasePoints()[0].setAxisY(Canvas.GetTop(pointA));
