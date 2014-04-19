@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 using TennisBusiness;
 
 namespace TennisLibrary
@@ -40,14 +41,14 @@ namespace TennisLibrary
                 case 3:
                         pDesign.getOutline().setColor(pColor);
                         pDesign.getOutline().setThickness(pThickness);
-                        PaintManager.paintOutline(pDesign, pColor, pThickness);
+                        //PaintManager.paintOutline(pDesign, pColor, pThickness);
                         MessageBox.Show("contorno cambiado");
                         break;
 
                 case 4:
                         pDesign.getShoeSole().setColor(pColor);
                         pDesign.getShoeSole().setThickness(pThickness);
-                        PaintManager.paintShoeSole(pDesign, pColor, pThickness);
+                        //PaintManager.paintShoeSole(pDesign, pColor, pThickness);
                         MessageBox.Show("suela cambiada");
                         break;
             }
@@ -59,6 +60,18 @@ namespace TennisLibrary
             {
                 circle.setAxisX(Canvas.GetLeft(circle.getEllipse()));
                 circle.setAxisY(Canvas.GetTop(circle.getEllipse()));
+            }
+        }
+
+        public static void saveLinesDecoPosition(Design pDesign)
+        {
+            foreach (LineDec line in pDesign.getLineDecorations())
+            {
+                foreach (BasePoint point in line.getBasePoints())
+                {
+                    point.setAxisX(Canvas.GetLeft(point.getPointEllipse()));
+                    point.setAxisY(Canvas.GetTop(point.getPointEllipse()));
+                }
             }
         }
 

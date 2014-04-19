@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Controls;
 
 namespace TennisBusiness
 {
@@ -15,6 +16,7 @@ namespace TennisBusiness
         private double axisX;
         private double axisY;
         private Color color;
+        private Label remarks;
 
         public Decoration(int pType, int pThickness, Color pColor)
         {

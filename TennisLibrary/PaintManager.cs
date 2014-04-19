@@ -158,8 +158,23 @@ namespace TennisLibrary
             pCanvas.Children.Add(circleDeco.getEllipse());
         }
 
+        public static void loadLineDecorations(Design pDesign, Canvas pCanvas, int pModo)
+        {
+            foreach (LineDec line in pDesign.getLineDecorations())
+            {
+                PaintLineDecoration(pCanvas, line, pModo);
+            }
+        }
+
         public static void PaintLineDecoration(Canvas pCanvas, LineDec lineDeco, int pMode)
         {
+            lineDeco.drawLine(pMode);
+            lineDeco.getLine().X1 = lineDeco.getBasePoints()[0].getAxisX() + 5;
+            lineDeco.getLine().Y1 = lineDeco.getBasePoints()[0].getAxisY() + 5;
+            lineDeco.getLine().X2 = lineDeco.getBasePoints()[1].getAxisX() + 5;
+            lineDeco.getLine().Y2 = lineDeco.getBasePoints()[1].getAxisY() + 5;
+            pCanvas.Children.Add(lineDeco.getLine());
+
             foreach (BasePoint point in lineDeco.getBasePoints())
             {
                 point.drawPoint(2);
@@ -167,11 +182,6 @@ namespace TennisLibrary
                 Canvas.SetTop(point.getPointEllipse(), point.getAxisY());
                 pCanvas.Children.Add(point.getPointEllipse());
             }
-
-            lineDeco.drawLine(pMode);
-            Canvas.SetLeft(lineDeco.getLine(), lineDeco.getAxisX());
-            Canvas.SetTop(lineDeco.getLine(), lineDeco.getAxisY());
-            pCanvas.Children.Add(lineDeco.getLine());
         }
 
         //------------------------------------------------------------------------------

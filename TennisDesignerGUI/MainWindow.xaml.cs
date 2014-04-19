@@ -174,7 +174,8 @@ namespace TennisDesignerGUI
             {
                 foreach (LineDec line in designInstance.getLineDecorations())
                 {
-
+                    line.getBasePoints()[0].getPointEllipse().MouseMove += axis1Line_MouseMove;
+                    line.getBasePoints()[1].getPointEllipse().MouseMove += axis2Line_MouseMove;
                 }
             }
 
@@ -185,6 +186,50 @@ namespace TennisDesignerGUI
                     circle.getEllipse().MouseMove += circleDecorations_MouseMove;
                 }
 
+            }
+        }
+
+        void axis1Line_MouseMove(object sender, MouseEventArgs e)
+        {
+            Ellipse axis1 = sender as Ellipse;
+
+            if (axis1 != null && e.LeftButton == MouseButtonState.Pressed)
+            {
+                axis1.SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 5);
+                axis1.SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 5);
+
+                foreach (LineDec line in designInstance.getLineDecorations())
+                {
+                    if (axis1 == line.getBasePoints()[0].getPointEllipse())
+                    {
+                        line.getLine().X1 = Canvas.GetLeft(axis1) + 5;
+                        line.getLine().Y1 = Canvas.GetTop(axis1) + 5; 
+                    }
+                }
+
+                DesignManager.saveLinesDecoPosition(designInstance);
+            }
+        }
+
+        void axis2Line_MouseMove(object sender, MouseEventArgs e)
+        {
+            Ellipse axis2 = sender as Ellipse;
+
+            if (axis2!= null && e.LeftButton == MouseButtonState.Pressed)
+            {
+                axis2.SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 5);
+                axis2.SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 5);
+
+                foreach (LineDec line in designInstance.getLineDecorations())
+                {
+                    if (axis2 == line.getBasePoints()[1].getPointEllipse())
+                    {
+                        line.getLine().X2 = Canvas.GetLeft(axis2) + 5;
+                        line.getLine().Y2 = Canvas.GetTop(axis2) + 5;
+                    }
+                }
+
+                DesignManager.saveLinesDecoPosition(designInstance);
             }
         }
 

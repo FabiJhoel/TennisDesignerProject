@@ -29,7 +29,7 @@ namespace TennisBusiness
             segmentD = new Line();
             segmentE = new Line(); 
             outline = new Decoration(3, 3, Color.FromArgb(255, 0, 0, 0));
-            shoeSole = new Decoration(3, 3, Color.FromArgb(255, 0, 0, 0));
+            shoeSole = new Decoration(4, 3, Color.FromArgb(255, 0, 0, 0));
             setName(pName);
             setCreationDate(DateTime.Now.ToString("M/d/yyyy"));
         }
