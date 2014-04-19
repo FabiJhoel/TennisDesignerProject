@@ -68,15 +68,27 @@ namespace TennisBusiness
             return ellipse;
         }
 
-        public void drawCircle()
+        public void drawCircle(int pMode) /* 1= edit  2= arcade  3= fire */
         {
             ellipse.StrokeThickness = getThickness();
-            ellipse.Stroke = new SolidColorBrush(getColor());
 
             if (filled)
-                ellipse.Fill = new SolidColorBrush(getColor());
+            {
+                if (pMode == 1)
+                    ellipse.Fill = Brushes.Black;
+                else
+                    ellipse.Fill = new SolidColorBrush(getColor());
+            }
+
             else
+            {
+                if (pMode == 1)
+                    ellipse.Stroke = Brushes.Black;
+                else
+                    ellipse.Stroke = new SolidColorBrush(getColor());
+
                 ellipse.Fill = Brushes.Transparent;
+            }          
         }
 
     }

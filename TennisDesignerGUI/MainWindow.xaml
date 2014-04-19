@@ -8,7 +8,7 @@
             <ColumnDefinition Width="305*"/>
             <ColumnDefinition Width="204*"/>
         </Grid.ColumnDefinitions>
-        
+
         <TabControl HorizontalAlignment="Left" Height="510" Margin="270,114,0,0" VerticalAlignment="Top" Width="695" Foreground="#FF595353" Grid.ColumnSpan="2" Background="#FFF0FD6C">
             <TabItem Header="Edit" Foreground="#FF595353">
                 <TabItem.Background>
@@ -18,7 +18,10 @@
                     </LinearGradientBrush>
                 </TabItem.Background>
                 <!--Work Space-->
-                <Canvas x:Name="canvasEdit" Margin="7,11,9,11" AllowDrop="True" Background="White"/>
+                <Canvas x:Name="canvasEdit" Margin="7,11,9,11" AllowDrop="True" Background="White">
+                   <Line X1="100" Y1="100" X2="200" Y2="280" Canvas.Left="100" Canvas.Top="100
+                         "/> 
+                </Canvas>
             </TabItem>
 
             <TabItem Header="Arcade Mode" Foreground="#FF595353">
@@ -28,7 +31,7 @@
                         <GradientStop Color="White" Offset="1"/>
                     </LinearGradientBrush>
                 </TabItem.Background>
-                
+
                 <!--Work Space-->
                 <Canvas x:Name="canvasArcade" Margin="7,11,9,11" AllowDrop="True" Background="White">
                 </Canvas>
@@ -67,7 +70,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        
+
         <!--Properties Panel-->
         <GroupBox Header="Decorations" HorizontalAlignment="Left" Margin="10,430,0,0" VerticalAlignment="Top" Height="220" Width="215" Foreground="#FF595353" FontWeight="Bold"/>
         <ComboBox x:Name="cmbxDecorations" HorizontalAlignment="Left" Margin="25,460,0,0" VerticalAlignment="Top" Width="185" Foreground="#FF595353" FontWeight="Normal" Text="Choose a decoration" IsEditable="True" IsReadOnly="True" SelectionChanged="cmbxDecorations_SelectionChanged">
@@ -75,7 +78,7 @@
             <ComboBoxItem Content="Circle" HorizontalAlignment="Left" Width="183"/>
             <ComboBoxItem Content="Filled Circle" HorizontalAlignment="Left" Width="183"/>
             <ComboBoxItem Content="Outline" HorizontalAlignment="Left" Width="183"/>
-            <ComboBoxItem Content="Shoe Sole" HorizontalAlignment="Left" Width="183"/>           
+            <ComboBoxItem Content="Shoe Sole" HorizontalAlignment="Left" Width="183"/>
         </ComboBox>
         <Label Content="Size" HorizontalAlignment="Left" Margin="25,502,0,0" VerticalAlignment="Top" Foreground="#FF595353"/>
         <ComboBox x:Name="cmbxSize" HorizontalAlignment="Left" Margin="86,502,0,0" VerticalAlignment="Top" Width="107" IsEnabled="False" Foreground="#FF595353">
@@ -124,11 +127,11 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        
+
         <!--Header-->
         <Rectangle Grid.ColumnSpan="2" Fill="#FF19A0D3" HorizontalAlignment="Left" Height="77.612" Stroke="#FF19A0D3" VerticalAlignment="Top" Width="1018"/>
         <TextBlock x:Name="headerTitle" HorizontalAlignment="Left" Margin="25,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Segoe WP Light" FontSize="48" Width="375" Height="68" Foreground="White" TextDecorations="{x:Null}" Text="TennisDesigner"/>
-        
+
 
     </Grid>
 </Window>

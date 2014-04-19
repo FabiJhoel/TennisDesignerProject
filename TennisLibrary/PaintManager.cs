@@ -32,7 +32,7 @@ namespace TennisLibrary
             // Draw each Basepoint on screen
             foreach (BasePoint point in pDesign.getBasePoints())
             {
-                point.drawPoint();
+                point.drawPoint(1);
                 Canvas.SetLeft(point.getPointEllipse(), point.getAxisX());
                 Canvas.SetTop(point.getPointEllipse(), point.getAxisY());
                 pCanvas.Children.Add(point.getPointEllipse());
@@ -142,33 +142,36 @@ namespace TennisLibrary
             pDesign.getSegmentE().StrokeThickness = pThickness;       
         }
 
-        public static void loadCircleDecorations(Design pDesign, Canvas pCanvas)
+        public static void loadCircleDecorations(Design pDesign, Canvas pCanvas, int pModo)
         {
             foreach (Circle circle in pDesign.getCircleDecorations())
             {
-                PaintCircleDecoration(pCanvas, circle);
+                PaintCircleDecoration(pCanvas, circle, pModo);
             }
         }
 
-        public static void PaintCircleDecoration(Canvas pCanvas, Circle circleDeco) 
+        public static void PaintCircleDecoration(Canvas pCanvas, Circle circleDeco, int pMode) 
         {
-            circleDeco.drawCircle();
+            circleDeco.drawCircle(pMode);
             Canvas.SetLeft(circleDeco.getEllipse(), circleDeco.getAxisX());
             Canvas.SetTop(circleDeco.getEllipse(), circleDeco.getAxisY());
             pCanvas.Children.Add(circleDeco.getEllipse());
         }
 
-        public static void PaintLineDecoration(Canvas pCanvas, LineDec lineDeco)
+        public static void PaintLineDecoration(Canvas pCanvas, LineDec lineDeco, int pMode)
         {
-            lineDeco.drawLine();
+            foreach (BasePoint point in lineDeco.getBasePoints())
+            {
+                point.drawPoint(2);
+                Canvas.SetLeft(point.getPointEllipse(), point.getAxisX());
+                Canvas.SetTop(point.getPointEllipse(), point.getAxisY());
+                pCanvas.Children.Add(point.getPointEllipse());
+            }
+
+            lineDeco.drawLine(pMode);
             Canvas.SetLeft(lineDeco.getLine(), lineDeco.getAxisX());
             Canvas.SetTop(lineDeco.getLine(), lineDeco.getAxisY());
             pCanvas.Children.Add(lineDeco.getLine());
-        }
-
-        static void decoLine_MouseMove(object sender, MouseEventArgs e)
-        {
-           
         }
 
         //------------------------------------------------------------------------------

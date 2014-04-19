@@ -63,8 +63,13 @@ namespace TennisDesignerGUI
                 canvasEdit.Children.Clear();
                 PaintManager.loadTennisSilhouette(designInstance, canvasEdit);
                 PaintManager.loadBasePoints(designInstance, canvasEdit);
-                PaintManager.loadCircleDecorations(designInstance, canvasEdit);
                 asignEventToBasePoint();
+
+                if (designInstance.getCircleDecorations().Count != 0)
+                {
+                    PaintManager.loadCircleDecorations(designInstance, canvasEdit, 1);
+                    asignEventToDecoration(1);
+                }                
             }
 
             else
@@ -150,7 +155,6 @@ namespace TennisDesignerGUI
                     DesignManager.addDecoration(canvasEdit, designInstance, selectedDeco, selectedSize,
                                                 selectedColor, selectedThickness);
                     asignEventToDecoration(selectedDeco);
-                    //PaintManager.PaintDecoration();
                 }
 
                 else
@@ -168,10 +172,10 @@ namespace TennisDesignerGUI
         {
             if (typeDeco == 0) /* Line */
             {
-                /*foreach (Line decoration in designInstance.getDecorations())
+                foreach (LineDec line in designInstance.getLineDecorations())
                 {
 
-                }*/
+                }
             }
 
             else if (typeDeco == 1 || typeDeco == 2) /* Circle */
@@ -184,7 +188,7 @@ namespace TennisDesignerGUI
             }
         }
 
-        void circleDecorations_MouseMove(object sender, MouseEventArgs e)
+        private void circleDecorations_MouseMove(object sender, MouseEventArgs e)
         {
             Ellipse circle = sender as Ellipse;
             int variance = 0;

@@ -19,21 +19,21 @@ namespace TennisLibrary
                 case 0:
                         LineDec line = new LineDec(pThickness, pColor);
                         pDesign.addLineDecoration(line);
-                        PaintManager.PaintLineDecoration(pCanvas, line);
+                        PaintManager.PaintLineDecoration(pCanvas, line, 1);
                         MessageBox.Show("linea agregada");
                         break;
 
                 case 1:
                         Circle circle = new Circle(pThickness, pColor, pSize, false, 300, 180);
                         pDesign.addCircleDecoration(circle);
-                        PaintManager.PaintCircleDecoration(pCanvas, circle);
+                        PaintManager.PaintCircleDecoration(pCanvas, circle, 1);
                         MessageBox.Show("circulo agregado");
                         break;
 
                 case 2:
                         Circle fCircle = new Circle(pThickness, pColor, pSize, true, 300, 180);
                         pDesign.addCircleDecoration(fCircle);
-                        PaintManager.PaintCircleDecoration(pCanvas, fCircle);
+                        PaintManager.PaintCircleDecoration(pCanvas, fCircle, 1);
                         MessageBox.Show("circulo relleno agregado");
                         break;
 

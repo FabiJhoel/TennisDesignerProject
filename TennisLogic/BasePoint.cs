@@ -59,18 +59,25 @@ namespace TennisBusiness
             return pointEllipse;
         }
 
-        public void drawPoint()
+        public void drawPoint(int pType)
         {
-            //Brush to fill the ellipse
-            SolidColorBrush colorBrush = new SolidColorBrush();
-            colorBrush.Color = Color.FromArgb(255, 177, 219, 255);
-
-            //Set ellipse properties
-            pointEllipse.Fill = colorBrush;
-            pointEllipse.StrokeThickness = 3;
-            pointEllipse.Stroke = Brushes.Navy;
-            pointEllipse.Width = 24;
-            pointEllipse.Height = 26;
+            if (pType == 1)
+            {
+                pointEllipse.Fill = new SolidColorBrush(Color.FromArgb(255, 177, 219, 255));
+                pointEllipse.StrokeThickness = 3;
+                pointEllipse.Stroke = Brushes.Navy;
+                pointEllipse.Width = 24;
+                pointEllipse.Height = 26;
+            }
+            
+            else
+            {
+                pointEllipse.Fill = new SolidColorBrush(Color.FromArgb(255, 238, 221, 56));
+                pointEllipse.StrokeThickness = 4;
+                pointEllipse.Stroke = new SolidColorBrush(Color.FromArgb(255, 245, 172, 16));
+                pointEllipse.Width = 15;
+                pointEllipse.Height = 15;
+            }
         }
     }
 }
