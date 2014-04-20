@@ -31,27 +31,22 @@ namespace TennisBusiness
         {
             this.axisX = pAxisX;
         }
-
         public void setAxisY(double pAxisY)
         {
             this.axisY = pAxisY;
         }
-
         public void setType(int pType)
         {
             this.type = pType;
         }
-
         public void setThickness(int pThikness)
         {
             this.thickness = pThikness;
         }
-
         public void setColor(Color pColor)
         {
             this.color = pColor;
         }
-
         public void setRemarks(string pRemarks)
         {
             remarks.Content = pRemarks;
@@ -61,27 +56,22 @@ namespace TennisBusiness
         {
             return this.type;
         }
-
         public int getThickness()
         {
             return this.thickness;
         }
-
         public Color getColor()
         {
             return this.color;
         }
-
         public double getAxisX()
         {
             return this.axisX;
         }
-
         public double getAxisY()
         {
             return this.axisY;
         }
-
         public Label getRemarks()
         {
             return remarks;

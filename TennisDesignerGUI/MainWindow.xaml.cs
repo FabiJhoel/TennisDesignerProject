@@ -215,7 +215,6 @@ namespace TennisDesignerGUI
                 }
             }
         }
-
         void circle_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             Ellipse circle = sender as Ellipse;
@@ -232,7 +231,6 @@ namespace TennisDesignerGUI
                 }
             }
         }
-
         void axis1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Ellipse axis1 = sender as Ellipse;
@@ -249,7 +247,6 @@ namespace TennisDesignerGUI
                 }
             }
         }
-
         void axis1_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             Ellipse axis1 = sender as Ellipse;
@@ -266,7 +263,6 @@ namespace TennisDesignerGUI
                 }
             }         
         }
-
         void axis1Line_MouseMove(object sender, MouseEventArgs e)
         {
             Ellipse axis1 = sender as Ellipse;
@@ -292,7 +288,6 @@ namespace TennisDesignerGUI
                 DesignManager.saveLinesDecoPosition(designInstance);
             }
         }
-
         void axis2Line_MouseMove(object sender, MouseEventArgs e)
         {
             Ellipse axis2 = sender as Ellipse;
@@ -314,7 +309,6 @@ namespace TennisDesignerGUI
                 DesignManager.saveLinesDecoPosition(designInstance);
             }
         }
-
         private void circleDecorations_MouseMove(object sender, MouseEventArgs e)
         {
             Ellipse circle = sender as Ellipse;
@@ -354,7 +348,7 @@ namespace TennisDesignerGUI
             designInstance.getBasePoints()[3].getPointEllipse().MouseMove += MouseMovePointD;
             designInstance.getBasePoints()[4].getPointEllipse().MouseMove += MouseMovePointE;
         }
-
+        
         private void MouseMovePointA(object sender, MouseEventArgs e)
         {
             Ellipse pointA = designInstance.getBasePoints()[0].getPointEllipse();
@@ -630,10 +624,16 @@ namespace TennisDesignerGUI
             }
         }
 
+        /*Painting Modes*/
         private void FireMode_Selected(object sender, MouseButtonEventArgs e)
         {
             canvasFire.Children.Clear();
             PaintManager.fireMode(designInstance, canvasFire);
+        }
+        private void ArcadeMode_Selection(object sender, MouseButtonEventArgs e)
+        {
+            canvasArcade.Children.Clear();
+            PaintManager.arcadeMode(designInstance, canvasArcade);
         }
 
     }

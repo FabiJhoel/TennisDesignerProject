@@ -202,7 +202,7 @@ namespace TennisLibrary
         }
 
         //------------------------------------------------------------------------------
-        private static void drawPolygon(PointCollection pPointCollection, Canvas pCanvas)
+        private static void drawPolygonFire(PointCollection pPointCollection, Canvas pCanvas)
         {
             Polygon polygon = new Polygon();
             polygon.Fill = System.Windows.Media.Brushes.LightSeaGreen;
@@ -214,7 +214,7 @@ namespace TennisLibrary
             pCanvas.Children.Add(polygon);
         }
 
-        private static void drawEllipse(Canvas pCanvas, Brush pColor, double pWidth, double pHeight, double pAxisX, double pAxisY, 
+        private static void drawEllipseFire(Canvas pCanvas, Brush pColor, double pWidth, double pHeight, double pAxisX, double pAxisY,
             int pThickness, SolidColorBrush pStroke)
         {
             Ellipse ellipse = new Ellipse();
@@ -237,15 +237,15 @@ namespace TennisLibrary
             points.Add(new Point(pDesign.getBasePoints()[2].getAxisX() + 15, pDesign.getBasePoints()[2].getAxisY() + 15));
             points.Add(new Point(pDesign.getBasePoints()[3].getAxisX() + 15, pDesign.getBasePoints()[3].getAxisY() + 15));
             points.Add(new Point(pDesign.getBasePoints()[4].getAxisX() + 8, pDesign.getBasePoints()[4].getAxisY() + 15));
-            drawPolygon(points, pCanvas);
+            drawPolygonFire(points, pCanvas);
 
             //Load Internal Arc
-            drawEllipse(pCanvas, Brushes.LightSeaGreen, pDesign.getSegmentA().getSegmentContainerWidth() * 2,
+            drawEllipseFire(pCanvas, Brushes.LightSeaGreen, pDesign.getSegmentA().getSegmentContainerWidth() * 2,
                 pDesign.getBasePoints()[4].getAxisY() - pDesign.getBasePoints()[0].getAxisY(),
                 pDesign.getSegmentA().getAxisX(), pDesign.getSegmentA().getAxisY() + 10, 0, null);
 
             //Load External Arc
-            drawEllipse(pCanvas, Brushes.White, pDesign.getBasePoints()[1].getAxisX() - pDesign.getBasePoints()[0].getAxisX(),
+            drawEllipseFire(pCanvas, Brushes.White, pDesign.getBasePoints()[1].getAxisX() - pDesign.getBasePoints()[0].getAxisX(),
                 pDesign.getSegmentB().getSegmentContainerHeight() * 2, pDesign.getSegmentB().getAxisX(),
                 pDesign.getSegmentB().getAxisY() - pDesign.getSegmentB().getSegmentContainerHeight(), 0, null);
 
@@ -279,7 +279,81 @@ namespace TennisLibrary
                 else
                     filling = Brushes.Transparent;
 
-                drawEllipse(pCanvas, filling, width, height, circleDecoration.getAxisX(), circleDecoration.getAxisY(),
+                drawEllipseFire(pCanvas, filling, width, height, circleDecoration.getAxisX(), circleDecoration.getAxisY(),
+                    circleDecoration.getThickness(), new SolidColorBrush(circleDecoration.getColor()));
+            }
+        }
+
+        private static void drawEllipseArcade(Canvas pCanvas, Brush pColor, double pWidth, double pHeight, double pAxisX, double pAxisY,
+            int pThickness, SolidColorBrush pStroke)
+        {
+            Ellipse ellipse;
+
+            if (pColor.Equals(Brushes.Transparent))
+            {
+                ellipse = new Ellipse();
+                ellipse.Fill = pColor;
+                ellipse.Stroke = pStroke;
+                ellipse.StrokeThickness = pThickness;
+                ellipse.Width = pWidth;
+                ellipse.Height = pHeight;
+                Canvas.SetLeft(ellipse, pAxisX);
+                Canvas.SetTop(ellipse, pAxisY);
+                pCanvas.Children.Add(ellipse);
+            }
+            else
+            {
+                while (pWidth > 0 && pHeight > 0)
+                {
+                    ellipse = new Ellipse();
+                    ellipse.Stroke = pColor;
+                    ellipse.StrokeThickness = pThickness;
+                    ellipse.Width = pWidth;
+                    ellipse.Height = pHeight;
+                    Canvas.SetLeft(ellipse, pAxisX);
+                    Canvas.SetTop(ellipse, pAxisY);
+                    pCanvas.Children.Add(ellipse);
+                    pWidth--;
+                    pHeight--;
+                    pAxisX += 0.5;
+                    pAxisY += 0.5;
+                }
+            }
+        }
+
+        public static void arcadeMode(Design pDesign, Canvas pCanvas)
+        {
+            //Load Internal Arc
+            drawEllipseArcade(pCanvas, Brushes.LightSeaGreen, pDesign.getSegmentA().getSegmentContainerWidth() * 2,
+                pDesign.getBasePoints()[4].getAxisY() - pDesign.getBasePoints()[0].getAxisY(),
+                pDesign.getSegmentA().getAxisX(), pDesign.getSegmentA().getAxisY() + 10, -1, Brushes.Transparent);
+
+            //Load External Arc
+            drawEllipseArcade(pCanvas, Brushes.White, pDesign.getBasePoints()[1].getAxisX() - pDesign.getBasePoints()[0].getAxisX(),
+                pDesign.getSegmentB().getSegmentContainerHeight() * 2, pDesign.getSegmentB().getAxisX(),
+                pDesign.getSegmentB().getAxisY() - pDesign.getSegmentB().getSegmentContainerHeight(), -1, Brushes.Transparent);
+
+            //Load Circle Decorations
+            foreach (Circle circleDecoration in pDesign.getCircleDecorations())
+            {
+                double width;
+                double height;
+                if (circleDecoration.getSize() == 0) /* Small */
+                    width = height = 27;
+
+                else if (circleDecoration.getSize() == 1) /* Medium */
+                    width = height = 64;
+
+                else /* Large */
+                    width = height = 110;
+
+                SolidColorBrush filling;
+                if (circleDecoration.getFilled())
+                    filling = new SolidColorBrush(circleDecoration.getColor());
+                else
+                    filling = Brushes.Transparent;
+
+                drawEllipseArcade(pCanvas, filling, width, height, circleDecoration.getAxisX(), circleDecoration.getAxisY(),
                     circleDecoration.getThickness(), new SolidColorBrush(circleDecoration.getColor()));
             }
         }

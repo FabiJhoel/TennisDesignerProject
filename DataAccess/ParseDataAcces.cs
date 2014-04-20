@@ -79,6 +79,9 @@ namespace DataAccess
             //Get Circles from object
             design.setCircleDecoration(await getCirclesFromParse(pParseObject.Get<IList<ParseObject>>("Circles")));
 
+            //Get Lines from object
+            design.setLineDecoration(await getLinesFromParse(pParseObject.Get<IList<ParseObject>>("Lines")));
+
             return design;
         }
 
@@ -109,16 +112,20 @@ namespace DataAccess
         {
             //Get Circles from the object
             ParseQuery<ParseObject> queryC = ParseObject.GetQuery("Circle");
-            ParseObject circle;
+            ParseObject circleFromParse;
+            Circle circle;
             List<Circle> circles = new List<Circle>();
 
             foreach (ParseObject tempCircle in parseCircles)
             {
-                circle = await queryC.GetAsync(tempCircle.ObjectId);
-                circles.Add(new Circle(circle.Get<int>("Thickness"),
-                            (Color)ColorConverter.ConvertFromString(circle.Get<string>("Color")),
-                            circle.Get<int>("Size"), circle.Get<bool>("Filled"),
-                            circle.Get<double>("AxisX"), circle.Get<double>("AxisY")));
+                circleFromParse = await queryC.GetAsync(tempCircle.ObjectId);
+                circle = new Circle(circleFromParse.Get<int>("Thickness"),
+                            (Color)ColorConverter.ConvertFromString(circleFromParse.Get<string>("Color")),
+                            circleFromParse.Get<int>("Size"), circleFromParse.Get<bool>("Filled"),
+                            circleFromParse.Get<double>("AxisX"), circleFromParse.Get<double>("AxisY"));
+                circle.setRemarks(circleFromParse.Get<string>("Label"));
+                circles.Add(circle);
+                
             }
 
             return circles;
@@ -128,17 +135,43 @@ namespace DataAccess
             ParseObject parseDecoration = await ParseObject.GetQuery("Decoration").GetAsync(pParseObject.Get<ParseObject>(key).ObjectId);
             Decoration decoration = new Decoration(parseDecoration.Get<int>("Type"), parseDecoration.Get<int>("Thickness"),
                 (Color)ColorConverter.ConvertFromString(parseDecoration.Get<string>("Color")));
+            decoration.setRemarks(parseDecoration.Get<string>("Label"));
 
             return decoration;
         }
-        public void deleteColletion(IList<ParseObject> pParseCollection)
+        private async Task<List<LineDec>> getLinesFromParse(IList<ParseObject> parseLines)
+        {
+            //Get Circles from the object
+            ParseQuery<ParseObject> queryL = ParseObject.GetQuery("Line");
+            ParseObject lineFromParse;
+            LineDec line;
+            List<LineDec> lines = new List<LineDec>();
+
+            foreach (ParseObject tempCircle in parseLines)
+            {
+                lineFromParse = await queryL.GetAsync(tempCircle.ObjectId);
+                line = new LineDec(lineFromParse.Get<int>("Thickness"),
+                            (Color)ColorConverter.ConvertFromString(lineFromParse.Get<string>("Color")));
+                line.setRemarks(lineFromParse.Get<string>("Label"));
+                line.setBasePoints(await getBasePointsFromParse(lineFromParse.Get<IList<ParseObject>>("Points")));
+                lines.Add(line);
+
+            }
+
+            return lines;
+        }
+
+        public void deleteColletion(IList<ParseObject> pParseCollection, int pType) //1 = Line 0 = Any other
         {
             foreach (ParseObject tempParseObject in pParseCollection)
             {
+                /*if (pType == 1)
+                {
+                    deleteColletion(tempParseObject.Get<IList<ParseObject>>("Points"), 0);
+                }*/
                 deleteObject(tempParseObject);
             }
         }
-
         public void deleteObject(ParseObject pParseObject)
         {
             pParseObject.DeleteAsync();

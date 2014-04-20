@@ -66,6 +66,10 @@ namespace TennisBusiness
         {
             circleDecorations = pCircles;
         }
+        public void setLineDecoration(List<LineDec> pLines)
+        {
+            lineDecorations = pLines;
+        }
 
         public string getName()
         {

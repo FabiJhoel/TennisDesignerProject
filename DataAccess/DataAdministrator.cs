@@ -33,17 +33,18 @@ namespace DataAccess
                 parseObject = new ParseObject("Design")
                 {
                     {"Name",pDesign.getName()},{"Date",pDesign.getCreationDate()},
-                    {"Points",getBasePointsFromDesign(pDesign)}, {"SegmentA",getSegmentFromDesign(pDesign.getSegmentA())}, 
+                    {"Points",getBasePointsFromDesign(pDesign.getBasePoints())}, {"SegmentA",getSegmentFromDesign(pDesign.getSegmentA())}, 
                     {"SegmentB",getSegmentFromDesign(pDesign.getSegmentB())},
                     {"ShoeSole",getDecorationFromDesign(pDesign.getShoeSole())},
                     {"OutLine", getDecorationFromDesign(pDesign.getOutline())},
-                    {"Circles", getCirclesFromDesign(pDesign)}
+                    {"Circles", getCirclesFromDesign(pDesign)},
+                    {"Lines", getLinesFromDesign(pDesign)}
                 };
             }
             else
             {
-                parseConnection.deleteColletion(parseObject.Get<IList<ParseObject>>("Points"));
-                parseObject["Points"] = getBasePointsFromDesign(pDesign);
+                parseConnection.deleteColletion(parseObject.Get<IList<ParseObject>>("Points"),0);
+                parseObject["Points"] = getBasePointsFromDesign(pDesign.getBasePoints());
                 
                 parseConnection.deleteObject(parseObject.Get<ParseObject>("SegmentA"));
                 parseObject["SegmentA"] = getSegmentFromDesign(pDesign.getSegmentA());
@@ -57,18 +58,21 @@ namespace DataAccess
                 parseConnection.deleteObject(parseObject.Get<ParseObject>("OutLine"));
                 parseObject["OutLine"] = getDecorationFromDesign(pDesign.getOutline());
 
-                parseConnection.deleteColletion(parseObject.Get<IList<ParseObject>>("Circles"));
+                parseConnection.deleteColletion(parseObject.Get<IList<ParseObject>>("Circles"),0);
                 parseObject["Circles"] = getCirclesFromDesign(pDesign);
+
+                parseConnection.deleteColletion(parseObject.Get<IList<ParseObject>>("Lines"),1);
+                parseObject["Lines"] = getLinesFromDesign(pDesign);
             }
 
             parseConnection.uploadDesign(parseObject);
         }
 
-        private List<ParseObject> getBasePointsFromDesign(Design pDesign)
+        private List<ParseObject> getBasePointsFromDesign(List<BasePoint> pBasePoints)
         {
             List<ParseObject> basePointList = new List<ParseObject>();
             ParseObject point;
-            foreach (BasePoint bPoint in pDesign.getBasePoints())
+            foreach (BasePoint bPoint in pBasePoints)
             {
                 point = new ParseObject("BasePoint")
                 {
@@ -98,7 +102,8 @@ namespace DataAccess
             {
                 {"Color", pDecoration.getColor().ToString()},
                 {"Thickness", pDecoration.getThickness()},
-                {"Type", pDecoration.getType()}
+                {"Type", pDecoration.getType()},
+                {"Label", pDecoration.getRemarks().Content}
             };
 
             return decoration;
@@ -115,13 +120,32 @@ namespace DataAccess
                     {"Color", dCircle.getColor().ToString()},
                     {"Thickness", dCircle.getThickness()},
                     {"Size", dCircle.getSize()}, {"Filled", dCircle.getFilled()}, 
-                    {"AxisX", dCircle.getAxisX()}, {"AxisY", dCircle.getAxisY()}
+                    {"AxisX", dCircle.getAxisX()}, {"AxisY", dCircle.getAxisY()},
+                    {"Label", dCircle.getRemarks().Content}
                 };
                 circleList.Add(circle);
             }
             return circleList;
         }
-        
+
+        private List<ParseObject> getLinesFromDesign(Design pDesign)
+        {
+            List<ParseObject> lineList = new List<ParseObject>();
+            ParseObject line;
+            foreach (LineDec dLine in pDesign.getLineDecorations())
+            {
+                line = new ParseObject("Line")
+                {
+                    {"Color", dLine.getColor().ToString()},
+                    {"Thickness", dLine.getThickness()}, 
+                    {"Label", dLine.getRemarks().Content},
+                    {"Points", getBasePointsFromDesign(dLine.getBasePoints())}
+                };
+                lineList.Add(line);
+            }
+            return lineList;
+        }
+
         public async Task<List<string>> getDesignList()
         {
             IEnumerable<ParseObject> results = await parseConnection.getDesignList();
