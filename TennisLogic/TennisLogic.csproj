@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arc.cs" />
+    <Compile Include="Arcade.cs" />
     <Compile Include="BasePoint.cs" />
     <Compile Include="Circle.cs" />
     <Compile Include="Decoration.cs" />
