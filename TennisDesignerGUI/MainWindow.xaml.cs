@@ -103,6 +103,9 @@ namespace TennisDesignerGUI
                     cmbxThikness.IsEnabled = true;
             }
 
+            else if (cmbxDecorations.SelectedItem.ToString() == statment + "Area")
+                cmbxThikness.IsEnabled = false;
+                 
             else
                 cmbxThikness.IsEnabled = true;
         }
@@ -137,6 +140,11 @@ namespace TennisDesignerGUI
                 {
                     if (selectedSize != -1)
                         valid = true;
+                }
+
+                else if (selectedDeco == 5)
+                {
+                    valid = true;
                 }
 
                 switch (selectedThickness)

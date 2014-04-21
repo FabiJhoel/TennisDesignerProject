@@ -11,7 +11,7 @@ namespace TennisBusiness
 {
     public class Decoration
     {
-        private int type; /* 0= Line  1= Circle  2= Filled Circle  3= Outline  4= Shoe Sole */
+        private int type; /* 0= Line  1= Circle  2= Filled Circle  3= Outline  4= Shoe Sole  5= Area */
         private int thickness;
         private double axisX;
         private double axisY;

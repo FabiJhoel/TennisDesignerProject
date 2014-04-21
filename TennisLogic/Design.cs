@@ -16,6 +16,7 @@ namespace TennisBusiness
         private List<BasePoint> basePoints = new List<BasePoint>();
         private List<Circle> circleDecorations = new List<Circle>();
         private List<LineDec> lineDecorations = new List<LineDec>();
+        private List<Area> fillingAreas = new List<Area>();
         private Decoration outline;
         private Decoration shoeSole;
         private Arc segmentA, segmentB;
@@ -131,6 +132,10 @@ namespace TennisBusiness
         public void addLineDecoration(LineDec pLine)
         {
             lineDecorations.Add(pLine);
+        }
+        public void addAreaDecoration(Area pArea)
+        {
+            fillingAreas.Add(pArea);
         }
     }
 }

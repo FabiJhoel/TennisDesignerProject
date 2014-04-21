@@ -74,6 +74,12 @@ namespace TennisLibrary
                         PaintManager.paintShoeSole(pDesign, pColor, pThickness, 1);
                         MessageBox.Show("suela cambiada");
                         break;
+
+                case 5:
+                        Area area = new Area(pColor,300,180);
+                        area.setRemarks("Area\n" + "Color" + pColor.ToString());
+                        pDesign.addAreaDecoration(area);
+                        break;
             }
         }
 

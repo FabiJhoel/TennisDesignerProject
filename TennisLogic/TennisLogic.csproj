@@ -45,10 +45,12 @@
   <ItemGroup>
     <Compile Include="Arc.cs" />
     <Compile Include="Arcade.cs" />
+    <Compile Include="Area.cs" />
     <Compile Include="BasePoint.cs" />
     <Compile Include="Circle.cs" />
     <Compile Include="Decoration.cs" />
     <Compile Include="Design.cs" />
+    <Compile Include="Fire.cs" />
     <Compile Include="LineDec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

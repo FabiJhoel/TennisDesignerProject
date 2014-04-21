@@ -76,6 +76,7 @@
             <ComboBoxItem Content="Filled Circle" HorizontalAlignment="Left" Width="183"/>
             <ComboBoxItem Content="Outline" HorizontalAlignment="Left" Width="183"/>
             <ComboBoxItem Content="Shoe Sole" HorizontalAlignment="Left" Width="183"/>
+            <ComboBoxItem Content="Area" HorizontalAlignment="Left" Width="183"/>
         </ComboBox>
         <Label Content="Size" HorizontalAlignment="Left" Margin="25,502,0,0" VerticalAlignment="Top" Foreground="#FF595353"/>
         <ComboBox x:Name="cmbxSize" HorizontalAlignment="Left" Margin="86,502,0,0" VerticalAlignment="Top" Width="107" IsEnabled="False" Foreground="#FF595353">
