@@ -79,6 +79,8 @@ namespace TennisLibrary
                         Area area = new Area(pColor,300,180);
                         area.setRemarks("Area\n" + "Color" + pColor.ToString());
                         pDesign.addAreaDecoration(area);
+                        PaintManager.paintArea(pCanvas, area);
+                        MessageBox.Show("area agregada");
                         break;
             }
         }
@@ -101,6 +103,15 @@ namespace TennisLibrary
                     point.setAxisX(Canvas.GetLeft(point.getPointEllipse()));
                     point.setAxisY(Canvas.GetTop(point.getPointEllipse()));
                 }
+            }
+        }
+
+        public static void saveAreasPosition(Design pDesign)
+        {
+            foreach (Area area in pDesign.getFillingAreas())
+            {
+                area.setAxisX(Canvas.GetLeft(area.getTriangle()));
+                area.setAxisY(Canvas.GetTop(area.getTriangle()));
             }
         }
 

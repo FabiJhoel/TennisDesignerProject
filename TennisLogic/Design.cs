@@ -92,6 +92,10 @@ namespace TennisBusiness
         {
             return this.lineDecorations;
         }
+        public List<Area> getFillingAreas()
+        {
+            return this.fillingAreas;
+        }
         public Arc getSegmentA()
         {
             return segmentA;

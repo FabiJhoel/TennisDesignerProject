@@ -204,6 +204,17 @@ namespace TennisDesignerGUI
                 }
 
             }
+
+            else if (typeDeco == 5) /* Area */
+            {
+                foreach (Area area in designInstance.getFillingAreas())
+                {
+                    area.getTriangle().MouseMove += area_MouseMove;
+                    area.getTriangle().MouseLeftButtonUp += area_MouseLeftButtonUp;
+                    area.getTriangle().MouseRightButtonDown += area_MouseRightButtonDown;
+                }
+
+            }
         }
 
         void circle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -269,6 +280,38 @@ namespace TennisDesignerGUI
                     }
                 }
             }         
+        }
+        void area_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Polygon triangle = sender as Polygon;
+
+            if (triangle != null)
+            {
+                foreach (Area area in designInstance.getFillingAreas())
+                {
+                    if (triangle == area.getTriangle())
+                    {
+                        if (!canvasEdit.Children.Contains(area.getRemarks()))
+                            canvasEdit.Children.Add(area.getRemarks());
+                    }
+                }
+            }
+        }
+        void area_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Polygon triangle = sender as Polygon;
+
+            if (triangle != null)
+            {
+                foreach (Area area in designInstance.getFillingAreas())
+                {
+                    if (triangle == area.getTriangle())
+                    {
+                        if (!canvasEdit.Children.Contains(area.getRemarks()))
+                            canvasEdit.Children.Add(area.getRemarks());
+                    }
+                }
+            }
         }
         void axis1Line_MouseMove(object sender, MouseEventArgs e)
         {
@@ -345,6 +388,28 @@ namespace TennisDesignerGUI
                 }
             }            
         }
+        private void area_MouseMove(object sender, MouseEventArgs e)
+        {
+            Polygon polygon = sender as Polygon;
+
+            if (polygon != null && e.LeftButton == MouseButtonState.Pressed)
+            {
+                polygon.SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 5);
+                polygon.SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 5);
+                DesignManager.saveCirclesDecoPosition(designInstance);
+
+                //Move Remarks
+                foreach (Area polygonArea in designInstance.getFillingAreas())
+                {
+                    if (polygon == polygonArea.getTriangle())
+                    {
+                        Canvas.SetLeft(polygonArea.getRemarks(), polygonArea.getAxisX());
+                        Canvas.SetTop(polygonArea.getRemarks(), polygonArea.getAxisY());
+                    }
+                }
+            }
+        }
+
 
         /* BasePoint Events */
         private void asignEventToBasePoint()

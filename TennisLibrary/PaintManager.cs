@@ -167,9 +167,12 @@ namespace TennisLibrary
             pDesign.getSegmentE().StrokeThickness = pThickness;       
         }
 
-        public static void paintArea(Design pDesign, Color pColor)
+        public static void paintArea(Canvas pCanvas, Area pArea)
         {
-
+            pArea.drawArea();
+            Canvas.SetLeft(pArea.getTriangle(), pArea.getAxisX());
+            Canvas.SetTop(pArea.getTriangle(), pArea.getAxisY());
+            pCanvas.Children.Add(pArea.getTriangle());
         }
 
         public static void loadCircleDecorations(Design pDesign, Canvas pCanvas, int pModo)
