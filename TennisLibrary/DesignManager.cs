@@ -62,7 +62,7 @@ namespace TennisLibrary
                         pDesign.getOutline().setThickness(pThickness);
                         pDesign.getOutline().setRemarks("Outline\n" + "Color: " + pColor.ToString()
                         + "\n" + "Thickness: " + pThickness.ToString() + "px");
-                        //PaintManager.paintOutline(pDesign, pColor, pThickness);
+                        PaintManager.paintOutline(pDesign, pColor, pThickness, 1);
                         MessageBox.Show("contorno cambiado");
                         break;
 
@@ -71,7 +71,7 @@ namespace TennisLibrary
                         pDesign.getShoeSole().setThickness(pThickness);
                         pDesign.getShoeSole().setRemarks("Shoe Sole\n" + "Color: " + pColor.ToString() 
                         + "\n" + "Thickness: " + pThickness.ToString() + "px");
-                        //PaintManager.paintShoeSole(pDesign, pColor, pThickness);
+                        PaintManager.paintShoeSole(pDesign, pColor, pThickness, 1);
                         MessageBox.Show("suela cambiada");
                         break;
             }

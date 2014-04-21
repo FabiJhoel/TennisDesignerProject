@@ -23,8 +23,6 @@ namespace TennisBusiness
             setType(pType);
             setThickness(pThickness);
             setColor(pColor);
-            remarks.FontSize = 10;
-            remarks.Background = Brushes.AliceBlue;
         }
 
         public void setAxisX(double pAxisX)
@@ -50,6 +48,8 @@ namespace TennisBusiness
         public void setRemarks(string pRemarks)
         {
             remarks.Content = pRemarks;
+            remarks.FontSize = 10;
+            remarks.Background = Brushes.AliceBlue;
         }
 
         public int getType()

@@ -18,7 +18,7 @@
                     </LinearGradientBrush>
                 </TabItem.Background>
                 <!--Work Space-->
-                <Canvas x:Name="canvasEdit" Margin="10,11,6,11" AllowDrop="True" Background="White"/>
+                <Canvas x:Name="canvasEdit" Margin="7,11,6,11" AllowDrop="True" Background="White"/>
             </TabItem>
 
             <TabItem Header="Arcade Mode" Foreground="#FF595353" MouseDoubleClick="ArcadeMode_Selection">

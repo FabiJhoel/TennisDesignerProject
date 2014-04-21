@@ -43,7 +43,7 @@ namespace TennisDesignerGUI
             getNameWindow.Show();
             canvasEdit.Children.Clear();
             PaintManager.createBasePoints(designInstance);
-            PaintManager.loadTennisSilhouette(designInstance, canvasEdit);           
+            PaintManager.loadTennisSilhouette(designInstance, canvasEdit, 1);           
             PaintManager.loadBasePoints(designInstance, canvasEdit);
             asignEventToBasePoint();
         }
@@ -61,7 +61,7 @@ namespace TennisDesignerGUI
             {
                 designInstance = design;
                 canvasEdit.Children.Clear();
-                PaintManager.loadTennisSilhouette(designInstance, canvasEdit);
+                PaintManager.loadTennisSilhouette(designInstance, canvasEdit, 1);
                 PaintManager.loadBasePoints(designInstance, canvasEdit);
                 asignEventToBasePoint();
 

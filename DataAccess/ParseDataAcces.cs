@@ -135,7 +135,7 @@ namespace DataAccess
             ParseObject parseDecoration = await ParseObject.GetQuery("Decoration").GetAsync(pParseObject.Get<ParseObject>(key).ObjectId);
             Decoration decoration = new Decoration(parseDecoration.Get<int>("Type"), parseDecoration.Get<int>("Thickness"),
                 (Color)ColorConverter.ConvertFromString(parseDecoration.Get<string>("Color")));
-            decoration.setRemarks(parseDecoration.Get<string>("Label"));
+                decoration.setRemarks(parseDecoration.Get<string>("Label"));
 
             return decoration;
         }

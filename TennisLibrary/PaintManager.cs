@@ -39,8 +39,23 @@ namespace TennisLibrary
             }
         }
 
-        public static void loadTennisSilhouette(Design pDesign, Canvas pCanvas)
+        public static void loadTennisSilhouette(Design pDesign, Canvas pCanvas, int pMode)
         {
+            SolidColorBrush outlineColor = new SolidColorBrush();
+            SolidColorBrush shoeSoleColor = new SolidColorBrush();
+
+            if (pMode == 1)
+            {
+                outlineColor.Color = Color.FromArgb(255, 0, 0, 0);
+                shoeSoleColor.Color = Color.FromArgb(255, 0, 0, 0);
+            }
+
+            else
+            {
+                outlineColor.Color = pDesign.getOutline().getColor();
+                shoeSoleColor.Color = pDesign.getShoeSole().getColor();
+            }
+
             // SegmentA: arc
             PathFigure myPathFigure = new PathFigure();
             myPathFigure.StartPoint = new Point(30, 40);
@@ -49,13 +64,11 @@ namespace TennisLibrary
 
             PathGeometry myPathGeometry = new PathGeometry();
             myPathGeometry.Figures.Add(myPathFigure);
-                    
+            pDesign.getSegmentA().getSegment().Stroke = outlineColor;
             pDesign.getSegmentA().getSegment().Stretch = Stretch.Fill;
-            pDesign.getSegmentA().getSegment().Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
             pDesign.getSegmentA().getSegment().StrokeThickness = pDesign.getOutline().getThickness();
             pDesign.getSegmentA().getSegment().Data = myPathGeometry;
 
-            //pDesign.getSegmentA().getSegmentContainer().Background = System.Windows.Media.Brushes.LightBlue;
             Canvas.SetLeft(pDesign.getSegmentA().getSegmentContainer(), pDesign.getSegmentA().getAxisX());
             Canvas.SetTop(pDesign.getSegmentA().getSegmentContainer(), pDesign.getSegmentA().getAxisY());
             pCanvas.Children.Add(pDesign.getSegmentA().getSegmentContainer());
@@ -70,11 +83,10 @@ namespace TennisLibrary
             myPathGeometryB.Figures.Add(myPathFigureB);
 
             pDesign.getSegmentB().getSegment().Stretch = Stretch.Fill;
-            pDesign.getSegmentB().getSegment().Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
+            pDesign.getSegmentB().getSegment().Stroke = outlineColor;
             pDesign.getSegmentB().getSegment().StrokeThickness = pDesign.getOutline().getThickness();
             pDesign.getSegmentB().getSegment().Data = myPathGeometryB;
             
-            //pDesign.getSegmentB().getSegmentContainer().Background = System.Windows.Media.Brushes.LightBlue;
             Canvas.SetLeft(pDesign.getSegmentB().getSegmentContainer(), pDesign.getSegmentB().getAxisX());
             Canvas.SetTop(pDesign.getSegmentB().getSegmentContainer(), pDesign.getSegmentB().getAxisY());
             pCanvas.Children.Add(pDesign.getSegmentB().getSegmentContainer());
@@ -84,7 +96,7 @@ namespace TennisLibrary
             pDesign.getSegmentC().Y1 = pDesign.getBasePoints()[1].getAxisY() + 15;
             pDesign.getSegmentC().X2 = pDesign.getBasePoints()[2].getAxisX() + 15;
             pDesign.getSegmentC().Y2 = pDesign.getBasePoints()[2].getAxisY() + 15;
-            pDesign.getSegmentC().Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
+            pDesign.getSegmentC().Stroke = outlineColor;
             pDesign.getSegmentC().StrokeThickness = pDesign.getOutline().getThickness();
             pCanvas.Children.Add(pDesign.getSegmentC());
 
@@ -93,7 +105,7 @@ namespace TennisLibrary
             pDesign.getSegmentD().Y1 = pDesign.getBasePoints()[2].getAxisY() + 15;
             pDesign.getSegmentD().X2 = pDesign.getBasePoints()[3].getAxisX() + 15;
             pDesign.getSegmentD().Y2 = pDesign.getBasePoints()[3].getAxisY() + 15;
-            pDesign.getSegmentD().Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
+            pDesign.getSegmentD().Stroke = outlineColor;
             pDesign.getSegmentD().StrokeThickness = pDesign.getOutline().getThickness();
             pCanvas.Children.Add(pDesign.getSegmentD());
 
@@ -102,7 +114,7 @@ namespace TennisLibrary
             pDesign.getSegmentE().Y1 = pDesign.getBasePoints()[3].getAxisY() + 15;
             pDesign.getSegmentE().X2 = pDesign.getBasePoints()[4].getAxisX() + 15;
             pDesign.getSegmentE().Y2 = pDesign.getBasePoints()[4].getAxisY() + 15;
-            pDesign.getSegmentE().Stroke = new SolidColorBrush(pDesign.getShoeSole().getColor());
+            pDesign.getSegmentE().Stroke = shoeSoleColor;
             pDesign.getSegmentE().StrokeThickness = pDesign.getShoeSole().getThickness();
             pDesign.getSegmentE().MouseLeftButtonDown += PaintManager_MouseLeftButtonDown; 
             pDesign.getSegmentE().MouseRightButtonDown += PaintManager_MouseRightButtonDown;
@@ -128,12 +140,15 @@ namespace TennisLibrary
             MessageBox.Show("mostrar");
         }
 
-        public static void paintOutline(Design pDesign, Color pColor, int pThickness)
+        public static void paintOutline(Design pDesign, Color pColor, int pThickness, int pMode)
         {
-            pDesign.getSegmentA().getSegment().Stroke = new SolidColorBrush(pColor);
-            pDesign.getSegmentB().getSegment().Stroke = new SolidColorBrush(pColor);
-            pDesign.getSegmentC().Stroke = new SolidColorBrush(pColor);
-            pDesign.getSegmentD().Stroke = new SolidColorBrush(pColor);
+            if (pMode != 1)
+            {
+                pDesign.getSegmentA().getSegment().Stroke = new SolidColorBrush(pColor);
+                pDesign.getSegmentB().getSegment().Stroke = new SolidColorBrush(pColor);
+                pDesign.getSegmentC().Stroke = new SolidColorBrush(pColor);
+                pDesign.getSegmentD().Stroke = new SolidColorBrush(pColor);
+            }
 
             pDesign.getSegmentA().getSegment().StrokeThickness = pThickness;
             pDesign.getSegmentB().getSegment().StrokeThickness = pThickness;
@@ -141,13 +156,14 @@ namespace TennisLibrary
             pDesign.getSegmentD().StrokeThickness = pThickness;           
         }
 
-        public static void paintShoeSole(Design pDesign, Color pColor, int pThickness)
+        public static void paintShoeSole(Design pDesign, Color pColor, int pThickness, int pMode)
         {
             /*//CONVERT STRING TO COLOR
             Color newColor = (Color)ColorConverter.ConvertFromString(pColor.ToString());
             pColor = newColor;*/
+            if (pMode != 1)
+                pDesign.getSegmentE().Stroke = new SolidColorBrush(pColor);
 
-            pDesign.getSegmentE().Stroke = new SolidColorBrush(pColor);
             pDesign.getSegmentE().StrokeThickness = pThickness;       
         }
 
