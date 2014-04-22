@@ -143,9 +143,7 @@ namespace TennisDesignerGUI
                 }
 
                 else if (selectedDeco == 5)
-                {
-                    valid = true;
-                }
+                    valid = true;                
 
                 switch (selectedThickness)
                 {
@@ -209,46 +207,12 @@ namespace TennisDesignerGUI
             {
                 foreach (Area area in designInstance.getFillingAreas())
                 {
-                    area.getTriangle().MouseMove += area_MouseMove;
-                    area.getTriangle().MouseLeftButtonUp += area_MouseLeftButtonUp;
-                    area.getTriangle().MouseRightButtonDown += area_MouseRightButtonDown;
+                    area.getRectangle().MouseMove += area_MouseMove;
                 }
 
             }
         }
-
-        void circle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            Ellipse circle = sender as Ellipse;
-
-            if (circle != null)
-            {
-                foreach (Circle circleDeco in designInstance.getCircleDecorations())
-                {
-                    if (circle == circleDeco.getEllipse())
-                    {
-                        if (!canvasEdit.Children.Contains(circleDeco.getRemarks()))
-                            canvasEdit.Children.Add(circleDeco.getRemarks());
-                    }
-                }
-            }
-        }
-        void circle_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Ellipse circle = sender as Ellipse;
-
-            if (circle != null)
-            {
-                foreach (Circle circleDeco in designInstance.getCircleDecorations())
-                {
-                    if (circle == circleDeco.getEllipse())
-                    {
-                        if (canvasEdit.Children.Contains(circleDeco.getRemarks()))
-                            canvasEdit.Children.Remove(circleDeco.getRemarks());
-                    }
-                }
-            }
-        }
+        
         void axis1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Ellipse axis1 = sender as Ellipse;
@@ -265,6 +229,7 @@ namespace TennisDesignerGUI
                 }
             }
         }
+
         void axis1_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             Ellipse axis1 = sender as Ellipse;
@@ -281,38 +246,7 @@ namespace TennisDesignerGUI
                 }
             }         
         }
-        void area_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            Polygon triangle = sender as Polygon;
-
-            if (triangle != null)
-            {
-                foreach (Area area in designInstance.getFillingAreas())
-                {
-                    if (triangle == area.getTriangle())
-                    {
-                        if (!canvasEdit.Children.Contains(area.getRemarks()))
-                            canvasEdit.Children.Add(area.getRemarks());
-                    }
-                }
-            }
-        }
-        void area_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Polygon triangle = sender as Polygon;
-
-            if (triangle != null)
-            {
-                foreach (Area area in designInstance.getFillingAreas())
-                {
-                    if (triangle == area.getTriangle())
-                    {
-                        if (!canvasEdit.Children.Contains(area.getRemarks()))
-                            canvasEdit.Children.Add(area.getRemarks());
-                    }
-                }
-            }
-        }
+        
         void axis1Line_MouseMove(object sender, MouseEventArgs e)
         {
             Ellipse axis1 = sender as Ellipse;
@@ -338,6 +272,7 @@ namespace TennisDesignerGUI
                 DesignManager.saveLinesDecoPosition(designInstance);
             }
         }
+
         void axis2Line_MouseMove(object sender, MouseEventArgs e)
         {
             Ellipse axis2 = sender as Ellipse;
@@ -359,6 +294,7 @@ namespace TennisDesignerGUI
                 DesignManager.saveLinesDecoPosition(designInstance);
             }
         }
+
         private void circleDecorations_MouseMove(object sender, MouseEventArgs e)
         {
             Ellipse circle = sender as Ellipse;
@@ -387,29 +323,53 @@ namespace TennisDesignerGUI
                     }
                 }
             }            
-        }
-        private void area_MouseMove(object sender, MouseEventArgs e)
+        }        
+
+        void circle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Polygon polygon = sender as Polygon;
+            Ellipse circle = sender as Ellipse;
 
-            if (polygon != null && e.LeftButton == MouseButtonState.Pressed)
+            if (circle != null)
             {
-                polygon.SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 5);
-                polygon.SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 5);
-                DesignManager.saveCirclesDecoPosition(designInstance);
-
-                //Move Remarks
-                foreach (Area polygonArea in designInstance.getFillingAreas())
+                foreach (Circle circleDeco in designInstance.getCircleDecorations())
                 {
-                    if (polygon == polygonArea.getTriangle())
+                    if (circle == circleDeco.getEllipse())
                     {
-                        Canvas.SetLeft(polygonArea.getRemarks(), polygonArea.getAxisX());
-                        Canvas.SetTop(polygonArea.getRemarks(), polygonArea.getAxisY());
+                        if (!canvasEdit.Children.Contains(circleDeco.getRemarks()))
+                            canvasEdit.Children.Add(circleDeco.getRemarks());
                     }
                 }
             }
         }
 
+        void circle_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Ellipse circle = sender as Ellipse;
+
+            if (circle != null)
+            {
+                foreach (Circle circleDeco in designInstance.getCircleDecorations())
+                {
+                    if (circle == circleDeco.getEllipse())
+                    {
+                        if (canvasEdit.Children.Contains(circleDeco.getRemarks()))
+                            canvasEdit.Children.Remove(circleDeco.getRemarks());
+                    }
+                }
+            }
+        }
+
+        private void area_MouseMove(object sender, MouseEventArgs e)
+        {
+            //Polygon triangle = sender as Polygon;
+            Rectangle rect = sender as Rectangle;
+
+            if (rect != null && e.LeftButton == MouseButtonState.Pressed)
+            {
+                rect.SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 5);
+                rect.SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 5);
+            }
+        }
 
         /* BasePoint Events */
         private void asignEventToBasePoint()
@@ -702,11 +662,11 @@ namespace TennisDesignerGUI
             canvasFire.Children.Clear();
             PaintManager.fireMode(designInstance, canvasFire);
         }
-        private void ArcadeMode_Selection(object sender, MouseButtonEventArgs e)
+
+        private void ArcadeMode_Selected(object sender, MouseButtonEventArgs e)
         {
             canvasArcade.Children.Clear();
             PaintManager.arcadeMode(designInstance, canvasArcade);
         }
-
     }
 }

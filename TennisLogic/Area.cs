@@ -11,35 +11,24 @@ namespace TennisBusiness
 {
     public class Area : Decoration
     {
-        Polygon triangle;
-
+        Rectangle rect = new Rectangle();
         public Area(Color pColor, double pAxisX, double pAxisY)
             : base(5, -1, pColor)
         {
-            triangle = new Polygon();
             setAxisX(pAxisX);
             setAxisY(pAxisY);
         }
 
+        public Rectangle getRectangle()
+        {
+            return rect;
+        }
+
         public void drawArea()
         {
-            PointCollection points = new PointCollection();
-            points.Add(new Point(getAxisX(), getAxisY()+10));
-            points.Add(new Point(getAxisX() - 5, getAxisY()));
-            points.Add(new Point(getAxisX() + 5, getAxisY()));
-
-            triangle.Points = points;
-
-            //triangle.StrokeThickness = 2;
-            triangle.Stroke = Brushes.Black;
-            triangle.Fill = new SolidColorBrush(this.getColor());
-            /*triangle.HorizontalAlignment = HorizontalAlignment.Left;
-            triangle.VerticalAlignment = VerticalAlignment.Center;*/
-        }
-
-        public Polygon getTriangle()
-        {
-            return triangle;
-        }
+            rect.Width = 15;
+            rect.Height = 15;
+            rect.Fill = new SolidColorBrush(this.getColor());
+        }  
     }
 }

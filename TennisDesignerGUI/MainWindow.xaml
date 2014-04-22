@@ -10,7 +10,7 @@
         </Grid.ColumnDefinitions>
 
         <TabControl HorizontalAlignment="Left" Height="510" Margin="270,114,0,0" VerticalAlignment="Top" Width="695" Foreground="#FF595353" Grid.ColumnSpan="2" Background="#FFF0FD6C">
-            <TabItem Header="Edit" Foreground="#FF595353">
+            <TabItem x:Name="editTab" Header="Edit" Foreground="#FF595353">
                 <TabItem.Background>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                         <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -21,7 +21,7 @@
                 <Canvas x:Name="canvasEdit" Margin="7,11,6,11" AllowDrop="True" Background="White"/>
             </TabItem>
 
-            <TabItem Header="Arcade Mode" Foreground="#FF595353" MouseDoubleClick="ArcadeMode_Selection">
+            <TabItem x:Name="arcadeTab" Header="Arcade Mode" Foreground="#FF595353" MouseDoubleClick="ArcadeMode_Selected">
                 <TabItem.Background>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                         <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -34,7 +34,7 @@
                 </Canvas>
             </TabItem>
 
-            <TabItem Header="Fire Mode" Foreground="#FF595353" MouseDoubleClick="FireMode_Selected">
+            <TabItem x:Name="fireTab" Header="Fire Mode" Foreground="#FF595353" MouseDoubleClick="FireMode_Selected">
                 <TabItem.Background>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                         <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -94,13 +94,6 @@
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-            <!--<ComboBoxItem Content="Red" HorizontalAlignment="Left" Width="92"/>
-            <ComboBoxItem Content="Green" HorizontalAlignment="Left" Width="92"/>
-            <ComboBoxItem Content="Blue" HorizontalAlignment="Left" Width="92"/>
-            <ComboBoxItem Content="Yellow" HorizontalAlignment="Left" Width="92"/>
-            <ComboBoxItem Content="Black" HorizontalAlignment="Left" Width="92"/>
-            <ComboBoxItem Content="Pink" HorizontalAlignment="Left" Width="92"/>
-            <ComboBoxItem Content="Orange" HorizontalAlignment="Left" Width="92"/>-->
         </ComboBox>
         <Label Content="Thickness" HorizontalAlignment="Left" Margin="25,574,0,0" VerticalAlignment="Top" Foreground="#FF595353"/>
         <ComboBox x:Name="cmbxThikness" HorizontalAlignment="Left" Margin="86,574,0,0" VerticalAlignment="Top" Width="107" IsEnabled="False" Foreground="#FF595353">

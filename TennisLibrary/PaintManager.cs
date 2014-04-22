@@ -116,8 +116,6 @@ namespace TennisLibrary
             pDesign.getSegmentE().Y2 = pDesign.getBasePoints()[4].getAxisY() + 15;
             pDesign.getSegmentE().Stroke = shoeSoleColor;
             pDesign.getSegmentE().StrokeThickness = pDesign.getShoeSole().getThickness();
-            pDesign.getSegmentE().MouseLeftButtonDown += PaintManager_MouseLeftButtonDown; 
-            pDesign.getSegmentE().MouseRightButtonDown += PaintManager_MouseRightButtonDown;
             pCanvas.Children.Add(pDesign.getSegmentE());
 
             //Remarks
@@ -128,16 +126,6 @@ namespace TennisLibrary
             Canvas.SetLeft(pDesign.getOutline().getRemarks(), 115);
             Canvas.SetTop(pDesign.getOutline().getRemarks(), 405);
             pCanvas.Children.Add(pDesign.getOutline().getRemarks());
-        }
-
-        static void PaintManager_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            MessageBox.Show("ocultar");
-        }
-
-        static void PaintManager_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            MessageBox.Show("mostrar");
         }
 
         public static void paintOutline(Design pDesign, Color pColor, int pThickness, int pMode)
@@ -170,9 +158,9 @@ namespace TennisLibrary
         public static void paintArea(Canvas pCanvas, Area pArea)
         {
             pArea.drawArea();
-            Canvas.SetLeft(pArea.getTriangle(), pArea.getAxisX());
-            Canvas.SetTop(pArea.getTriangle(), pArea.getAxisY());
-            pCanvas.Children.Add(pArea.getTriangle());
+            Canvas.SetLeft(pArea.getRectangle(), pArea.getAxisX());
+            Canvas.SetTop(pArea.getRectangle(), pArea.getAxisY());
+            pCanvas.Children.Add(pArea.getRectangle());
         }
 
         public static void loadCircleDecorations(Design pDesign, Canvas pCanvas, int pModo)

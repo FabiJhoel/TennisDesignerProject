@@ -76,7 +76,7 @@ namespace TennisLibrary
                         break;
 
                 case 5:
-                        Area area = new Area(pColor,300,180);
+                        Area area = new Area(pColor, 300, 180);
                         area.setRemarks("Area\n" + "Color" + pColor.ToString());
                         pDesign.addAreaDecoration(area);
                         PaintManager.paintArea(pCanvas, area);
@@ -110,15 +110,9 @@ namespace TennisLibrary
         {
             foreach (Area area in pDesign.getFillingAreas())
             {
-                area.setAxisX(Canvas.GetLeft(area.getTriangle()));
-                area.setAxisY(Canvas.GetTop(area.getTriangle()));
+                area.setAxisX(Canvas.GetLeft(area.getRectangle()));
+                area.setAxisY(Canvas.GetTop(area.getRectangle()));
             }
-        }
-
-        public static void addDecorationRemarks(/*Canvas pCanvas, Design pDesign, int typeDeco, int pSize, Color pColor, int pThickness*/)
-        {
-            Label remarks = new Label();
-            MessageBox.Show("sirviooooooo");
         }
     }
 }
