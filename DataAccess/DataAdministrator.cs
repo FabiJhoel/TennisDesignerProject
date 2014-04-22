@@ -38,7 +38,8 @@ namespace DataAccess
                     {"ShoeSole",getDecorationFromDesign(pDesign.getShoeSole())},
                     {"OutLine", getDecorationFromDesign(pDesign.getOutline())},
                     {"Circles", getCirclesFromDesign(pDesign)},
-                    {"Lines", getLinesFromDesign(pDesign)}
+                    {"Lines", getLinesFromDesign(pDesign)},
+                    {"Areas", getAreasFromDesign(pDesign)}
                 };
             }
             else
@@ -63,6 +64,9 @@ namespace DataAccess
 
                 parseConnection.deleteColletion(parseObject.Get<IList<ParseObject>>("Lines"),1);
                 parseObject["Lines"] = getLinesFromDesign(pDesign);
+
+                parseConnection.deleteColletion(parseObject.Get<IList<ParseObject>>("Area"), 0);
+                parseObject["Areas"] = getAreasFromDesign(pDesign);
             }
 
             parseConnection.uploadDesign(parseObject);
@@ -144,6 +148,25 @@ namespace DataAccess
                 lineList.Add(line);
             }
             return lineList;
+        }
+
+        private List<ParseObject> getAreasFromDesign(Design pDesign)
+        {
+            List<ParseObject> areasList = new List<ParseObject>();
+            ParseObject area;
+            foreach (Area dArea in pDesign.getFillingAreas())
+            {
+                area = new ParseObject("Area")
+                {
+                    {"Color", dArea.getColor().ToString()},
+                    {"Thickness", dArea.getThickness()}, 
+                    {"Label", dArea.getRemarks().Content},
+                    {"AxisX", dArea.getAxisX()},
+                    {"AxisY", dArea.getAxisY()}
+                };
+                areasList.Add(area);
+            }
+            return areasList;
         }
 
         public async Task<List<string>> getDesignList()

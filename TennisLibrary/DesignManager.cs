@@ -77,7 +77,7 @@ namespace TennisLibrary
 
                 case 5:
                         Area area = new Area(pColor, 300, 180);
-                        area.setRemarks("Area\n" + "Color" + pColor.ToString());
+                        area.setRemarks("Area\n" + "Color: " + pColor.ToString());
                         pDesign.addAreaDecoration(area);
                         PaintManager.paintArea(pCanvas, area);
                         MessageBox.Show("area agregada");

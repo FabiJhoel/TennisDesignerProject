@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 
 namespace TennisBusiness
@@ -38,7 +39,7 @@ namespace TennisBusiness
             Canvas.SetTop(ellipse, pAxisY);
             pCanvas.Children.Add(ellipse);
         }
-
+        
         public static void loadDesign(Design pDesign, Canvas pCanvas)
         {
             //Load basic form
@@ -92,6 +93,8 @@ namespace TennisBusiness
 
                 drawEllipse(pCanvas, filling, width, height, circleDecoration.getAxisX(), circleDecoration.getAxisY(),
                     circleDecoration.getThickness(), new SolidColorBrush(circleDecoration.getColor()));
+
+                
             }
         }
     }

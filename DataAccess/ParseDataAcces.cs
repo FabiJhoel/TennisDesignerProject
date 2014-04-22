@@ -82,6 +82,9 @@ namespace DataAccess
             //Get Lines from object
             design.setLineDecoration(await getLinesFromParse(pParseObject.Get<IList<ParseObject>>("Lines")));
 
+            //Get Areas from object
+            design.setFillingAreas(await getAreasFromParse(pParseObject.Get<IList<ParseObject>>("Areas")));
+
             return design;
         }
 
@@ -159,6 +162,27 @@ namespace DataAccess
             }
 
             return lines;
+        }
+
+        private async Task<List<Area>> getAreasFromParse(IList<ParseObject> parseLines)
+        {
+            //Get Circles from the object
+            ParseQuery<ParseObject> queryA = ParseObject.GetQuery("Area");
+            ParseObject areaFromParse;
+            Area area;
+            List<Area> areas = new List<Area>();
+
+            foreach (ParseObject tempCircle in parseLines)
+            {
+                areaFromParse = await queryA.GetAsync(tempCircle.ObjectId);
+                area = new Area((Color)ColorConverter.ConvertFromString(areaFromParse.Get<string>("Color")),
+                    areaFromParse.Get<double>("AxisX"), areaFromParse.Get<double>("AxisY"));
+                area.setRemarks(areaFromParse.Get<string>("Label"));
+                areas.Add(area);
+
+            }
+
+            return areas;
         }
 
         public void deleteColletion(IList<ParseObject> pParseCollection, int pType) //1 = Line 0 = Any other

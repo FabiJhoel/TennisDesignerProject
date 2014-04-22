@@ -39,37 +39,50 @@ namespace TennisBusiness
         {
             name = pName;
         }
+
         public void setCreationDate(string pDate)
         {
             creationDate = pDate;
         }
+
         public void setBasePoints(List<BasePoint> pBasePoints)
         {
             basePoints = pBasePoints;
         }
+
         public void setSegmentA(Arc pSegmentA)
         {
             segmentA = pSegmentA;
         }
+
         public void setSegmentB(Arc pSegmentB)
         {
             segmentB = pSegmentB;
         }
+
         public void setShoeSole(Decoration pShoeSole)
         {
             shoeSole = pShoeSole;
         }
+
         public void setOutline(Decoration pOutline)
         {
             outline = pOutline;
         }
+
         public void setCircleDecoration(List<Circle> pCircles)
         {
             circleDecorations = pCircles;
         }
+
         public void setLineDecoration(List<LineDec> pLines)
         {
             lineDecorations = pLines;
+        }
+
+        public void setFillingAreas(List<Area> pAreas)
+        {
+            fillingAreas = pAreas;
         }
 
         public string getName()
