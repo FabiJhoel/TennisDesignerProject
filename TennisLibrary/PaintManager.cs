@@ -217,6 +217,7 @@ namespace TennisLibrary
         public static void fireMode(Design pDesign, Canvas pCanvas)
         {
             Fire.loadDesign(pDesign, pCanvas);
+            Fire.paintBackground(pDesign, pCanvas);
         }
 
         public static void arcadeMode(Design pDesign, Canvas pCanvas)

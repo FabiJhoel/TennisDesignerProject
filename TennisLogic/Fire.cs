@@ -14,6 +14,37 @@ namespace TennisBusiness
 {
     public static class Fire
     {
+        public static void paintBackground(Design pDesign, Canvas pCanvas)
+        {
+            BasePoint pointA = pDesign.getBasePoints()[0];
+            BasePoint pointB = pDesign.getBasePoints()[1];
+            BasePoint pointC = pDesign.getBasePoints()[2];
+            BasePoint pointD = pDesign.getBasePoints()[3];
+            BasePoint pointE = pDesign.getBasePoints()[4];
+
+            PathFigure myPathFigure = new PathFigure();
+            myPathFigure.StartPoint = new Point(pointA.getAxisX() + 8, pointA.getAxisY() + 15);
+            myPathFigure.Segments.Add(new ArcSegment(new Point(pointE.getAxisX() + 8, pointE.getAxisY() + 15),
+                                      new Size(pDesign.getSegmentA().getSegmentContainerWidth() - 21,
+                                      55), 0, true,
+                                      SweepDirection.Counterclockwise, true));
+            myPathFigure.Segments.Add(new LineSegment(new Point(pointD.getAxisX(), pointD.getAxisY()), true));
+
+            PathGeometry myPathGeometry = new PathGeometry();
+            myPathGeometry.Figures.Add(myPathFigure);
+            Path myPath = new Path();
+            //myPath.Fill = Brushes.AntiqueWhite;
+            myPath.Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
+            myPath.StrokeThickness = pDesign.getOutline().getThickness();
+            myPath.Data = myPathGeometry;
+            pCanvas.Children.Add(myPath);
+
+            MessageBox.Show(pDesign.getSegmentA().getSegmentContainerWidth().ToString() + "\n");
+            //http://msdn.microsoft.com/en-us/library/vstudio/ms751808(v=vs.100).aspx
+        }
+
+
+
         private static void drawPolygon(PointCollection pPointCollection, Canvas pCanvas)
         {
             Polygon polygon = new Polygon();
@@ -39,7 +70,7 @@ namespace TennisBusiness
             Canvas.SetTop(ellipse, pAxisY);
             pCanvas.Children.Add(ellipse);
         }
-        
+
         public static void loadDesign(Design pDesign, Canvas pCanvas)
         {
             //Load basic form
@@ -94,8 +125,9 @@ namespace TennisBusiness
                 drawEllipse(pCanvas, filling, width, height, circleDecoration.getAxisX(), circleDecoration.getAxisY(),
                     circleDecoration.getThickness(), new SolidColorBrush(circleDecoration.getColor()));
 
-                
+
             }
         }
     }
 }
+
