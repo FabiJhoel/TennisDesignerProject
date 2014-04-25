@@ -18,7 +18,6 @@ using DataAccess;
 using TennisBusiness;
 using TennisLibrary;
 
-
 namespace TennisDesignerGUI
 {
     public partial class MainWindow : Window
@@ -30,7 +29,7 @@ namespace TennisDesignerGUI
         {
             InitializeComponent();
             cmbxColor.ItemsSource = typeof(Colors).GetProperties();
-            DataManager.loadDesignList(ListBoxDesigns);
+            DataManager.loadDesignList(ListBoxDesigns);         
         }
         
         private void addNewDesignButton(object sender, RoutedEventArgs e)
