@@ -76,16 +76,18 @@ namespace TennisBusiness
             {
                 if (pMode == 1)
                     ellipse.Fill = Brushes.Black;
-                else
-                    ellipse.Fill = new SolidColorBrush(getColor());
+
+                else if (pMode == 3)
+                    Fire.paintCircle(ellipse, getColor(), true);
             }
 
             else
             {
                 if (pMode == 1)
                     ellipse.Stroke = Brushes.Black;
-                else
-                    ellipse.Stroke = new SolidColorBrush(getColor());
+
+                else if (pMode == 3)
+                    Fire.paintCircle(ellipse, getColor(), false);
 
                 ellipse.Fill = Brushes.Transparent;
             }          

@@ -45,9 +45,10 @@ namespace TennisBusiness
         {
             if (pMode == 1)
                 line.Stroke = Brushes.Black;
-            else
-                line.Stroke = new SolidColorBrush(getColor());
 
+            else if (pMode == 3)
+                Fire.paintLine(line, getColor());
+           
             line.StrokeThickness = getThickness();
         }
     }

@@ -19,18 +19,20 @@ namespace TennisBusiness
         private List<Area> fillingAreas = new List<Area>();
         private Decoration outline;
         private Decoration shoeSole;
+        private Decoration baseColor;
         private Arc segmentA, segmentB;
         private Line segmentC, segmentD, segmentE;
 
         public Design(string pName)
         {
             segmentA = new Arc(100, 132, 71, 153);
-            segmentB = new Arc(165, 132, 200, 45);
+            segmentB = new Arc(167, 132, 200, 45);
             segmentC = new Line();
             segmentD = new Line();
             segmentE = new Line(); 
             outline = new Decoration(3, 3, Color.FromArgb(255, 0, 0, 0));
             shoeSole = new Decoration(4, 3, Color.FromArgb(255, 0, 0, 0));
+            baseColor = new Decoration(6, -1, Color.FromArgb(255, 255, 255, 255));
             setName(pName);
             setCreationDate(DateTime.Now.ToString("M/d/yyyy"));
         }
@@ -70,6 +72,11 @@ namespace TennisBusiness
             outline = pOutline;
         }
 
+        public void setBaseColor(Decoration pBaseColor)
+        {
+            baseColor = pBaseColor;
+        }
+
         public void setCircleDecoration(List<Circle> pCircles)
         {
             circleDecorations = pCircles;
@@ -105,6 +112,7 @@ namespace TennisBusiness
         {
             return this.lineDecorations;
         }
+
         public List<Area> getFillingAreas()
         {
             return this.fillingAreas;
@@ -136,6 +144,11 @@ namespace TennisBusiness
         public Decoration getShoeSole()
         {
             return shoeSole;
+        }
+
+        public Decoration getBaseColor()
+        {
+            return baseColor;
         }
         
         public void addPoint(BasePoint pPoint)

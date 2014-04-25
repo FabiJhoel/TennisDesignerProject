@@ -92,8 +92,8 @@ namespace TennisLibrary
             pCanvas.Children.Add(pDesign.getSegmentB().getSegmentContainer());
 
             // SegmentC: line
-            pDesign.getSegmentC().X1 = pDesign.getBasePoints()[1].getAxisX() + 15;
-            pDesign.getSegmentC().Y1 = pDesign.getBasePoints()[1].getAxisY() + 15;
+            pDesign.getSegmentC().X1 = pDesign.getBasePoints()[1].getAxisX() + 13;
+            pDesign.getSegmentC().Y1 = pDesign.getBasePoints()[1].getAxisY() + 12;
             pDesign.getSegmentC().X2 = pDesign.getBasePoints()[2].getAxisX() + 15;
             pDesign.getSegmentC().Y2 = pDesign.getBasePoints()[2].getAxisY() + 15;
             pDesign.getSegmentC().Stroke = outlineColor;
@@ -111,8 +111,8 @@ namespace TennisLibrary
 
             // SegmentE: line
             pDesign.getSegmentE().X1 = pDesign.getBasePoints()[3].getAxisX() + 15;
-            pDesign.getSegmentE().Y1 = pDesign.getBasePoints()[3].getAxisY() + 15;
-            pDesign.getSegmentE().X2 = pDesign.getBasePoints()[4].getAxisX() + 15;
+            pDesign.getSegmentE().Y1 = pDesign.getBasePoints()[3].getAxisY() + 14;
+            pDesign.getSegmentE().X2 = pDesign.getBasePoints()[4].getAxisX() + 13;
             pDesign.getSegmentE().Y2 = pDesign.getBasePoints()[4].getAxisY() + 15;
             pDesign.getSegmentE().Stroke = shoeSoleColor;
             pDesign.getSegmentE().StrokeThickness = pDesign.getShoeSole().getThickness();
@@ -126,33 +126,38 @@ namespace TennisLibrary
             Canvas.SetLeft(pDesign.getOutline().getRemarks(), 115);
             Canvas.SetTop(pDesign.getOutline().getRemarks(), 405);
             pCanvas.Children.Add(pDesign.getOutline().getRemarks());
+
+            Canvas.SetLeft(pDesign.getBaseColor().getRemarks(), 215);
+            Canvas.SetTop(pDesign.getBaseColor().getRemarks(), 405);
+            pCanvas.Children.Add(pDesign.getBaseColor().getRemarks());
+
         }
 
-        public static void paintOutline(Design pDesign, Color pColor, int pThickness, int pMode)
+        public static void paintOutline(Design pDesign, int pMode)
         {
             if (pMode != 1)
             {
-                pDesign.getSegmentA().getSegment().Stroke = new SolidColorBrush(pColor);
-                pDesign.getSegmentB().getSegment().Stroke = new SolidColorBrush(pColor);
-                pDesign.getSegmentC().Stroke = new SolidColorBrush(pColor);
-                pDesign.getSegmentD().Stroke = new SolidColorBrush(pColor);
+                pDesign.getSegmentA().getSegment().Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
+                pDesign.getSegmentB().getSegment().Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
+                pDesign.getSegmentC().Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
+                pDesign.getSegmentD().Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
             }
 
-            pDesign.getSegmentA().getSegment().StrokeThickness = pThickness;
-            pDesign.getSegmentB().getSegment().StrokeThickness = pThickness;
-            pDesign.getSegmentC().StrokeThickness = pThickness;
-            pDesign.getSegmentD().StrokeThickness = pThickness;           
+            pDesign.getSegmentA().getSegment().StrokeThickness = pDesign.getOutline().getThickness();
+            pDesign.getSegmentB().getSegment().StrokeThickness = pDesign.getOutline().getThickness();
+            pDesign.getSegmentC().StrokeThickness = pDesign.getOutline().getThickness();
+            pDesign.getSegmentD().StrokeThickness = pDesign.getOutline().getThickness();           
         }
 
-        public static void paintShoeSole(Design pDesign, Color pColor, int pThickness, int pMode)
+        public static void paintShoeSole(Design pDesign, int pMode)
         {
             /*//CONVERT STRING TO COLOR
             Color newColor = (Color)ColorConverter.ConvertFromString(pColor.ToString());
             pColor = newColor;*/
             if (pMode != 1)
-                pDesign.getSegmentE().Stroke = new SolidColorBrush(pColor);
+                pDesign.getSegmentE().Stroke = new SolidColorBrush (pDesign.getShoeSole().getColor());
 
-            pDesign.getSegmentE().StrokeThickness = pThickness;       
+            pDesign.getSegmentE().StrokeThickness = pDesign.getShoeSole().getThickness();   
         }
 
         public static void paintArea(Canvas pCanvas, Area pArea)
@@ -180,7 +185,9 @@ namespace TennisLibrary
 
             Canvas.SetLeft(circleDeco.getRemarks(), circleDeco.getAxisX() + circleDeco.getEllipse().Width / 2);
             Canvas.SetTop(circleDeco.getRemarks(), circleDeco.getAxisY() + circleDeco.getEllipse().Height / 2);
-            pCanvas.Children.Add(circleDeco.getRemarks());
+
+            if (pMode == 1)
+                pCanvas.Children.Add(circleDeco.getRemarks());
         }
 
         public static void loadLineDecorations(Design pDesign, Canvas pCanvas, int pModo)
@@ -200,12 +207,15 @@ namespace TennisLibrary
             lineDeco.getLine().Y2 = lineDeco.getBasePoints()[1].getAxisY() + 5;
             pCanvas.Children.Add(lineDeco.getLine());
 
-            foreach (BasePoint point in lineDeco.getBasePoints())
+            if (pMode == 1)
             {
-                point.drawPoint(2);
-                Canvas.SetLeft(point.getPointEllipse(), point.getAxisX());
-                Canvas.SetTop(point.getPointEllipse(), point.getAxisY());
-                pCanvas.Children.Add(point.getPointEllipse());
+                foreach (BasePoint point in lineDeco.getBasePoints())
+                {
+                    point.drawPoint(2);
+                    Canvas.SetLeft(point.getPointEllipse(), point.getAxisX());
+                    Canvas.SetTop(point.getPointEllipse(), point.getAxisY());
+                    pCanvas.Children.Add(point.getPointEllipse());
+                }
             }
 
             Canvas.SetLeft(lineDeco.getRemarks(), lineDeco.getBasePoints()[0].getAxisX() + 15);
@@ -215,9 +225,23 @@ namespace TennisLibrary
 
         //------------------------------------------------------------------------------
         public static void fireMode(Design pDesign, Canvas pCanvas)
-        {
-            Fire.loadDesign(pDesign, pCanvas);
+        {          
             Fire.paintBackground(pDesign, pCanvas);
+            Fire.paintOutline(pDesign, pCanvas);
+            
+            foreach(Circle circle in pDesign.getCircleDecorations())
+            {
+                Circle newCircle = new Circle(circle.getThickness(), circle.getColor(), circle.getSize(), 
+                                              circle.getFilled(), circle.getAxisX(), circle.getAxisY());
+                PaintCircleDecoration(pCanvas, newCircle, 3);
+            }
+
+            foreach(LineDec line in pDesign.getLineDecorations())
+            {
+                LineDec newLine = new LineDec(line.getThickness(), line.getColor());
+                newLine.setBasePoints(line.getBasePoints());
+                PaintLineDecoration(pCanvas, newLine, 3);
+            }
         }
 
         public static void arcadeMode(Design pDesign, Canvas pCanvas)

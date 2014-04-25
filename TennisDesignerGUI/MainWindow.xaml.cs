@@ -105,6 +105,9 @@ namespace TennisDesignerGUI
 
             else if (cmbxDecorations.SelectedItem.ToString() == statment + "Area")
                 cmbxThikness.IsEnabled = false;
+
+            else if (cmbxDecorations.SelectedItem.ToString() == statment + "Base Color")
+                cmbxThikness.IsEnabled = false;
                  
             else
                 cmbxThikness.IsEnabled = true;
@@ -143,7 +146,10 @@ namespace TennisDesignerGUI
                 }
 
                 else if (selectedDeco == 5)
-                    valid = true;                
+                    valid = true;
+
+                else if (selectedDeco == 6)
+                    valid = true;
 
                 switch (selectedThickness)
                 {
@@ -169,12 +175,12 @@ namespace TennisDesignerGUI
                 }
 
                 else
-                    MessageBox.Show("Properties hasn't been set correctly");
+                    MessageBox.Show("Properties have not been set correctly");
             }
    
             catch
                 {
-                    MessageBox.Show("Properties hasn't been set correctly");
+                    MessageBox.Show("Properties have not been set correctly");
                 }
         }
 
@@ -368,7 +374,9 @@ namespace TennisDesignerGUI
             {
                 rect.SetValue(Canvas.LeftProperty, e.GetPosition(canvasEdit).X - 5);
                 rect.SetValue(Canvas.TopProperty, e.GetPosition(canvasEdit).Y - 5);
+                DesignManager.saveAreasPosition(designInstance);
             }
+
         }
 
         /* BasePoint Events */
@@ -427,14 +435,14 @@ namespace TennisDesignerGUI
                 segmentB.SetValue(Canvas.TopProperty, Canvas.GetTop(pointA) + 10);
 
                 // Move auxiliar arc
-                segmentA.SetValue(Canvas.TopProperty, Canvas.GetTop(pointA) + 5);
-                segmentA.SetValue(Canvas.LeftProperty, (Canvas.GetLeft(pointA) + 5) - segmentA.ActualWidth);
+                segmentA.SetValue(Canvas.TopProperty, Canvas.GetTop(pointA) + 10);
+                segmentA.SetValue(Canvas.LeftProperty, (Canvas.GetLeft(pointA) + 12) - segmentA.ActualWidth);
 
                 //Move auxiliar line
-                segmentC.X1 = Canvas.GetLeft(pointB) + 5;
-                segmentC.Y1 = Canvas.GetTop(pointB) + 5;
-                segmentE.X2 = Canvas.GetLeft(pointE) + 5;
-                segmentE.Y2 = Canvas.GetTop(pointE) + 5;
+                segmentC.X1 = Canvas.GetLeft(pointB) + 9;
+                segmentC.Y1 = Canvas.GetTop(pointB) + 12;
+                segmentE.X2 = Canvas.GetLeft(pointE) + 10;
+                segmentE.Y2 = Canvas.GetTop(pointE) + 13;
 
                 // Set design values 
                 designInstance.getBasePoints()[0].setAxisX(Canvas.GetLeft(pointA));
@@ -483,21 +491,20 @@ namespace TennisDesignerGUI
                 pointE.SetValue(Canvas.TopProperty, Canvas.GetTop(pointA) + segmentA.ActualHeight - 5);
 
                 // Move arc
-                segmentB.Width = Math.Abs((Canvas.GetLeft(pointB) - Canvas.GetLeft(pointA)) + 5);
-                segmentB.SetValue(Canvas.TopProperty, Canvas.GetTop(pointB) + 5);
-                //segmentB.Height = Math.Abs(segmentB.ActualHeight - Canvas.GetTop(pointB));
+                segmentB.Width = Math.Abs((Canvas.GetLeft(pointB) - Canvas.GetLeft(pointA)) + 3);
+                segmentB.SetValue(Canvas.TopProperty, Canvas.GetTop(pointB) + 10);
                 
                 // Move auxiliar arc
-                segmentA.SetValue(Canvas.TopProperty, Canvas.GetTop(pointA) + 5);
-                segmentA.SetValue(Canvas.LeftProperty, (Canvas.GetLeft(pointA) + 5) - segmentA.ActualWidth);
+                segmentA.SetValue(Canvas.TopProperty, Canvas.GetTop(pointA) + 10);
+                segmentA.SetValue(Canvas.LeftProperty, (Canvas.GetLeft(pointA) + 12) - segmentA.ActualWidth);
 
                 // Move line
-                segmentC.X1 = Canvas.GetLeft(pointB) + 5;
-                segmentC.Y1 = Canvas.GetTop(pointB) + 5;
+                segmentC.X1 = Canvas.GetLeft(pointB) + 12;
+                segmentC.Y1 = Canvas.GetTop(pointB) + 12;
 
                 //Move auxiliar line
-                segmentE.X2 = Canvas.GetLeft(pointE) + 5;
-                segmentE.Y2 = Canvas.GetTop(pointE) + 5;
+                segmentE.X2 = Canvas.GetLeft(pointE) + 10;
+                segmentE.Y2 = Canvas.GetTop(pointE) + 13;
 
                 // Set design values
                 designInstance.getBasePoints()[0].setAxisX(Canvas.GetLeft(pointA));
@@ -538,8 +545,8 @@ namespace TennisDesignerGUI
                 }
 
                 // Move line
-                segmentC.X2 = Canvas.GetLeft(pointC) + 5;
-                segmentC.Y2 = Canvas.GetTop(pointC) + 5;
+                segmentC.X2 = Canvas.GetLeft(pointC) + 7;
+                segmentC.Y2 = Canvas.GetTop(pointC) + 7;
                 segmentD.X1 = Canvas.GetLeft(pointC) + 7;
                 segmentD.Y1 = Canvas.GetTop(pointC) + 7;
 
@@ -574,10 +581,10 @@ namespace TennisDesignerGUI
                 }
 
                 // Move line
-                segmentD.X2 = Canvas.GetLeft(pointD) + 5;
-                segmentD.Y2 = Canvas.GetTop(pointD) + 5;
-                segmentE.X1 = Canvas.GetLeft(pointD) + 7;
-                segmentE.Y1 = Canvas.GetTop(pointD) + 7;
+                segmentD.X2 = Canvas.GetLeft(pointD) + 15;
+                segmentD.Y2 = Canvas.GetTop(pointD) + 15;
+                segmentE.X1 = Canvas.GetLeft(pointD) + 15;
+                segmentE.Y1 = Canvas.GetTop(pointD) + 15;
 
                 // Set design values
                 designInstance.getBasePoints()[3].setAxisX(Canvas.GetLeft(pointD));
@@ -626,21 +633,21 @@ namespace TennisDesignerGUI
                 pointB.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointA) + segmentB.ActualWidth);
 
                 // Move arcs
-                segmentA.Width = Math.Abs((Canvas.GetLeft(pointE) - Canvas.GetLeft(segmentA)) + 5);
-                segmentA.Height = Math.Abs(Canvas.GetTop(pointE) - Canvas.GetTop(pointA));
+                segmentA.Width = Math.Abs((Canvas.GetLeft(pointE) - Canvas.GetLeft(segmentA)) + 14);
+                segmentA.Height = Math.Abs(Canvas.GetTop(pointE) - Canvas.GetTop(pointA) + 5);
 
                 designInstance.getSegmentA().setSegmentContainerWidth(segmentA.Width);
 
                 // Move auxiliar arc
-                segmentB.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointA) + 5);
+                segmentB.SetValue(Canvas.LeftProperty, Canvas.GetLeft(pointA) + 10);
 
                 // Move line
-                segmentE.X2 = Canvas.GetLeft(pointE) + 5;
-                segmentE.Y2 = Canvas.GetTop(pointE) + 5;
+                segmentE.X2 = Canvas.GetLeft(pointE) + 10;
+                segmentE.Y2 = Canvas.GetTop(pointE) + 13;
 
                 // Move auxiliar line
-                segmentC.X1 = Canvas.GetLeft(pointB) + 5;
-                segmentC.Y1 = Canvas.GetTop(pointB) + 5;
+                segmentC.X1 = Canvas.GetLeft(pointB) + 9;
+                segmentC.Y1 = Canvas.GetTop(pointB) + 12;
 
                 // Set design values
                 designInstance.getBasePoints()[0].setAxisX(Canvas.GetLeft(pointA));
