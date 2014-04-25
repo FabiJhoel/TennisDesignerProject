@@ -62,7 +62,7 @@ namespace TennisLibrary
                         pDesign.getOutline().setThickness(pThickness);
                         pDesign.getOutline().setRemarks("Outline\n" + "Color: " + pColor.ToString()
                         + "\n" + "Thickness: " + pThickness.ToString() + "px");
-                        PaintManager.paintOutline(pDesign, 1);
+                        PaintManager.paintOutline(pDesign, pCanvas, 1);
                         MessageBox.Show("contorno cambiado");
                         break;
 

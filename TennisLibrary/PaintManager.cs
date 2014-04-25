@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Diagnostics;
 using TennisBusiness;
 
 namespace TennisLibrary
@@ -131,16 +132,106 @@ namespace TennisLibrary
             Canvas.SetTop(pDesign.getBaseColor().getRemarks(), 405);
             pCanvas.Children.Add(pDesign.getBaseColor().getRemarks());
 
+            //http://msdn.microsoft.com/en-us/library/vstudio/ms751808(v=vs.100).aspx
         }
 
-        public static void paintOutline(Design pDesign, int pMode)
+        public static void paintOutline(Design pDesign, Canvas pCanvas, int pMode)
         {
             if (pMode != 1)
             {
-                pDesign.getSegmentA().getSegment().Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
-                pDesign.getSegmentB().getSegment().Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
-                pDesign.getSegmentC().Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
-                pDesign.getSegmentD().Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
+                int variantY = 0;
+                int variantX = 0;
+                Arc segmentA = new Arc(pDesign.getSegmentA().getAxisX(),
+                                       pDesign.getSegmentA().getAxisY(),
+                                       pDesign.getSegmentA().getSegmentContainerWidth(),
+                                       pDesign.getSegmentA().getSegmentContainerHeight());
+
+                Arc segmentB = new Arc(pDesign.getSegmentB().getAxisX(),
+                                       pDesign.getSegmentB().getAxisY(),
+                                       pDesign.getSegmentB().getSegmentContainerWidth(),
+                                       pDesign.getSegmentB().getSegmentContainerHeight());
+
+                BasePoint pointA = pDesign.getBasePoints()[0];
+                BasePoint pointB = pDesign.getBasePoints()[1];
+                BasePoint pointC = pDesign.getBasePoints()[2];
+                BasePoint pointD = pDesign.getBasePoints()[3];
+                BasePoint pointE = pDesign.getBasePoints()[4];
+
+                // Segments: C, D
+                PathFigure pathFigOutline = new PathFigure();
+                pathFigOutline.StartPoint = new Point(pointB.getAxisX() + 13, pointB.getAxisY() + 10);
+                pathFigOutline.Segments.Add(new LineSegment(new Point(pointC.getAxisX() + 12, pointC.getAxisY() + 13), true));
+                pathFigOutline.Segments.Add(new LineSegment(new Point(pointD.getAxisX() + 12, pointD.getAxisY() + 13), true));
+
+                PathGeometry pathGeoOutline = new PathGeometry();
+                pathGeoOutline.Figures.Add(pathFigOutline);
+
+                Path outline = new Path();
+                outline.Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
+                outline.StrokeThickness = pDesign.getOutline().getThickness();
+                outline.Data = pathGeoOutline;
+
+                pCanvas.Children.Add(outline);
+
+                //SegmentA
+                PathFigure myPathFigure = new PathFigure();
+                myPathFigure.StartPoint = new Point(30, 40);
+                myPathFigure.Segments.Add(new ArcSegment(new Point(30, 190), new Size(50, 55),
+                                            0, true, SweepDirection.Counterclockwise, true));
+
+                PathGeometry myPathGeometry = new PathGeometry();
+                myPathGeometry.Figures.Add(myPathFigure);
+                segmentA.getSegment().Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
+                segmentA.getSegment().Stretch = Stretch.Fill;
+                segmentA.getSegment().StrokeThickness = pDesign.getOutline().getThickness();
+                segmentA.getSegment().Data = myPathGeometry;
+
+                Canvas.SetLeft(segmentA.getSegmentContainer(), segmentA.getAxisX());
+                Canvas.SetTop(segmentA.getSegmentContainer(), segmentA.getAxisY() - 1);
+                pCanvas.Children.Add(segmentA.getSegmentContainer());
+
+                //SegmentB
+                PathFigure myPathFigureB = new PathFigure();
+                myPathFigureB.StartPoint = new Point(30, 40);
+                myPathFigureB.Segments.Add(new ArcSegment(new Point(227, 40), new Size(70, 30),
+                                           0, true, SweepDirection.Counterclockwise, true));
+
+                PathGeometry myPathGeometryB = new PathGeometry();
+                myPathGeometryB.Figures.Add(myPathFigureB);
+                segmentB.getSegment().Stroke = new SolidColorBrush(pDesign.getOutline().getColor());
+                segmentB.getSegment().Stretch = Stretch.Fill;
+                segmentB.getSegment().StrokeThickness = pDesign.getOutline().getThickness();
+                segmentB.getSegment().Data = myPathGeometryB;
+
+                if (pDesign.getOutline().getThickness() == 8)
+                {
+                    variantY = 5;
+                    variantX = 5;
+                    segmentB.setSegmentContainerWidth(segmentB.getSegmentContainerWidth() + 9);
+                }
+
+                else
+                {
+                    variantY = 2;
+                    variantX = 0;
+                    segmentB.setSegmentContainerWidth(segmentB.getSegmentContainerWidth() + 2);
+                }
+
+                Canvas.SetLeft(segmentB.getSegmentContainer(), segmentB.getAxisX() - variantX);
+                Canvas.SetTop(segmentB.getSegmentContainer(), segmentB.getAxisY() - variantY);
+                pCanvas.Children.Add(segmentB.getSegmentContainer());
+
+                // Shoe Sole
+                Line shoeSole = new Line();
+
+                shoeSole.X1 = pointE.getAxisX() + 11;
+                shoeSole.Y1 = pointE.getAxisY() + 13;
+                shoeSole.X2 = pointD.getAxisX() + 12;
+                shoeSole.Y2 = pointD.getAxisY() + 13;
+                shoeSole.Stroke = new SolidColorBrush(pDesign.getShoeSole().getColor());
+                shoeSole.StrokeThickness = pDesign.getShoeSole().getThickness();
+
+                pCanvas.Children.Add(shoeSole);
             }
 
             pDesign.getSegmentA().getSegment().StrokeThickness = pDesign.getOutline().getThickness();
@@ -233,10 +324,22 @@ namespace TennisLibrary
 
         //------------------------------------------------------------------------------
         public static void fireMode(Design pDesign, Canvas pCanvas)
-        {          
+        {
+            /*using System.Diagnostics;
+            // ...
+
+            Stopwatch sw = new Stopwatch();
+
+            sw.Start();
+
+            // ...
+
+            sw.Stop();
+
+            MessageBox.Show(sw.Elapsed.ToString());*/
             Fire.paintBackground(pDesign, pCanvas);
-            Fire.paintOutline(pDesign, pCanvas);
-            
+            paintOutline(pDesign, pCanvas, 3);
+
             foreach(Circle circle in pDesign.getCircleDecorations())
             {
                 Circle newCircle = new Circle(circle.getThickness(), circle.getColor(), circle.getSize(), 
@@ -359,7 +462,17 @@ namespace TennisLibrary
 
         public static void arcadeMode(Design pDesign, Canvas pCanvas)
         {
-            Arcade.loadDesign(pDesign, pCanvas);
+            foreach (Circle circle in pDesign.getCircleDecorations())
+            {
+                Arcade.paintEllipse(pCanvas, circle);
+            }
+
+            foreach (LineDec line in pDesign.getLineDecorations())
+            {
+                LineDec newLine = new LineDec(line.getThickness(), line.getColor());
+                newLine.setBasePoints(line.getBasePoints());
+                PaintLineDecoration(pCanvas, newLine, 3);
+            }
         }
     }
 }
