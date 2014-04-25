@@ -60,6 +60,7 @@ namespace DataAccess
         {
             Design design = new Design(pParseObject.Get<string>("Name"));
             design.setCreationDate(pParseObject.Get<string>("Date"));
+            design.getBaseColor().setColor((Color)ColorConverter.ConvertFromString(pParseObject.Get<string>("BaseColor")));
 
             //Get BasePoints from the object
             design.setBasePoints(await getBasePointsFromParse(pParseObject.Get<IList<ParseObject>>("Points")));

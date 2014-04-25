@@ -23,7 +23,7 @@ namespace TennisLibrary
                         pDesign.addLineDecoration(line);
                         line.setRemarks("Line\n" + "Color: " + pColor.ToString()
                         + "\n" + "Thickness: " + pThickness.ToString() + "px");
-                        PaintManager.PaintLineDecoration(pCanvas, line, 1);
+                        PaintManager.paintLineDecoration(pCanvas, line, 1);
                         MessageBox.Show("linea agregada");
                         break;
 
@@ -38,7 +38,7 @@ namespace TennisLibrary
                         pDesign.addCircleDecoration(circle);
                         circle.setRemarks("Circle\n" + "Size: " + sSize + "\n" + "Color: " 
                         + pColor.ToString()+ "\n" + "Thickness: " + pThickness.ToString() + "px");
-                        PaintManager.PaintCircleDecoration(pCanvas, circle, 1);
+                        PaintManager.paintCircleDecoration(pCanvas, circle, 1);
                         MessageBox.Show("circulo agregado");
                         break;
 
@@ -53,7 +53,7 @@ namespace TennisLibrary
                         pDesign.addCircleDecoration(fCircle);
                         fCircle.setRemarks("Filled Circle\n" + "Color: " + pColor.ToString()
                         + "\n" + "Size: " + sSize);
-                        PaintManager.PaintCircleDecoration(pCanvas, fCircle, 1);
+                        PaintManager.paintCircleDecoration(pCanvas, fCircle, 1);
                         MessageBox.Show("circulo relleno agregado");
                         break;
 

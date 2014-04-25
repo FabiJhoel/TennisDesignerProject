@@ -39,7 +39,8 @@ namespace DataAccess
                     {"OutLine", getDecorationFromDesign(pDesign.getOutline())},
                     {"Circles", getCirclesFromDesign(pDesign)},
                     {"Lines", getLinesFromDesign(pDesign)},
-                    {"Areas", getAreasFromDesign(pDesign)}
+                    {"Areas", getAreasFromDesign(pDesign)},
+                    {"BaseColor", pDesign.getBaseColor().getColor().ToString()}
                 };
             }
             else
@@ -65,8 +66,10 @@ namespace DataAccess
                 parseConnection.deleteColletion(parseObject.Get<IList<ParseObject>>("Lines"),1);
                 parseObject["Lines"] = getLinesFromDesign(pDesign);
 
-                parseConnection.deleteColletion(parseObject.Get<IList<ParseObject>>("Area"), 0);
+                parseConnection.deleteColletion(parseObject.Get<IList<ParseObject>>("Areas"), 0);
                 parseObject["Areas"] = getAreasFromDesign(pDesign);
+
+                parseObject["BaseColor"] = pDesign.getBaseColor().getColor().ToString();
             }
 
             parseConnection.uploadDesign(parseObject);
