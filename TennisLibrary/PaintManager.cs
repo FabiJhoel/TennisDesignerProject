@@ -471,7 +471,7 @@ namespace TennisLibrary
             {
                 LineDec newLine = new LineDec(line.getThickness(), line.getColor());
                 newLine.setBasePoints(line.getBasePoints());
-                PaintLineDecoration(pCanvas, newLine, 3);
+                paintLineDecoration(pCanvas, newLine, 3);
             }
         }
     }

@@ -112,6 +112,108 @@ namespace TennisBusiness
             else
                 pEllipse.Stroke = new SolidColorBrush(pColor);
         }
+
+        public static void paintArea(PointCollection pPointCollection, Canvas pCanvas, SolidColorBrush pColor)
+        {
+            Polygon polygon = new Polygon();
+            polygon.Fill = pColor;
+            polygon.StrokeThickness = 0;
+            polygon.HorizontalAlignment = HorizontalAlignment.Left;
+            polygon.VerticalAlignment = VerticalAlignment.Center;
+
+            polygon.Points = pPointCollection;
+            pCanvas.Children.Add(polygon);
+        }
+
+        //http://www.navision-blog.de/blog/2008/12/02/calculate-the-intersection-of-two-lines-in-fsharp-2d/
+        //http://stackoverflow.com/questions/4543506/algorithm-for-intersection-of-2-lines
+        public static List<BasePoint> calculateIntersections(List<BasePoint[]> lines, Canvas pCanvas, int mode) //0 = all intersections
+        {                                                                                                         //1 = intersections with a particular line
+            List<BasePoint> intersections = new List<BasePoint>();
+
+            //calculate intersections
+            double delta;
+            double r;
+            double s;
+            double IntX;
+            double IntY;
+            double aY, aX, bY, bX, cY, cX, dY, dX;
+            Line test;
+
+            foreach (BasePoint[] pLine in lines)
+            {
+                /*test = new Line();
+                test.Stroke = Brushes.Black;
+                test.StrokeThickness = 8;
+                test.X1 = pLine[0].getAxisX() + 5;
+                test.Y1 = pLine[0].getAxisY() + 5;
+                test.X2 = pLine[1].getAxisX() + 5;
+                test.Y2 = pLine[1].getAxisY() + 5;
+                pCanvas.Children.Add(test);*/
+
+                foreach (BasePoint[] qLine in lines)
+                {
+                    if (!pLine.Equals(qLine))
+                    {
+                        aX = pLine[0].getAxisX();
+                        aY = pLine[0].getAxisY();
+                        bX = pLine[1].getAxisX();
+                        bY = pLine[1].getAxisY();
+                        cX = qLine[0].getAxisX();
+                        cY = qLine[0].getAxisY();
+                        dX = qLine[1].getAxisX();
+                        dY = qLine[1].getAxisY();
+
+                        delta = (bX - aX) * (dY - cY) - (bY - aY) * (dX - cX); //A1*B2 - A2*B1
+
+                        if (delta != 0)
+                        {
+                            r = ((aY - cY) * (dX - cX) - (aX - cX) * (dY - cY)) / delta;
+
+                            s = ((aY - cY) * (bX - aX) - (aX - cX) * (bY - aY)) / delta;
+
+                            if (r >= 0 && r <= 1 && s >= 0 && s <= 1)
+                            {
+                                IntX = aX + r * (bX - aX);
+                                IntY = aY + r * (bY - aY);
+                                intersections.Add(new BasePoint(Math.Round(IntX, 5), Math.Round(IntY, 5), "")); //+9 Ajuste de Intersecciones
+                            }
+                        }
+                    }
+                }
+
+                if (mode == 1)
+                    break;
+            }
+
+            //Delete repeated items
+            int index = 0;
+            int index2 = 0;
+            while (index < intersections.Count)
+            {
+                index2 = index + 1;
+                while (index2 < intersections.Count)
+                {
+                    if (intersections[index].getAxisX() == intersections[index2].getAxisX() &&
+                        intersections[index].getAxisY() == intersections[index2].getAxisY())
+                    {
+                        intersections.RemoveAt(index2);
+                    }
+                    else
+                    {
+                        /*MessageBox.Show("Puntos: " + intersections[index].getAxisX() + " " + intersections[index].getAxisY() + "\n"+
+                            intersections[index2].getAxisX() + " " + intersections[index2].getAxisY()+
+                            "\nDiferencias " + (intersections[index].getAxisX() - intersections[index2].getAxisX()) +
+                            "  "+(intersections[index].getAxisY() - intersections[index2].getAxisY()));*/
+                        index2++;
+                    }
+                        
+                }
+                index++;
+            }
+
+            return intersections;
+        }
     }
 }
 
