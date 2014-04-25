@@ -74,7 +74,13 @@ namespace TennisDesignerGUI
                 {
                     PaintManager.loadLineDecorations(designInstance, canvasEdit, 1);
                     asignEventToDecoration(0);
-                }    
+                }
+
+                if (designInstance.getFillingAreas().Count != 0)
+                {
+                    PaintManager.loadAreaDecorations(designInstance, canvasEdit);
+                    asignEventToDecoration(5);
+                } 
             }
 
             else

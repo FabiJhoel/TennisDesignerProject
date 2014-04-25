@@ -96,18 +96,22 @@ namespace TennisBusiness
         {
             return this.name;
         }
+
         public string getCreationDate()
         {
             return this.creationDate;
         }
+        
         public List<BasePoint> getBasePoints()
         {
             return this.basePoints;
         }
+       
         public List<Circle> getCircleDecorations()
         {
             return this.circleDecorations;
         }
+        
         public List<LineDec> getLineDecorations()
         {
             return this.lineDecorations;
@@ -117,30 +121,37 @@ namespace TennisBusiness
         {
             return this.fillingAreas;
         }
+
         public Arc getSegmentA()
         {
             return segmentA;
         }
+
         public Arc getSegmentB()
         {
             return segmentB;
         }
+
         public Line getSegmentC()
         {
             return segmentC;
         }
+
         public Line getSegmentD()
         {
             return segmentD;
         }
+
         public Line getSegmentE()
         {
             return segmentE;
         }
+
         public Decoration getOutline()
         {
             return outline;
         }
+
         public Decoration getShoeSole()
         {
             return shoeSole;
@@ -155,14 +166,17 @@ namespace TennisBusiness
         {
             basePoints.Add(pPoint);
         }
+
         public void addCircleDecoration(Circle pCircle)
         {
             circleDecorations.Add(pCircle);
         }
+
         public void addLineDecoration(LineDec pLine)
         {
             lineDecorations.Add(pLine);
         }
+
         public void addAreaDecoration(Area pArea)
         {
             fillingAreas.Add(pArea);
