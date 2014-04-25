@@ -346,9 +346,11 @@ namespace TennisLibrary
                 PaintLineDecoration(pCanvas, newLine, 3);
             }
         }
-
+       
         public static void arcadeMode(Design pDesign, Canvas pCanvas)
         {
+            paintOutline(pDesign, pCanvas, 2);
+
             foreach (Circle circle in pDesign.getCircleDecorations())
             {
                 Arcade.paintEllipse(pCanvas, circle);
