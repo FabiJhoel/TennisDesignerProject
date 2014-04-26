@@ -1,15 +1,16 @@
 ﻿<Window x:Class="TennisDesignerGUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="TennisDesigner" Height="711" Width="1024" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Background="White">
+        Title="TennisDesigner" Height="725" Width="1366" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Background="White">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="305*"/>
-            <ColumnDefinition Width="204*"/>
+            <ColumnDefinition Width="415*"/>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="304*"/>
         </Grid.ColumnDefinitions>
 
-        <TabControl HorizontalAlignment="Left" Height="510" Margin="270,114,0,0" VerticalAlignment="Top" Width="695" Foreground="#FF595353" Grid.ColumnSpan="2" Background="#FFF0FD6C">
+        <TabControl HorizontalAlignment="Left" Height="510" Margin="250,114,0,0" VerticalAlignment="Top" Width="695" Foreground="#FF595353" Grid.ColumnSpan="3" Background="#FFF0FD6C">
             <TabItem x:Name="editTab" Header="Edit" Foreground="#FF595353">
                 <TabItem.Background>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -47,7 +48,7 @@
             </TabItem>
         </TabControl>
 
-        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="310,640,0,0" VerticalAlignment="Top" Width="45" Foreground="#FF595353" Grid.Column="1" Click="saveDesignButton">
+        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="104.39,635,0,0" VerticalAlignment="Top" Width="45" Foreground="#FF595353" Grid.Column="2" Click="saveDesignButton">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -111,7 +112,7 @@
                 <Image Source="Resources/8px.png" />
             </ComboBoxItem>
         </ComboBox>
-        <Button x:Name="addDesignButton_Copy" Content="Add" HorizontalAlignment="Left" Margin="165,620,0,0" VerticalAlignment="Top" Width="45" Foreground="#FF595353" Click="addDecorationButton" RenderTransformOrigin="0.739,6.262">
+        <Button x:Name="addDecoration" Content="Add" HorizontalAlignment="Left" Margin="165,620,0,0" VerticalAlignment="Top" Width="45" Foreground="#FF595353" Click="addDecorationButton" RenderTransformOrigin="0.739,6.262">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -121,9 +122,27 @@
         </Button>
 
         <!--Header-->
-        <Rectangle Grid.ColumnSpan="2" Fill="#FF19A0D3" HorizontalAlignment="Left" Height="77.612" Stroke="#FF19A0D3" VerticalAlignment="Top" Width="1018"/>
+        <Rectangle Grid.ColumnSpan="3" Fill="#FF19A0D3" HorizontalAlignment="Left" Height="78" Stroke="#FF19A0D3" VerticalAlignment="Top" Width="1508"/>
         <TextBlock x:Name="headerTitle" HorizontalAlignment="Left" Margin="25,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Segoe WP Light" FontSize="48" Width="375" Height="68" Foreground="White" TextDecorations="{x:Null}" Text="TennisDesigner"/>
+        <GroupBox Grid.Column="2" Header="GroupBox" HorizontalAlignment="Left" Height="550" Margin="156,100,0,0" VerticalAlignment="Top" Width="380" FontWeight="Bold" Foreground="#FF595353">
+        </GroupBox>
+        <DataGrid x:Name="ReportsTable" AutoGenerateColumns="True" Grid.Column="2" HorizontalAlignment="Left" Margin="181.39,130,0,0" VerticalAlignment="Top" Height="466" Width="331" Foreground="#FF595353">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path = designName}" Header="Name" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Path= Date}" Header="Date" Width="70" />
+                <DataGridTextColumn Binding="{Binding Path= bestArcade}" Header="Best Arcade" Width="80"/>
+                <DataGridTextColumn Binding="{Binding Path= bestFire}" Header="Best Fire" Width="80" />
+            </DataGrid.Columns>
 
+        </DataGrid>
+        <Button x:Name="GenerateReport" Content="Generate" HorizontalAlignment="Left" Margin="454.39,609,0,0" VerticalAlignment="Top" Width="58" Foreground="#FF595353" RenderTransformOrigin="0.739,6.262" Grid.Column="2">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>
