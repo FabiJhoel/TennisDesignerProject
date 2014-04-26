@@ -324,19 +324,11 @@ namespace TennisLibrary
 
         //------------------------------------------------------------------------------
         public static void fireMode(Design pDesign, Canvas pCanvas)
-        {
-            /*using System.Diagnostics;
-            // ...
-
+        {           
             Stopwatch sw = new Stopwatch();
 
             sw.Start();
-
-            // ...
-
-            sw.Stop();
-
-            MessageBox.Show(sw.Elapsed.ToString());*/
+  
             Fire.paintBackground(pDesign, pCanvas);
             paintOutline(pDesign, pCanvas, 3);
 
@@ -354,10 +346,6 @@ namespace TennisLibrary
                 paintLineDecoration(pCanvas, newLine, 3);
             }
 
-
-
-
-            //------------------------------------------------------
             //Calculate All Intersections
 
             List<BasePoint[]> lines = new List<BasePoint[]>();
@@ -457,6 +445,10 @@ namespace TennisLibrary
                }
                Fire.paintArea(polygonPoints, pCanvas,new SolidColorBrush(cArea.getColor()));
            }
+
+            sw.Stop();
+            
+            //MessageBox.Show(sw.Elapsed.ToString());
 
         }
        
