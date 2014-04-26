@@ -87,8 +87,10 @@ namespace DataAccess
             design.setFillingAreas(await getAreasFromParse(pParseObject.Get<IList<ParseObject>>("Areas")));
 
             //Get TimeSpans from Parse
-            //design.setArcadeTimes(getTimeSpansFromParse(pParseObject.Get<IList<string>>("ArcadeTimes")));
-            //design.setArcadeTimes(getTimeSpansFromParse(pParseObject.Get<IList<string>>("FireTimes")));
+            design.setArcadeTime(TimeSpan.Parse(pParseObject.Get<string>("BestArcadeTime")));
+            design.setFireTime(TimeSpan.Parse(pParseObject.Get<string>("BestFireTime")));
+            design.setBestArcadeDate(pParseObject.Get<string>("BestArcadeDate"));
+            design.setBestFireDate(pParseObject.Get<string>("BestFireDate"));
 
             return design;
         }
@@ -149,18 +151,6 @@ namespace DataAccess
                 decoration.setRemarks(parseDecoration.Get<string>("Label"));
 
             return decoration;
-        }
-
-        private List<TimeSpan> getTimeSpansFromParse(IList<string> pTimes)
-        {
-            List<TimeSpan> times = new List<TimeSpan>();
-
-            foreach (string pTime in pTimes)
-            {
-                times.Add(TimeSpan.Parse(pTime));
-            }
-
-            return times;
         }
 
         private async Task<List<LineDec>> getLinesFromParse(IList<ParseObject> parseLines)
