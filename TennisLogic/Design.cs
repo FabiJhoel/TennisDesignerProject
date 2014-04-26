@@ -94,6 +94,16 @@ namespace TennisBusiness
             fillingAreas = pAreas;
         }
 
+        public void setArcadeTimes(List<TimeSpan> pArcadeTimes)
+        {
+            arcadeTimes = pArcadeTimes;
+        }
+
+        public void setFireTimes(List<TimeSpan> pFireTimes)
+        {
+            fireTimes = pFireTimes;
+        }
+
         public string getName()
         {
             return this.name;
@@ -122,6 +132,16 @@ namespace TennisBusiness
         public List<Area> getFillingAreas()
         {
             return this.fillingAreas;
+        }
+
+        public List<TimeSpan> getArcadeTimes()
+        {
+            return arcadeTimes;
+        }
+
+        public List<TimeSpan> getFireTimes()
+        {
+            return fireTimes;
         }
 
         public Arc getSegmentA()
@@ -182,6 +202,16 @@ namespace TennisBusiness
         public void addAreaDecoration(Area pArea)
         {
             fillingAreas.Add(pArea);
+        }
+
+        public void addArcadeTime(TimeSpan pArcadeTime)
+        {
+            arcadeTimes.Add(pArcadeTime);
+        }
+
+        public void addFireTime(TimeSpan pFireTime)
+        {
+            fireTimes.Add(pFireTime);
         }
     }
 }
