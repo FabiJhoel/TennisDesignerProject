@@ -20,13 +20,18 @@ namespace TennisLibrary
             MessageBox.Show("Your design has been saved as: " + pDesign.getName());
         }
 
-        public static async void loadDesignList(ListBox pListBoxDesigns)
+        public static async Task<List<Design>> loadDesignList()
         {
-            List<string> names = await dataAdmin.getDesignList();
+            List<Design> designs = await dataAdmin.getDesignList();
+            return designs;
+        }
 
-            foreach (string name in names)
+        public static async void writeDesignList(ListBox pListBoxDesign)
+        {
+            List<Design> designs = await DataManager.loadDesignList();
+            foreach (Design design in designs)
             {
-                pListBoxDesigns.Items.Add(name);
+                pListBoxDesign.Items.Add(design.getName());
             }
         }
 

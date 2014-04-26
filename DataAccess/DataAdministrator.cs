@@ -102,16 +102,6 @@ namespace DataAccess
             }
             return basePointList;
         }
-
-        private List<string> getTimesSpanFomDesign(List<TimeSpan> pTimeList)
-        {
-            List<string> times = new List<string>();
-            foreach (TimeSpan time in pTimeList)
-            {
-                times.Add(time.ToString());
-            }
-            return times;
-        }
         
         private ParseObject getSegmentFromDesign(Arc pArc)
         {
@@ -194,17 +184,23 @@ namespace DataAccess
             return areasList;
         }
 
-        public async Task<List<string>> getDesignList()
+        public async Task<List<Design>> getDesignList()
         {
             IEnumerable<ParseObject> results = await parseConnection.getDesignList();
 
-            List<string> nameList = new List<string>();
+            List<Design> designList = new List<Design>();
+            Design temporal;
             foreach (ParseObject tempObject in results)
             {
-                nameList.Add(tempObject.Get<string>("Name"));
+                temporal = new Design(tempObject.Get<string>("Name"));
+                temporal.setArcadeTime(TimeSpan.Parse(tempObject.Get<string>("BestArcadeTime")));
+                temporal.setFireTime(TimeSpan.Parse(tempObject.Get<string>("BestArcadeTime")));
+                temporal.setBestArcadeDate(tempObject.Get<string>("BestArcadeDate"));
+                temporal.setBestFireDate(tempObject.Get<string>("BestFireDate"));
+                designList.Add(temporal);
             }
 
-            return nameList;
+            return designList;
         }
 
         public async Task<Design> getDesign(string pName)

@@ -29,12 +29,19 @@ namespace TennisDesignerGUI
         {
             InitializeComponent();
             cmbxColor.ItemsSource = typeof(Colors).GetProperties();
-            DataManager.loadDesignList(ListBoxDesigns);
-
+            DataManager.writeDesignList(ListBoxDesigns);
             ReportsTable.Items.Add(new MyData() { Date = 1, designName = 2, bestArcade = 3, bestFire = 4 });
 
         }
 
+        private async void report()
+        {
+            List<Design> designs = await DataManager.loadDesignList();
+            foreach (Design design in designs)
+            {
+
+            }
+        }
         private void addNewDesignButton(object sender, RoutedEventArgs e)
         {
             string designName = "";
