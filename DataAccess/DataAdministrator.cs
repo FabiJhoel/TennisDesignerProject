@@ -41,8 +41,8 @@ namespace DataAccess
                     {"Lines", getLinesFromDesign(pDesign)},
                     {"Areas", getAreasFromDesign(pDesign)},
                     {"BaseColor", pDesign.getBaseColor().getColor().ToString()},
-                    {"ArcadeTimes", getTimesSpanFomDesign(pDesign.getArcadeTimes())},
-                    {"FireTimes", getTimesSpanFomDesign(pDesign.getFireTimes())}
+                   /* {"ArcadeTimes", getTimesSpanFomDesign(pDesign.getArcadeTimes())},
+                    {"FireTimes", getTimesSpanFomDesign(pDesign.getFireTimes())}*/
                 };
             }
             else
@@ -73,9 +73,9 @@ namespace DataAccess
 
                 parseObject["BaseColor"] = pDesign.getBaseColor().getColor().ToString();
 
-                parseObject["ArcadeTimes"] = getTimesSpanFomDesign(pDesign.getArcadeTimes());
+                //parseObject["ArcadeTimes"] = getTimesSpanFomDesign(pDesign.getArcadeTimes());
 
-                parseObject["FireTimes"] = getTimesSpanFomDesign(pDesign.getFireTimes());
+                //parseObject["FireTimes"] = getTimesSpanFomDesign(pDesign.getFireTimes());
             }
 
             parseConnection.uploadDesign(parseObject);

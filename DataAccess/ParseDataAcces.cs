@@ -87,8 +87,8 @@ namespace DataAccess
             design.setFillingAreas(await getAreasFromParse(pParseObject.Get<IList<ParseObject>>("Areas")));
 
             //Get TimeSpans from Parse
-            design.setArcadeTimes(getTimeSpansFromParse(pParseObject.Get<IList<string>>("ArcadeTimes")));
-            design.setArcadeTimes(getTimeSpansFromParse(pParseObject.Get<IList<string>>("FireTimes")));
+            //design.setArcadeTimes(getTimeSpansFromParse(pParseObject.Get<IList<string>>("ArcadeTimes")));
+            //design.setArcadeTimes(getTimeSpansFromParse(pParseObject.Get<IList<string>>("FireTimes")));
 
             return design;
         }

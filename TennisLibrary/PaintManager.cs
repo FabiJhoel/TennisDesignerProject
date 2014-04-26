@@ -325,9 +325,9 @@ namespace TennisLibrary
         //------------------------------------------------------------------------------
         public static void fireMode(Design pDesign, Canvas pCanvas)
         {           
-            Stopwatch sw = new Stopwatch();
+            Stopwatch timer = new Stopwatch();
 
-            sw.Start();
+            timer.Start();
   
             Fire.paintBackground(pDesign, pCanvas);
 
@@ -433,9 +433,21 @@ namespace TennisLibrary
                 paintLineDecoration(pCanvas, newLine, 3);
             }
 
-            sw.Stop();
+            timer.Stop();
+
+            if (pDesign.getFireTime().ToString() == "00:00:00")
+                pDesign.setFireTime(timer.Elapsed);
+
+            else 
+            {
+                int result = TimeSpan.Compare(timer.Elapsed, pDesign.getFireTime());
+                if (result == -1)
+                    pDesign.setFireTime(timer.Elapsed);
+
+            }
+
+            MessageBox.Show(pDesign.getFireTime().ToString());
             
-            //MessageBox.Show(sw.Elapsed.ToString());
 
         }
        

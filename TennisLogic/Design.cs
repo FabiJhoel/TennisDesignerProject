@@ -13,8 +13,10 @@ namespace TennisBusiness
     {
         private string name;
         private string creationDate;
-        private List<TimeSpan> arcadeTimes = new List<TimeSpan>();
-        private List<TimeSpan> fireTimes = new List<TimeSpan>();
+        private TimeSpan bestArcadeTime;
+        private string bestArcadeDate;
+        private TimeSpan bestFireTime;
+        private string bestFireDate;
         private List<BasePoint> basePoints = new List<BasePoint>();
         private List<Circle> circleDecorations = new List<Circle>();
         private List<LineDec> lineDecorations = new List<LineDec>();
@@ -94,14 +96,24 @@ namespace TennisBusiness
             fillingAreas = pAreas;
         }
 
-        public void setArcadeTimes(List<TimeSpan> pArcadeTimes)
+        public void setArcadeTime(TimeSpan pArcadeTime)
         {
-            arcadeTimes = pArcadeTimes;
+            bestArcadeTime = pArcadeTime;
         }
 
-        public void setFireTimes(List<TimeSpan> pFireTimes)
+        public void setBestArcadeDate(string pDate)
         {
-            fireTimes = pFireTimes;
+            bestArcadeDate = pDate;
+        }
+
+        public void setBestFireDate(string pDate)
+        {
+            bestFireDate = pDate;
+        }
+
+        public void setFireTime(TimeSpan pFireTime)
+        {
+            bestFireTime = pFireTime;
         }
 
         public string getName()
@@ -134,14 +146,24 @@ namespace TennisBusiness
             return this.fillingAreas;
         }
 
-        public List<TimeSpan> getArcadeTimes()
+        public TimeSpan getArcadeTime()
         {
-            return arcadeTimes;
+            return bestArcadeTime;
         }
 
-        public List<TimeSpan> getFireTimes()
+        public string getBestArcadeDate()
         {
-            return fireTimes;
+            return bestArcadeDate;
+        }
+
+        public string getBestFireDate()
+        {
+            return bestFireDate;
+        }
+
+        public TimeSpan getFireTime()
+        {
+            return bestFireTime;
         }
 
         public Arc getSegmentA()
@@ -204,14 +226,5 @@ namespace TennisBusiness
             fillingAreas.Add(pArea);
         }
 
-        public void addArcadeTime(TimeSpan pArcadeTime)
-        {
-            arcadeTimes.Add(pArcadeTime);
-        }
-
-        public void addFireTime(TimeSpan pFireTime)
-        {
-            fireTimes.Add(pFireTime);
-        }
     }
 }
