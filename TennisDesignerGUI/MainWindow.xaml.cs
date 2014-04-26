@@ -89,6 +89,11 @@ namespace TennisDesignerGUI
                 MessageBox.Show("The selected design was not saved");
         }
 
+        private void generateReport()
+        {
+
+        }
+
         private void cmbxDecorations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string statment = "System.Windows.Controls.ComboBoxItem: ";

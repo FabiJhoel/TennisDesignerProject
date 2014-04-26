@@ -338,18 +338,6 @@ namespace TennisLibrary
 
             //calculate All intersections
             List<BasePoint> intersections = Fire.calculateIntersections(lines, pCanvas, 0);
-            Rectangle rect;
-
-            /*foreach (BasePoint bpoint in intersections)
-            {
-                rect = new Rectangle();
-                rect.Width = 5;
-                rect.Height = 5;
-                rect.Fill = Brushes.Red;
-                Canvas.SetLeft(rect, bpoint.getAxisX());
-                Canvas.SetTop(rect, bpoint.getAxisY());
-                pCanvas.Children.Add(rect);
-            }*/
 
             //Calculate Polygons of Areas
             List<BasePoint> polygonInt = new List<BasePoint>();
@@ -436,42 +424,33 @@ namespace TennisLibrary
             timer.Stop();
 
             if (pDesign.getFireTime().ToString() == "00:00:00")
+            {
                 pDesign.setFireTime(timer.Elapsed);
-
-            else 
+                pDesign.setBestFireDate(DateTime.Now.ToString("M/d/yyyy"));
+            }
+            else
             {
                 int result = TimeSpan.Compare(timer.Elapsed, pDesign.getFireTime());
                 if (result == -1)
+                {
                     pDesign.setFireTime(timer.Elapsed);
+                    pDesign.setBestFireDate(DateTime.Now.ToString("M/d/yyyy"));
+                }
 
             }
-
-            MessageBox.Show(pDesign.getFireTime().ToString());
-            
-
         }
        
         public static void arcadeMode(Design pDesign, Canvas pCanvas)
         {
-            //------------------------------------------------------
-            //Calculate All Intersections
+            Stopwatch timer = new Stopwatch();
 
+            timer.Start();
+
+            //Calculate All Intersections
             List<BasePoint[]> lines = Arcade.getLinesFromDesign(pDesign);
 
             //calculate All intersections
             List<BasePoint> intersections = Arcade.calculateIntersections(lines, pCanvas, 0);
-            Rectangle rect;
-
-            /*foreach (BasePoint bpoint in intersections)
-            {
-                rect = new Rectangle();
-                rect.Width = 5;
-                rect.Height = 5;
-                rect.Fill = Brushes.Red;
-                Canvas.SetLeft(rect, bpoint.getAxisX());
-                Canvas.SetTop(rect, bpoint.getAxisY());
-                pCanvas.Children.Add(rect);
-            }*/
 
             //Calculate Polygons of Areas
             List<BasePoint> polygonInt = new List<BasePoint>();
@@ -551,6 +530,25 @@ namespace TennisLibrary
                 LineDec newLine = new LineDec(lineDec.getThickness(), lineDec.getColor());
                 newLine.setBasePoints(lineDec.getBasePoints());
                 paintLineDecoration(pCanvas, newLine, 3);
+            }
+
+            timer.Stop();
+
+            if (pDesign.getArcadeTime().ToString() == "00:00:00")
+            {
+                pDesign.setArcadeTime(timer.Elapsed);
+                pDesign.setBestArcadeDate(DateTime.Now.ToString("M/d/yyyy"));
+            }
+
+            else
+            {
+                int result = TimeSpan.Compare(timer.Elapsed, pDesign.getArcadeTime());
+                if (result == -1)
+                {
+                    pDesign.setArcadeTime(timer.Elapsed);
+                    pDesign.setBestArcadeDate(DateTime.Now.ToString("M/d/yyyy"));
+                }
+
             }
 
         }
