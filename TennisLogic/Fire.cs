@@ -18,16 +18,16 @@ namespace TennisBusiness
         {
             int variantY = 0;
             int variantX = 0;
-            Arc segmentA = new Arc(pDesign.getSegmentA().getAxisX(), 
-                                   pDesign.getSegmentA().getAxisY(), 
-                                   pDesign.getSegmentA().getSegmentContainerWidth(), 
+            Arc segmentA = new Arc(pDesign.getSegmentA().getAxisX(),
+                                   pDesign.getSegmentA().getAxisY(),
+                                   pDesign.getSegmentA().getSegmentContainerWidth(),
                                    pDesign.getSegmentA().getSegmentContainerHeight());
 
             Arc segmentB = new Arc(pDesign.getSegmentB().getAxisX(),
                                    pDesign.getSegmentB().getAxisY(),
                                    pDesign.getSegmentB().getSegmentContainerWidth(),
                                    pDesign.getSegmentB().getSegmentContainerHeight());
-            
+
             BasePoint pointA = pDesign.getBasePoints()[0];
             BasePoint pointB = pDesign.getBasePoints()[1];
             BasePoint pointC = pDesign.getBasePoints()[2];
@@ -96,7 +96,48 @@ namespace TennisBusiness
 
             Canvas.SetLeft(segmentB.getSegmentContainer(), segmentB.getAxisX() - variantX);
             Canvas.SetTop(segmentB.getSegmentContainer(), segmentB.getAxisY() - variantY);
-            pCanvas.Children.Add(segmentB.getSegmentContainer());                      
+            pCanvas.Children.Add(segmentB.getSegmentContainer());
+        }
+
+        public static void paintWhiteArc(Design pDesign, Canvas pCanvas)
+        {
+            int variantY = 0;
+            int variantX = 0;
+
+            Arc segmentB = new Arc(pDesign.getSegmentB().getAxisX(),
+                                   pDesign.getSegmentB().getAxisY(),
+                                   pDesign.getSegmentB().getSegmentContainerWidth(),
+                                   pDesign.getSegmentB().getSegmentContainerHeight());
+
+            // Arc SegmentB
+            PathFigure myPathFigureB = new PathFigure();
+            myPathFigureB.StartPoint = new Point(30, 40);
+            myPathFigureB.Segments.Add(new ArcSegment(new Point(227, 40), new Size(70, 30),
+                                       0, true, SweepDirection.Counterclockwise, true));
+
+            PathGeometry myPathGeometryB = new PathGeometry();
+            myPathGeometryB.Figures.Add(myPathFigureB);
+            segmentB.getSegment().Stretch = Stretch.Fill;
+            segmentB.getSegment().Fill = Brushes.White;
+            segmentB.getSegment().Data = myPathGeometryB;
+
+            if (pDesign.getOutline().getThickness() == 8)
+            {
+                variantY = 5;
+                variantX = 5;
+                segmentB.setSegmentContainerWidth(segmentB.getSegmentContainerWidth() + 9);
+            }
+
+            else
+            {
+                variantY = 2;
+                variantX = 0;
+                segmentB.setSegmentContainerWidth(segmentB.getSegmentContainerWidth() + 1);
+            }
+
+            Canvas.SetLeft(segmentB.getSegmentContainer(), segmentB.getAxisX() - variantX);
+            Canvas.SetTop(segmentB.getSegmentContainer(), segmentB.getAxisY() - variantY);
+            pCanvas.Children.Add(segmentB.getSegmentContainer());
         }
 
         public static void paintLine(Line pLine, Color pColor)
@@ -142,15 +183,6 @@ namespace TennisBusiness
 
             foreach (BasePoint[] pLine in lines)
             {
-                /*test = new Line();
-                test.Stroke = Brushes.Black;
-                test.StrokeThickness = 8;
-                test.X1 = pLine[0].getAxisX() + 5;
-                test.Y1 = pLine[0].getAxisY() + 5;
-                test.X2 = pLine[1].getAxisX() + 5;
-                test.Y2 = pLine[1].getAxisY() + 5;
-                pCanvas.Children.Add(test);*/
-
                 foreach (BasePoint[] qLine in lines)
                 {
                     if (!pLine.Equals(qLine))
@@ -176,7 +208,7 @@ namespace TennisBusiness
                             {
                                 IntX = aX + r * (bX - aX);
                                 IntY = aY + r * (bY - aY);
-                                intersections.Add(new BasePoint(Math.Round(IntX, 5), Math.Round(IntY, 5), "")); //+9 Ajuste de Intersecciones
+                                intersections.Add(new BasePoint(Math.Round(IntX, 5), Math.Round(IntY, 5), ""));
                             }
                         }
                     }
@@ -199,21 +231,96 @@ namespace TennisBusiness
                     {
                         intersections.RemoveAt(index2);
                     }
-                    else
+                    else if (Math.Abs(intersections[index].getAxisX() - intersections[index2].getAxisX()) < 1 &&
+                        Math.Abs(intersections[index].getAxisY() - intersections[index2].getAxisY()) < 1)
                     {
-                        /*MessageBox.Show("Puntos: " + intersections[index].getAxisX() + " " + intersections[index].getAxisY() + "\n"+
-                            intersections[index2].getAxisX() + " " + intersections[index2].getAxisY()+
-                            "\nDiferencias " + (intersections[index].getAxisX() - intersections[index2].getAxisX()) +
-                            "  "+(intersections[index].getAxisY() - intersections[index2].getAxisY()));*/
-                        index2++;
+                        intersections.RemoveAt(index2);
                     }
-                        
+                    else
+                        index2++;
                 }
                 index++;
             }
 
             return intersections;
         }
+
+        //http://stackoverflow.com/questions/3153861/get-angle-of-a-line-from-horizon
+        public static double calculateAngle(double x1, double y1, Point pPoint2)
+        {
+            double x2 = pPoint2.X;
+            double y2 = pPoint2.Y;
+
+            double degrees;
+
+            // Avoid divide by zero run values.
+            if (x2 - x1 == 0)
+            {
+                if (y2 > y1)
+                    degrees = 90;
+                else
+                    degrees = 270;
+            }
+            else
+            {
+                // Calculate angle from offset.
+                double riseoverrun = (double)(y2 - y1) / (double)(x2 - x1);
+                double radians = Math.Atan(riseoverrun);
+                degrees = radians * ((double)180 / Math.PI);
+
+                // Handle quadrant specific transformations.       
+                if ((x2 - x1) < 0 || (y2 - y1) < 0)
+                    degrees += 180;
+                if ((x2 - x1) > 0 && (y2 - y1) < 0)
+                    degrees -= 180;
+                if (degrees < 0)
+                    degrees += 360;
+            }
+            return Math.Round(degrees, 4);
+        }
+
+        public static List<BasePoint[]> getLinesFromDesign(Design pDesign)
+        {
+            List<BasePoint[]> lines = new List<BasePoint[]>();
+
+            //get lines from Design First Silouhette lines and then LinesDec
+            BasePoint[] line = new BasePoint[2];
+            line[0] = pDesign.getBasePoints()[0];
+            line[1] = pDesign.getBasePoints()[1];
+            lines.Add(line); //A-B
+
+            line = new BasePoint[2];
+            line[0] = pDesign.getBasePoints()[1];
+            line[1] = pDesign.getBasePoints()[2];
+            lines.Add(line); //B-C
+
+            line = new BasePoint[2];
+            line[0] = pDesign.getBasePoints()[2];
+            line[1] = pDesign.getBasePoints()[3];
+            lines.Add(line); //C-D
+
+            line = new BasePoint[2];
+            line[0] = pDesign.getBasePoints()[3];
+            line[1] = pDesign.getBasePoints()[4];
+            lines.Add(line); //D-E
+
+            line = new BasePoint[2];
+            line[0] = pDesign.getBasePoints()[4];
+            line[1] = pDesign.getBasePoints()[0];
+            lines.Add(line); //E-A
+
+            foreach (LineDec tLine in pDesign.getLineDecorations())
+            {
+                line = new BasePoint[2];
+                line[0] = tLine.getBasePoints()[0];
+                line[1] = tLine.getBasePoints()[1];
+                lines.Add(line); //E-A
+            }
+
+            return lines;
+        }
+
+
     }
 }
 

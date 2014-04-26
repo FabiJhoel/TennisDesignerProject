@@ -330,6 +330,93 @@ namespace TennisLibrary
             sw.Start();
   
             Fire.paintBackground(pDesign, pCanvas);
+
+            //------------------------------------------------------
+            //Calculate All Intersections
+
+            List<BasePoint[]> lines = Fire.getLinesFromDesign(pDesign);
+
+            //calculate All intersections
+            List<BasePoint> intersections = Fire.calculateIntersections(lines, pCanvas, 0);
+            Rectangle rect;
+
+            /*foreach (BasePoint bpoint in intersections)
+            {
+                rect = new Rectangle();
+                rect.Width = 5;
+                rect.Height = 5;
+                rect.Fill = Brushes.Red;
+                Canvas.SetLeft(rect, bpoint.getAxisX());
+                Canvas.SetTop(rect, bpoint.getAxisY());
+                pCanvas.Children.Add(rect);
+            }*/
+
+            //Calculate Polygons of Areas
+            List<BasePoint> polygonInt = new List<BasePoint>();
+            BasePoint areaPoint;
+            BasePoint[] testLine = new BasePoint[2];
+            List<Point> polygonPoints;
+
+            foreach (Area cArea in pDesign.getFillingAreas())
+            {
+                polygonPoints = new List<Point>();
+                areaPoint = new BasePoint(cArea.getAxisX(), cArea.getAxisY(), "");
+                foreach (BasePoint iPoint in intersections)
+                {
+                    testLine[0] = areaPoint;
+                    testLine[1] = iPoint;
+                    lines.Insert(0, testLine);
+                    /*rect = new Rectangle();
+                    rect.Width = 5;
+                    rect.Height = 5;
+                    rect.Fill = Brushes.LightBlue;
+                    Canvas.SetLeft(rect, testLine[1].getAxisX());
+                    Canvas.SetTop(rect, testLine[1].getAxisY());
+                    pCanvas.Children.Add(rect);*/
+
+
+                    polygonInt = Fire.calculateIntersections(lines, pCanvas, 1);
+                    if (polygonInt.Count == 1 || polygonInt.Count == 0) //si es valido
+                    {
+                        polygonPoints.Add(new Point(iPoint.getAxisX(), iPoint.getAxisY()));
+                        /*rect = new Rectangle();
+                        rect.Width = 5;
+                        rect.Height = 5;
+                        rect.Fill = Brushes.Yellow;
+                        Canvas.SetLeft(rect, iPoint.getAxisX());
+                        Canvas.SetTop(rect, iPoint.getAxisY());
+                        pCanvas.Children.Add(rect);*/
+                    }
+                    lines.RemoveAt(0);
+                }
+
+                //order polygon points
+                Point temporal;
+                for (int index = 0; index < polygonPoints.Count; index++)
+                {
+                    for (int index2 = 0; index2 < polygonPoints.Count - 1; index2++)
+                    {
+                        if (Fire.calculateAngle(cArea.getAxisX(), cArea.getAxisY(), polygonPoints[index2]) >
+                            Fire.calculateAngle(cArea.getAxisX(), cArea.getAxisY(), polygonPoints[index2 + 1]))
+                        {
+                            temporal = polygonPoints[index2 + 1];
+                            polygonPoints[index2 + 1] = polygonPoints[index2];
+                            polygonPoints[index2] = temporal;
+                        }
+                    }
+                }
+
+                PointCollection correctPolygonPoints = new PointCollection();
+                foreach (Point pPoint in polygonPoints)
+                {
+                    correctPolygonPoints.Add(new Point(pPoint.X + 8, pPoint.Y + 8));
+                }
+
+                Fire.paintArea(correctPolygonPoints, pCanvas, new SolidColorBrush(cArea.getColor()));
+            }
+
+            //Add the other parts
+            Fire.paintWhiteArc(pDesign, pCanvas);
             paintOutline(pDesign, pCanvas, 3);
 
             foreach(Circle circle in pDesign.getCircleDecorations())
@@ -345,106 +432,6 @@ namespace TennisLibrary
                 newLine.setBasePoints(lineDec.getBasePoints());
                 paintLineDecoration(pCanvas, newLine, 3);
             }
-
-            //Calculate All Intersections
-
-            List<BasePoint[]> lines = new List<BasePoint[]>();
-
-            //get lines from Design First Silouhette lines and then LinesDec
-            BasePoint[] line = new BasePoint[2];
-            line[0] = pDesign.getBasePoints()[0];
-            line[1] = pDesign.getBasePoints()[1];
-            lines.Add(line); //A-B
-
-            line = new BasePoint[2];
-            line[0] = pDesign.getBasePoints()[1];
-            line[1] = pDesign.getBasePoints()[2];
-            lines.Add(line); //B-C
-
-            line = new BasePoint[2];
-            line[0] = pDesign.getBasePoints()[2];
-            line[1] = pDesign.getBasePoints()[3];
-            lines.Add(line); //C-D
-
-            line = new BasePoint[2];
-            line[0] = pDesign.getBasePoints()[3];
-            line[1] = pDesign.getBasePoints()[4];
-            lines.Add(line); //D-E
-
-            line = new BasePoint[2];
-            line[0] = pDesign.getBasePoints()[4];
-            line[1] = pDesign.getBasePoints()[0];
-            lines.Add(line); //E-A
-
-            foreach (LineDec tLine in pDesign.getLineDecorations())
-            {
-                line = new BasePoint[2];
-                line[0] = tLine.getBasePoints()[0];
-                line[1] = tLine.getBasePoints()[1];
-                lines.Add(line); //E-A
-            }
-
-            //calculate All intersections
-            List<BasePoint> intersections = Fire.calculateIntersections(lines, pCanvas, 0);
-            Rectangle rect;
-            //MessageBox.Show("" + intersections.Count);
-
-            foreach (BasePoint bpoint in intersections)
-            {
-                rect = new Rectangle();
-                rect.Width = 5;
-                rect.Height = 5;
-                rect.Fill = Brushes.Red;
-                Canvas.SetLeft(rect, bpoint.getAxisX());
-                Canvas.SetTop(rect, bpoint.getAxisY());
-                pCanvas.Children.Add(rect);
-                //MessageBox.Show("" + bpoint.getAxisX() + "  " + bpoint.getAxisY());
-            }
-
-
-
-            //Calculate Polygons of Areas
-           List<BasePoint> polygonInt = new List<BasePoint>();
-           BasePoint areaPoint;
-           BasePoint[] testLine = new BasePoint[2];
-           PointCollection polygonPoints;
-
-           foreach (Area cArea in pDesign.getFillingAreas())
-           {
-               polygonPoints = new PointCollection();
-               areaPoint = new BasePoint(cArea.getAxisX(), cArea.getAxisY(), "");
-               foreach (BasePoint iPoint in intersections)
-               {
-                   testLine[0] = areaPoint;
-                   testLine[1] = iPoint;
-                   lines.Insert(0,testLine);
-                   /*rect = new Rectangle();
-                   rect.Width = 5;
-                   rect.Height = 5;
-                   rect.Fill = Brushes.LightBlue;
-                   Canvas.SetLeft(rect, testLine[1].getAxisX());
-                   Canvas.SetTop(rect, testLine[1].getAxisY());
-                   pCanvas.Children.Add(rect);*/
-
-
-                   polygonInt = Fire.calculateIntersections(lines, pCanvas, 1);
-                   //MessageBox.Show("" + polygonInt.Count);
-                   if (polygonInt.Count == 1) //si es valido
-                   {
-                       polygonPoints.Add(new Point(polygonInt[0].getAxisX(), polygonInt[0].getAxisY()));
-                       rect = new Rectangle();
-                       rect.Width = 5;
-                       rect.Height = 5;
-                       rect.Fill = Brushes.Yellow;
-                       Canvas.SetLeft(rect, polygonInt[0].getAxisX());
-                       Canvas.SetTop(rect, polygonInt[0].getAxisY());
-                       pCanvas.Children.Add(rect);
-                   }
-
-                   lines.RemoveAt(0);
-               }
-               Fire.paintArea(polygonPoints, pCanvas,new SolidColorBrush(cArea.getColor()));
-           }
 
             sw.Stop();
             

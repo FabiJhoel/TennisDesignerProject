@@ -40,7 +40,9 @@ namespace DataAccess
                     {"Circles", getCirclesFromDesign(pDesign)},
                     {"Lines", getLinesFromDesign(pDesign)},
                     {"Areas", getAreasFromDesign(pDesign)},
-                    {"BaseColor", pDesign.getBaseColor().getColor().ToString()}
+                    {"BaseColor", pDesign.getBaseColor().getColor().ToString()},
+                    {"ArcadeTimes", getTimesSpanFomDesign(pDesign.getArcadeTimes())},
+                    {"FireTimes", getTimesSpanFomDesign(pDesign.getFireTimes())}
                 };
             }
             else
@@ -70,6 +72,10 @@ namespace DataAccess
                 parseObject["Areas"] = getAreasFromDesign(pDesign);
 
                 parseObject["BaseColor"] = pDesign.getBaseColor().getColor().ToString();
+
+                parseObject["ArcadeTimes"] = getTimesSpanFomDesign(pDesign.getArcadeTimes());
+
+                parseObject["FireTimes"] = getTimesSpanFomDesign(pDesign.getFireTimes());
             }
 
             parseConnection.uploadDesign(parseObject);
@@ -91,6 +97,16 @@ namespace DataAccess
             return basePointList;
         }
 
+        private List<string> getTimesSpanFomDesign(List<TimeSpan> pTimeList)
+        {
+            List<string> times = new List<string>();
+            foreach (TimeSpan time in pTimeList)
+            {
+                times.Add(time.ToString());
+            }
+            return times;
+        }
+        
         private ParseObject getSegmentFromDesign(Arc pArc)
         {
             ParseObject arc = new ParseObject("Arc")

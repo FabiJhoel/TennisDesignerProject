@@ -86,6 +86,10 @@ namespace DataAccess
             //Get Areas from object
             design.setFillingAreas(await getAreasFromParse(pParseObject.Get<IList<ParseObject>>("Areas")));
 
+            //Get TimeSpans from Parse
+            design.setArcadeTimes(getTimeSpansFromParse(pParseObject.Get<IList<string>>("ArcadeTimes")));
+            design.setArcadeTimes(getTimeSpansFromParse(pParseObject.Get<IList<string>>("FireTimes")));
+
             return design;
         }
 
@@ -97,6 +101,7 @@ namespace DataAccess
 
             return segment;
         }
+        
         private async Task<List<BasePoint>> getBasePointsFromParse(IList<ParseObject> parseBasePoints)
         {
             //Get BasePoints from the object
@@ -112,6 +117,7 @@ namespace DataAccess
 
             return basePoints;
         }
+        
         private async Task<List<Circle>> getCirclesFromParse(IList<ParseObject> parseCircles)
         {
             //Get Circles from the object
@@ -134,6 +140,7 @@ namespace DataAccess
 
             return circles;
         }
+        
         private async Task<Decoration> getDecorationFromParse(ParseObject pParseObject, string key)
         {
             ParseObject parseDecoration = await ParseObject.GetQuery("Decoration").GetAsync(pParseObject.Get<ParseObject>(key).ObjectId);
@@ -143,6 +150,19 @@ namespace DataAccess
 
             return decoration;
         }
+
+        private List<TimeSpan> getTimeSpansFromParse(IList<string> pTimes)
+        {
+            List<TimeSpan> times = new List<TimeSpan>();
+
+            foreach (string pTime in pTimes)
+            {
+                times.Add(TimeSpan.Parse(pTime));
+            }
+
+            return times;
+        }
+
         private async Task<List<LineDec>> getLinesFromParse(IList<ParseObject> parseLines)
         {
             //Get Circles from the object
@@ -186,17 +206,20 @@ namespace DataAccess
             return areas;
         }
 
-        public void deleteColletion(IList<ParseObject> pParseCollection, int pType) //1 = Line 0 = Any other
+        public async void deleteColletion(IList<ParseObject> pParseCollection, int pType) //1 = Line 0 = Any other
         {
             foreach (ParseObject tempParseObject in pParseCollection)
             {
-                /*if (pType == 1)
+                if (pType == 1)
                 {
-                    deleteColletion(tempParseObject.Get<IList<ParseObject>>("Points"), 0);
-                }*/
+                    ParseQuery<ParseObject> queryL = ParseObject.GetQuery("Line");
+                    ParseObject LineFromParse = await queryL.GetAsync(tempParseObject.ObjectId);
+                    deleteColletion(LineFromParse.Get<IList<ParseObject>>("Points"), 0);
+                }
                 deleteObject(tempParseObject);
             }
         }
+        
         public void deleteObject(ParseObject pParseObject)
         {
             pParseObject.DeleteAsync();
