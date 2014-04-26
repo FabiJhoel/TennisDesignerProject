@@ -692,5 +692,10 @@ namespace TennisDesignerGUI
             public int bestFire { get; set; }
 
         }
+
+        private async void GenerateReport_Click(object sender, RoutedEventArgs e)
+        {
+            Design design = await DataManager.loadDesign("");
+        }
     }
 }
