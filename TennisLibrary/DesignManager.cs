@@ -24,7 +24,6 @@ namespace TennisLibrary
                         line.setRemarks("Line\n" + "Color: " + pColor.ToString()
                         + "\n" + "Thickness: " + pThickness.ToString() + "px");
                         PaintManager.paintLineDecoration(pCanvas, line, 1);
-                        MessageBox.Show("linea agregada");
                         break;
 
                 case 1:
@@ -39,7 +38,6 @@ namespace TennisLibrary
                         circle.setRemarks("Circle\n" + "Size: " + sSize + "\n" + "Color: " 
                         + pColor.ToString()+ "\n" + "Thickness: " + pThickness.ToString() + "px");
                         PaintManager.paintCircleDecoration(pCanvas, circle, 1);
-                        MessageBox.Show("circulo agregado");
                         break;
 
                 case 2:
@@ -54,7 +52,6 @@ namespace TennisLibrary
                         fCircle.setRemarks("Filled Circle\n" + "Color: " + pColor.ToString()
                         + "\n" + "Size: " + sSize);
                         PaintManager.paintCircleDecoration(pCanvas, fCircle, 1);
-                        MessageBox.Show("circulo relleno agregado");
                         break;
 
                 case 3:
@@ -63,7 +60,6 @@ namespace TennisLibrary
                         pDesign.getOutline().setRemarks("Outline\n" + "Color: " + pColor.ToString()
                         + "\n" + "Thickness: " + pThickness.ToString() + "px");
                         PaintManager.paintOutline(pDesign, pCanvas, 1);
-                        MessageBox.Show("contorno cambiado");
                         break;
 
                 case 4:
@@ -72,7 +68,6 @@ namespace TennisLibrary
                         pDesign.getShoeSole().setRemarks("Shoe Sole\n" + "Color: " + pColor.ToString() 
                         + "\n" + "Thickness: " + pThickness.ToString() + "px");
                         PaintManager.paintShoeSole(pDesign, 1);
-                        MessageBox.Show("suela cambiada");
                         break;
 
                 case 5:
@@ -80,14 +75,12 @@ namespace TennisLibrary
                         area.setRemarks("Area\n" + "Color: " + pColor.ToString());
                         pDesign.addAreaDecoration(area);
                         PaintManager.paintArea(pCanvas, area);
-                        MessageBox.Show("area agregada");
                         break;
 
                 case 6:
                         pDesign.getBaseColor().setColor(pColor);
                         pDesign.getBaseColor().setRemarks("Base Color\n" + "Color: " + pColor.ToString()
                         + "\n");
-                        MessageBox.Show("Fondo cambiado");
                         break;
             }
         }

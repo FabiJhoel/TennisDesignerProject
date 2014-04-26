@@ -242,9 +242,6 @@ namespace TennisLibrary
 
         public static void paintShoeSole(Design pDesign, int pMode)
         {
-            /*//CONVERT STRING TO COLOR
-            Color newColor = (Color)ColorConverter.ConvertFromString(pColor.ToString());
-            pColor = newColor;*/
             if (pMode != 1)
                 pDesign.getSegmentE().Stroke = new SolidColorBrush (pDesign.getShoeSole().getColor());
 
@@ -322,119 +319,99 @@ namespace TennisLibrary
             pCanvas.Children.Add(lineDeco.getRemarks());
         }
 
-        //------------------------------------------------------------------------------
-        public static void fireMode(Design pDesign, Canvas pCanvas)
+        public static void fireMode(Design pDesign, Canvas pCanvas) //N= number of decorations
         {           
-            Stopwatch timer = new Stopwatch();
+            Stopwatch timer = new Stopwatch();          //2
 
-            timer.Start();
+            timer.Start(); //2
   
-            Fire.paintBackground(pDesign, pCanvas);
+            Fire.paintBackground(pDesign, pCanvas);       //4
 
-            //------------------------------------------------------
-            //Calculate All Intersections
-
-            List<BasePoint[]> lines = Fire.getLinesFromDesign(pDesign);
+            List<BasePoint[]> lines = Fire.getLinesFromDesign(pDesign); //4 + ...
 
             //calculate All intersections
-            List<BasePoint> intersections = Fire.calculateIntersections(lines, pCanvas, 0);
+            List<BasePoint> intersections = Fire.calculateIntersections(lines, pCanvas, 0); //6 + ...
 
             //Calculate Polygons of Areas
-            List<BasePoint> polygonInt = new List<BasePoint>();
+            List<BasePoint> polygonInt = new List<BasePoint>(); //1
             BasePoint areaPoint;
-            BasePoint[] testLine = new BasePoint[2];
+            BasePoint[] testLine = new BasePoint[2]; //1
             List<Point> polygonPoints;
 
-            foreach (Area cArea in pDesign.getFillingAreas())
+            foreach (Area cArea in pDesign.getFillingAreas()) //3 + ...
             {
-                polygonPoints = new List<Point>();
-                areaPoint = new BasePoint(cArea.getAxisX(), cArea.getAxisY(), "");
-                foreach (BasePoint iPoint in intersections)
+                polygonPoints = new List<Point>(); //1
+                areaPoint = new BasePoint(cArea.getAxisX(), cArea.getAxisY(), ""); //8
+                foreach (BasePoint iPoint in intersections) //2
                 {
-                    testLine[0] = areaPoint;
-                    testLine[1] = iPoint;
-                    lines.Insert(0, testLine);
-                    /*rect = new Rectangle();
-                    rect.Width = 5;
-                    rect.Height = 5;
-                    rect.Fill = Brushes.LightBlue;
-                    Canvas.SetLeft(rect, testLine[1].getAxisX());
-                    Canvas.SetTop(rect, testLine[1].getAxisY());
-                    pCanvas.Children.Add(rect);*/
+                    testLine[0] = areaPoint;    //2
+                    testLine[1] = iPoint;       //2
+                    lines.Insert(0, testLine);  //4
+                    polygonInt = Fire.calculateIntersections(lines, pCanvas, 1);    //6
 
-
-                    polygonInt = Fire.calculateIntersections(lines, pCanvas, 1);
-                    if (polygonInt.Count == 1 || polygonInt.Count == 0) //si es valido
-                    {
-                        polygonPoints.Add(new Point(iPoint.getAxisX(), iPoint.getAxisY()));
-                        /*rect = new Rectangle();
-                        rect.Width = 5;
-                        rect.Height = 5;
-                        rect.Fill = Brushes.Yellow;
-                        Canvas.SetLeft(rect, iPoint.getAxisX());
-                        Canvas.SetTop(rect, iPoint.getAxisY());
-                        pCanvas.Children.Add(rect);*/
-                    }
-                    lines.RemoveAt(0);
+                    if (polygonInt.Count == 1 || polygonInt.Count == 0)     //3               
+                        polygonPoints.Add(new Point(iPoint.getAxisX(), iPoint.getAxisY())); //7
+                    
+                    lines.RemoveAt(0); //3
                 }
 
                 //order polygon points
-                Point temporal;
-                for (int index = 0; index < polygonPoints.Count; index++)
+                Point temporal; 
+                for (int index = 0; index < polygonPoints.Count; index++) //1 +( 3 + 1+ ...
                 {
-                    for (int index2 = 0; index2 < polygonPoints.Count - 1; index2++)
+                    for (int index2 = 0; index2 < polygonPoints.Count - 1; index2++) //4 + ...
                     {
                         if (Fire.calculateAngle(cArea.getAxisX(), cArea.getAxisY(), polygonPoints[index2]) >
-                            Fire.calculateAngle(cArea.getAxisX(), cArea.getAxisY(), polygonPoints[index2 + 1]))
+                            Fire.calculateAngle(cArea.getAxisX(), cArea.getAxisY(), polygonPoints[index2 + 1]))//18
                         {
-                            temporal = polygonPoints[index2 + 1];
-                            polygonPoints[index2 + 1] = polygonPoints[index2];
-                            polygonPoints[index2] = temporal;
+                            temporal = polygonPoints[index2 + 1]; //3
+                            polygonPoints[index2 + 1] = polygonPoints[index2]; //4
+                            polygonPoints[index2] = temporal; //2
                         }
                     }
                 }
 
-                PointCollection correctPolygonPoints = new PointCollection();
-                foreach (Point pPoint in polygonPoints)
+                PointCollection correctPolygonPoints = new PointCollection(); //1
+                foreach (Point pPoint in polygonPoints) //2
                 {
-                    correctPolygonPoints.Add(new Point(pPoint.X + 8, pPoint.Y + 8));
+                    correctPolygonPoints.Add(new Point(pPoint.X + 8, pPoint.Y + 8));//7
                 }
 
-                Fire.paintArea(correctPolygonPoints, pCanvas, new SolidColorBrush(cArea.getColor()));
+                Fire.paintArea(correctPolygonPoints, pCanvas, new SolidColorBrush(cArea.getColor()));//7
             }
 
             //Add the other parts
-            Fire.paintWhiteArc(pDesign, pCanvas);
-            paintOutline(pDesign, pCanvas, 3);
+            Fire.paintWhiteArc(pDesign, pCanvas);//4
+            paintOutline(pDesign, pCanvas, 3); //5
 
-            foreach(Circle circle in pDesign.getCircleDecorations())
+            foreach(Circle circle in pDesign.getCircleDecorations()) //3
             {
                 Circle newCircle = new Circle(circle.getThickness(), circle.getColor(), circle.getSize(), 
-                                              circle.getFilled(), circle.getAxisX(), circle.getAxisY());
-                paintCircleDecoration(pCanvas, newCircle, 3);
+                                              circle.getFilled(), circle.getAxisX(), circle.getAxisY()); //19
+                paintCircleDecoration(pCanvas, newCircle, 3);//5
             }
 
-            foreach(LineDec lineDec in pDesign.getLineDecorations())
+            foreach(LineDec lineDec in pDesign.getLineDecorations())//3
             {
-                LineDec newLine = new LineDec(lineDec.getThickness(), lineDec.getColor());
-                newLine.setBasePoints(lineDec.getBasePoints());
-                paintLineDecoration(pCanvas, newLine, 3);
+                LineDec newLine = new LineDec(lineDec.getThickness(), lineDec.getColor()); //7
+                newLine.setBasePoints(lineDec.getBasePoints());//5
+                paintLineDecoration(pCanvas, newLine, 3);//5
             }
 
-            timer.Stop();
+            timer.Stop();//2
 
-            if (pDesign.getFireTime().ToString() == "00:00:00")
+            if (pDesign.getFireTime().ToString() == "00:00:00") //5
             {
-                pDesign.setFireTime(timer.Elapsed);
-                pDesign.setBestFireDate(DateTime.Now.ToString("M/d/yyyy"));
+                pDesign.setFireTime(timer.Elapsed);//3
+                pDesign.setBestFireDate(DateTime.Now.ToString("M/d/yyyy"));//4
             }
             else
             {
-                int result = TimeSpan.Compare(timer.Elapsed, pDesign.getFireTime());
-                if (result == -1)
+                int result = TimeSpan.Compare(timer.Elapsed, pDesign.getFireTime());//7
+                if (result == -1)//1
                 {
-                    pDesign.setFireTime(timer.Elapsed);
-                    pDesign.setBestFireDate(DateTime.Now.ToString("M/d/yyyy"));
+                    pDesign.setFireTime(timer.Elapsed);//3
+                    pDesign.setBestFireDate(DateTime.Now.ToString("M/d/yyyy"));//4
                 }
 
             }
@@ -469,27 +446,11 @@ namespace TennisLibrary
                     testLine[0] = areaPoint;
                     testLine[1] = iPoint;
                     lines.Insert(0, testLine);
-                    /*rect = new Rectangle();
-                    rect.Width = 5;
-                    rect.Height = 5;
-                    rect.Fill = Brushes.LightBlue;
-                    Canvas.SetLeft(rect, testLine[1].getAxisX());
-                    Canvas.SetTop(rect, testLine[1].getAxisY());
-                    pCanvas.Children.Add(rect);*/
-
 
                     polygonInt = Arcade.calculateIntersections(lines, pCanvas, 1);
                     if (polygonInt.Count == 1 || polygonInt.Count == 0) //si es valido
-                    {
                         polygonPoints.Add(new Point(iPoint.getAxisX(), iPoint.getAxisY()));
-                        /*rect = new Rectangle();
-                        rect.Width = 5;
-                        rect.Height = 5;
-                        rect.Fill = Brushes.Yellow;
-                        Canvas.SetLeft(rect, iPoint.getAxisX());
-                        Canvas.SetTop(rect, iPoint.getAxisY());
-                        pCanvas.Children.Add(rect);*/
-                    }
+
                     lines.RemoveAt(0);
                 }
 

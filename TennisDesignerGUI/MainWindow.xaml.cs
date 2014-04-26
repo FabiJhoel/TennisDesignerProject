@@ -30,14 +30,13 @@ namespace TennisDesignerGUI
             InitializeComponent();
             cmbxColor.ItemsSource = typeof(Colors).GetProperties();
             DataManager.writeDesignList(ListBoxDesigns);
-            report();
         }
 
-        private async void report()
+        private async void generateReport()
         {
             List<Design> designsList = new List<Design>();
 
-            designsList = await DataManager.loadDesignList(); /////////////////////////
+            designsList = await DataManager.loadDesignList(); 
             foreach (Design design in designsList)
             {
                 ReportsTable.Items.Add(new Report() { designName = design.getName(), 
@@ -100,11 +99,6 @@ namespace TennisDesignerGUI
 
             else
                 MessageBox.Show("The selected design was not saved");
-        }
-
-        private void generateReport()
-        {
-
         }
 
         private void cmbxDecorations_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -714,7 +708,7 @@ namespace TennisDesignerGUI
         private void GenerateReport_Click(object sender, RoutedEventArgs e)
         {
             ReportsTable.Items.Clear();
-            report();
+            generateReport();
         }
     }
 }

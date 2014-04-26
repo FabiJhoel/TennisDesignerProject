@@ -194,9 +194,9 @@ namespace DataAccess
             {
                 temporal = new Design(tempObject.Get<string>("Name"));
                 temporal.setArcadeTime(TimeSpan.Parse(tempObject.Get<string>("BestArcadeTime")));
-                temporal.setFireTime(TimeSpan.Parse(tempObject.Get<string>("BestArcadeTime")));
+                temporal.setFireTime(TimeSpan.Parse(tempObject.Get<string>("BestFireTime")));
                 temporal.setBestArcadeDate(tempObject.Get<string>("BestArcadeDate"));
-                temporal.setBestFireDate(tempObject.Get<string>("BestFireDate")); //aqui eesta llegando null el fireDate
+                temporal.setBestFireDate(tempObject.Get<string>("BestFireDate")); 
                 designList.Add(temporal);
             }
 
