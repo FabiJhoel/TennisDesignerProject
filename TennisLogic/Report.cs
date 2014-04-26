@@ -9,8 +9,9 @@ namespace TennisBusiness
     public class Report
     {
         public string designName { get; set; }
-        public string creationDate { get; set; }        
-        public int bestArcade { get; set; }
-        public int bestFire { get; set; }
+        public string arcadeDate { get; set; }
+        public string fireDate { get; set; } 
+        public string bestArcade { get; set; }
+        public string bestFire { get; set; }
     }
 }

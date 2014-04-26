@@ -30,16 +30,22 @@ namespace TennisDesignerGUI
             InitializeComponent();
             cmbxColor.ItemsSource = typeof(Colors).GetProperties();
             DataManager.writeDesignList(ListBoxDesigns);
-            ReportsTable.Items.Add(new MyData() { Date = 1, designName = 2, bestArcade = 3, bestFire = 4 });
-
+            report();
         }
 
         private async void report()
         {
-            List<Design> designs = await DataManager.loadDesignList();
-            foreach (Design design in designs)
-            {
+            List<Design> designsList = new List<Design>();
 
+            designsList = await DataManager.loadDesignList(); /////////////////////////
+            foreach (Design design in designsList)
+            {
+                ReportsTable.Items.Add(new Report() { designName = design.getName(), 
+                                                      arcadeDate = design.getBestArcadeDate(),
+                                                      bestArcade = design.getArcadeTime().ToString(),
+                                                      fireDate = design.getBestFireDate(),
+                                                      bestFire = design.getFireTime().ToString()
+                                                    });
             }
         }
         private void addNewDesignButton(object sender, RoutedEventArgs e)
@@ -705,9 +711,10 @@ namespace TennisDesignerGUI
 
         }
 
-        private async void GenerateReport_Click(object sender, RoutedEventArgs e)
+        private void GenerateReport_Click(object sender, RoutedEventArgs e)
         {
-            Design design = await DataManager.loadDesign("");
+            ReportsTable.Items.Clear();
+            report();
         }
     }
 }

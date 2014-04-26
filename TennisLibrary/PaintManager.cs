@@ -446,6 +446,8 @@ namespace TennisLibrary
 
             timer.Start();
 
+            Fire.paintBackground(pDesign, pCanvas);
+
             //Calculate All Intersections
             List<BasePoint[]> lines = Arcade.getLinesFromDesign(pDesign);
 

@@ -124,14 +124,15 @@
         <!--Header-->
         <Rectangle Grid.ColumnSpan="3" Fill="#FF19A0D3" HorizontalAlignment="Left" Height="78" Stroke="#FF19A0D3" VerticalAlignment="Top" Width="1508"/>
         <TextBlock x:Name="headerTitle" HorizontalAlignment="Left" Margin="25,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Segoe WP Light" FontSize="48" Width="375" Height="68" Foreground="White" TextDecorations="{x:Null}" Text="TennisDesigner"/>
-        <GroupBox Grid.Column="2" Header="GroupBox" HorizontalAlignment="Left" Height="550" Margin="156,100,0,0" VerticalAlignment="Top" Width="380" FontWeight="Bold" Foreground="#FF595353">
+        <GroupBox Grid.Column="2" Header="Designs Report" HorizontalAlignment="Left" Height="550" Margin="156,100,0,0" VerticalAlignment="Top" Width="380" FontWeight="Bold" Foreground="#FF595353">
         </GroupBox>
         <DataGrid x:Name="ReportsTable" AutoGenerateColumns="True" Grid.Column="2" HorizontalAlignment="Left" Margin="172.39,130,0,0" VerticalAlignment="Top" Height="466" Width="349" Foreground="#FF595353">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path = designName}" Header="Name" Width="100"/>
-                <DataGridTextColumn Binding="{Binding Path= Date}" Header="Date" Width="81" />
-                <DataGridTextColumn Binding="{Binding Path= bestArcade}" Header="Best Arcade" Width="83"/>
-                <DataGridTextColumn Binding="{Binding Path= bestFire}" Header="Best Fire" Width="83" />
+                <DataGridTextColumn Binding="{Binding Path= arcadeDate}" Header="ArcadeDate" Width="81" />
+                <DataGridTextColumn Binding="{Binding Path= bestArcade}" Header="Best Arcade" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Path= fireDate}" Header="FireDate" Width="81" />
+                <DataGridTextColumn Binding="{Binding Path= bestFire}" Header="Best Fire" Width="100" />
             </DataGrid.Columns>
 
         </DataGrid>
