@@ -13,6 +13,8 @@ namespace TennisBusiness
     {
         private string name;
         private string creationDate;
+        private List<TimeSpan> arcadeTimes = new List<TimeSpan>();
+        private List<TimeSpan> fireTimes = new List<TimeSpan>();
         private List<BasePoint> basePoints = new List<BasePoint>();
         private List<Circle> circleDecorations = new List<Circle>();
         private List<LineDec> lineDecorations = new List<LineDec>();

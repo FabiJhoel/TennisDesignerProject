@@ -29,9 +29,12 @@ namespace TennisDesignerGUI
         {
             InitializeComponent();
             cmbxColor.ItemsSource = typeof(Colors).GetProperties();
-            DataManager.loadDesignList(ListBoxDesigns);         
+            DataManager.loadDesignList(ListBoxDesigns);
+
+            ReportsTable.Items.Add(new MyData() { Date = 1, designName = 2, bestArcade = 3, bestFire = 4 });
+
         }
-        
+
         private void addNewDesignButton(object sender, RoutedEventArgs e)
         {
             string designName = "";
@@ -679,6 +682,15 @@ namespace TennisDesignerGUI
         {
             canvasArcade.Children.Clear();
             PaintManager.arcadeMode(designInstance, canvasArcade);
+        }
+
+        public class MyData
+        {
+            public int Date { get; set; }
+            public int designName { get; set; }
+            public int bestArcade { get; set; }
+            public int bestFire { get; set; }
+
         }
     }
 }
