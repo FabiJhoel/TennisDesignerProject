@@ -453,19 +453,106 @@ namespace TennisLibrary
        
         public static void arcadeMode(Design pDesign, Canvas pCanvas)
         {
-            paintOutline(pDesign, pCanvas, 2);
+            //------------------------------------------------------
+            //Calculate All Intersections
+
+            List<BasePoint[]> lines = Arcade.getLinesFromDesign(pDesign);
+
+            //calculate All intersections
+            List<BasePoint> intersections = Arcade.calculateIntersections(lines, pCanvas, 0);
+            Rectangle rect;
+
+            /*foreach (BasePoint bpoint in intersections)
+            {
+                rect = new Rectangle();
+                rect.Width = 5;
+                rect.Height = 5;
+                rect.Fill = Brushes.Red;
+                Canvas.SetLeft(rect, bpoint.getAxisX());
+                Canvas.SetTop(rect, bpoint.getAxisY());
+                pCanvas.Children.Add(rect);
+            }*/
+
+            //Calculate Polygons of Areas
+            List<BasePoint> polygonInt = new List<BasePoint>();
+            BasePoint areaPoint;
+            BasePoint[] testLine = new BasePoint[2];
+            List<Point> polygonPoints;
+
+            foreach (Area cArea in pDesign.getFillingAreas())
+            {
+                polygonPoints = new List<Point>();
+                areaPoint = new BasePoint(cArea.getAxisX(), cArea.getAxisY(), "");
+                foreach (BasePoint iPoint in intersections)
+                {
+                    testLine[0] = areaPoint;
+                    testLine[1] = iPoint;
+                    lines.Insert(0, testLine);
+                    /*rect = new Rectangle();
+                    rect.Width = 5;
+                    rect.Height = 5;
+                    rect.Fill = Brushes.LightBlue;
+                    Canvas.SetLeft(rect, testLine[1].getAxisX());
+                    Canvas.SetTop(rect, testLine[1].getAxisY());
+                    pCanvas.Children.Add(rect);*/
+
+
+                    polygonInt = Arcade.calculateIntersections(lines, pCanvas, 1);
+                    if (polygonInt.Count == 1 || polygonInt.Count == 0) //si es valido
+                    {
+                        polygonPoints.Add(new Point(iPoint.getAxisX(), iPoint.getAxisY()));
+                        /*rect = new Rectangle();
+                        rect.Width = 5;
+                        rect.Height = 5;
+                        rect.Fill = Brushes.Yellow;
+                        Canvas.SetLeft(rect, iPoint.getAxisX());
+                        Canvas.SetTop(rect, iPoint.getAxisY());
+                        pCanvas.Children.Add(rect);*/
+                    }
+                    lines.RemoveAt(0);
+                }
+
+                //order polygon points
+                Point temporal;
+                for (int index = 0; index < polygonPoints.Count; index++)
+                {
+                    for (int index2 = 0; index2 < polygonPoints.Count - 1; index2++)
+                    {
+                        if (Arcade.calculateAngle(cArea.getAxisX(), cArea.getAxisY(), polygonPoints[index2]) >
+                            Arcade.calculateAngle(cArea.getAxisX(), cArea.getAxisY(), polygonPoints[index2 + 1]))
+                        {
+                            temporal = polygonPoints[index2 + 1];
+                            polygonPoints[index2 + 1] = polygonPoints[index2];
+                            polygonPoints[index2] = temporal;
+                        }
+                    }
+                }
+
+                PointCollection correctPolygonPoints = new PointCollection();
+                foreach (Point pPoint in polygonPoints)
+                {
+                    correctPolygonPoints.Add(new Point(pPoint.X + 8, pPoint.Y + 8));
+                }
+
+                Arcade.paintArea(correctPolygonPoints, pCanvas, new SolidColorBrush(cArea.getColor()));
+            }
+
+            //Add the other parts
+            Fire.paintWhiteArc(pDesign, pCanvas);
+            paintOutline(pDesign, pCanvas, 3);
 
             foreach (Circle circle in pDesign.getCircleDecorations())
             {
                 Arcade.paintEllipse(pCanvas, circle);
             }
 
-            foreach (LineDec line in pDesign.getLineDecorations())
+            foreach (LineDec lineDec in pDesign.getLineDecorations())
             {
-                LineDec newLine = new LineDec(line.getThickness(), line.getColor());
-                newLine.setBasePoints(line.getBasePoints());
+                LineDec newLine = new LineDec(lineDec.getThickness(), lineDec.getColor());
+                newLine.setBasePoints(lineDec.getBasePoints());
                 paintLineDecoration(pCanvas, newLine, 3);
             }
+
         }
     }
 }
